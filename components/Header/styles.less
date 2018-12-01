@@ -1,5 +1,57 @@
 @import "~@theme/colors";
+@import "~@theme/spacings";
+@import "~@theme/responsive";
+@import "~@theme/common";
 
-.body {
-  color: @white;
+.header {
+  padding: @global-space 0;
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+}
+
+.logo {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.text {
+  margin-left: @global-space;
+  .primary {
+    color: @primary;
+  }
+
+  .secondary {
+    color: @secondary;
+  }
+}
+
+.image {
+  max-width: 100%;
+}
+
+.contact {
+  text-align: right;
+}
+
+@media @mobile {
+  .text {
+    margin-left: @global-space * 0.5;
+  }
+
+  .image {
+    width: 60px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contact {
+    text-align: left;
+    margin-top: @global-space * 0.5;
+  }
 }

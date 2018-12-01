@@ -1,0 +1,18 @@
+{
+  "presets": [["next/babel", { "preset-env": { "modules": "commonjs" } }]],
+  "plugins": [
+    "transform-class-properties",
+    "transform-function-bind",
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          "@components": ["./components"],
+          "@root": ["./"],
+          "@static": ["./static"]
+        }
+      }
+    ]
+  ]
+}

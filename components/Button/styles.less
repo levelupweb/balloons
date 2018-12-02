@@ -1,0 +1,71 @@
+@import "~@theme/colors";
+@import "~@theme/spacings";
+@import "~@theme/common";
+
+.button {
+  cursor: pointer;
+  transition: 0.2s all ease-in-out;
+  background: @white;
+  border: 1px solid fadeout(@black, 50%);
+  position: relative;
+  color: @black;
+  white-space: nowrap;
+  outline: none;
+  border-radius: 4.5px;
+  padding: @global-space * 0.5;
+
+  &:before {
+    content: "";
+    opacity: 0;
+    box-sizing: border-box; // ?
+    position: absolute;
+    left: 50%;
+    margin-left: -10px;
+    top: 50%;
+    margin-top: -10px;
+    transform: scale(0);
+    will-change: transform opacity;
+    transition: 0.2s all ease;
+    width: 20px;
+    height: 20px;
+    border: 2px solid fadeout(@black, 60%);
+    border-radius: 50%;
+    border-left-color: transparent !important;
+    background: transparent;
+  }
+
+  &.loading {
+    color: transparent;
+    &:before {
+      opacity: 1;
+      transform: scale(1);
+      animation: spinning 1000ms 200ms linear infinite;
+    }
+  }
+  /*
+  &.big {
+    .button-typography(@ui-big-ratio);
+    height: 50px;
+    .spinner {
+      .spinner(26px);
+    }
+  }
+
+  &.small {
+    .button-typography(@ui-small-ratio);
+    height: 40px;
+    .spinner {
+      .spinner(14px);
+    }
+	}
+	*/
+}
+
+@keyframes spinning {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

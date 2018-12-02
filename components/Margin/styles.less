@@ -1,0 +1,40 @@
+@import "~@theme/spacings";
+
+.margin {
+  &.top {
+    margin-top: @global-space;
+    &.double {
+      margin-top: @global-space * 2;
+    }
+    &.half {
+      margin-top: @global-space * 0.5;
+    }
+  }
+  &.left {
+    margin-left: @global-space;
+    &.double {
+      margin-left: @global-space * 2;
+    }
+    &.half {
+      margin-left: @global-space * 0.5;
+    }
+  }
+  &.right {
+    margin-right: @global-space;
+    &.right {
+      margin-bottom: @global-space * 2;
+    }
+    &.half {
+      margin-right: @global-space * 0.5;
+    }
+  }
+  &.bottom {
+    margin-bottom: @global-space;
+    &.double {
+      margin-bottom: @global-space * 2;
+    }
+    &.half {
+      margin-bottom: @global-space * 0.5;
+    }
+  }
+}

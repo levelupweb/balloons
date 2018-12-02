@@ -7,8 +7,8 @@ export const error = (err, req, res, next) => {
 		response = err.message;
 	}
 
-	res.locals.message = err.message;
-	res.locals.error = err.error || new Error(err.message);
+	res.locals.message = response;
+	res.locals.error = err.error || new Error(response);
 	res.status(500).json(response);
 };
 

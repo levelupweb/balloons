@@ -1,6 +1,6 @@
 export const createError = (message, error) => ({
 	message,
-	error
+	error: error || new Error(message)
 });
 
 export default createError;

@@ -31,7 +31,7 @@ if (process.env.NODE_ENV === "development") {
 
 router.post("/signin", (req, res, next) => {
 	const { login, password } = req.body;
-	console.log(req.body);
+
 	if (!login || !password) {
 		return next(createError("Одно из полей 'Логин' или 'пароль' не заполнено"));
 	}

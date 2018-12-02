@@ -1,0 +1,1 @@
+export { findPopulation } from "./findPopulation";

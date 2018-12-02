@@ -7,7 +7,7 @@ import { variantToStyle, sizeToStyle } from "./utils";
 
 const Button = ({ onClick, loading, children, variant, size }) => (
 	<button
-		onClick={onClick}
+		onClick={!loading ? onClick : null}
 		className={classes(
 			styles.button,
 			variantToStyle(variant),

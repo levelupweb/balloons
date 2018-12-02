@@ -1,8 +1,8 @@
 import express from "express";
 import { auth, validation } from "@server/middlewares";
-import { createError } from "@server/utils";
+import { createError, createSlug } from "@server/utils";
 import { Category } from "@server/models";
-
+import { CATEGORY_SLUG, CATEGORY_TITLE } from "@consts/category";
 import { createValidation, updateValidation } from "./middlewares";
 
 const router = express.Router();
@@ -11,15 +11,18 @@ router.post(
 	"/create",
 	[auth(), createValidation, validation],
 	(req, res, next) =>
-		Category.create(req.matchedData)
+		Category.create({
+			[CATEGORY_SLUG]: createSlug(req.matchedData[CATEGORY_TITLE]),
+			...req.matchedData
+		})
 			.then(category => res.json(category))
 			.catch(error =>
 				next(createError("Не удалось создать новую категорию", error))
 			)
 );
 
-router.get("/entry", (req, res, next) =>
-	Category.findById(req.query.categoryId)
+router.get("/entry/:slug", (req, res, next) =>
+	Category.findOne({ [CATEGORY_SLUG]: req.params.slug })
 		.then(category => {
 			if (!category || !category._id) {
 				return next(createError("Категория не была найдена в базе данных"));

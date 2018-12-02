@@ -19,6 +19,10 @@ const ArticleSchema = new Schema(
 			required: false,
 			ref: CATEGORY_MODEL,
 			default: null
+		},
+		[consts.ARTICLE_SLUG]: {
+			type: String,
+			required: true
 		}
 	},
 	{

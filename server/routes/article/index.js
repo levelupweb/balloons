@@ -1,8 +1,8 @@
 import express from "express";
 import { auth, validation } from "@server/middlewares";
-import { createError } from "@server/utils";
+import { createError, createSlug } from "@server/utils";
+import { ARTICLE_SLUG, ARTICLE_TITLE } from "@consts/article";
 import { Article } from "@server/models";
-
 import { createValidation, updateValidation } from "./middlewares";
 
 const router = express.Router();
@@ -11,15 +11,18 @@ router.post(
 	"/create",
 	[auth(), createValidation, validation],
 	(req, res, next) =>
-		Article.createArticle(req.matchedData)
+		Article.createArticle({
+			[ARTICLE_SLUG]: createSlug(req.matchedData[ARTICLE_TITLE]),
+			...req.matchedData
+		})
 			.then(article => res.json(article))
 			.catch(error =>
 				next(createError("Не удалось создать новую статью", error))
 			)
 );
 
-router.get("/entry", (req, res, next) =>
-	Article.getArticle(req.query.articleId)
+router.get("/entry/:slug", (req, res, next) =>
+	Article.getArticle(req.params.slug)
 		.then(article => {
 			if (!article || !article._id) {
 				return next(createError("Статья не была найдена в базе данных"));

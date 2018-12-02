@@ -9,6 +9,10 @@ const CategorySchema = new Schema(
 		[consts.CATEGORY_TITLE]: {
 			type: String,
 			required: true
+		},
+		[consts.CATEGORY_SLUG]: {
+			type: String,
+			required: true
 		}
 	},
 	{

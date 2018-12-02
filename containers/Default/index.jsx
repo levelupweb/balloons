@@ -3,24 +3,28 @@ import PropTypes from "prop-types";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
 import Container from "@components/Container";
-import Navigation from "@components/Navigation";
+// import Navigation from "@components/Navigation";
 import styles from "./styles";
 
 const Default = ({ children }) => (
-	<Container>
-		<div className={styles.wrapper}>
-			<header>
+	<div className={styles.wrapper}>
+		<header>
+			<Container>
 				<Header />
-			</header>
-			<nav>
-				<Navigation />
-			</nav>
-			<div className={styles.main}>{children}</div>
-			<footer className={styles.footer}>
-				<Footer />
-			</footer>
+			</Container>
+		</header>
+		<nav className={styles.nav}>
+			<Container>{/* <Navigation /> */}</Container>
+		</nav>
+		<div className={styles.main}>
+			<Container>{children}</Container>
 		</div>
-	</Container>
+		<footer className={styles.footer}>
+			<Container>
+				<Footer />
+			</Container>
+		</footer>
+	</div>
 );
 
 Default.propTypes = {

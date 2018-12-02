@@ -54,7 +54,7 @@
   }
 
   &.loading {
-    color: transparent;
+    color: transparent !important;
     cursor: not-allowed;
     &:before {
       opacity: 1;
@@ -81,6 +81,10 @@
     &:active:not(.loading) {
       background: fadeout(@primary, 15%);
       box-shadow: 2px 10px 10px fadeout(@primary, 89%);
+    }
+
+    &:before {
+      border-color: @white;
     }
   }
 

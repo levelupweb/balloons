@@ -7,5 +7,9 @@ module.exports = {
 	"@theme": path.resolve("theme"),
 	"@utils": path.resolve("utils"),
 	"@containers": path.resolve("containers"),
-	"@pages": path.resolve("pages")
+	"@pages": path.resolve("pages"),
+	"@providers": path.resolve("providers"),
+	"@fetch": path.resolve("fetch"),
+	"@consts": path.resolve("consts"),
+	"@HOC": path.resolve("HOC")
 };

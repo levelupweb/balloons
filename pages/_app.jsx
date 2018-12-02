@@ -1,6 +1,7 @@
 import React from "react";
 import App, { Container } from "next/app";
-import { bindNProgress } from "@utils";
+import { bindNProgress, compose } from "@utils";
+import { withFetcher, withAuth } from "@HOC";
 // import moment from "moment";
 
 bindNProgress();
@@ -9,6 +10,8 @@ bindNProgress();
 class MyApp extends App {
 	static async getInitialProps({ Component, ctx }) {
 		let pageProps = {};
+
+		// console.log(ctx);
 
 		if (Component.getInitialProps) {
 			pageProps = await Component.getInitialProps(ctx);
@@ -29,9 +32,9 @@ class MyApp extends App {
 	}
 }
 
-// const enhance = compose(
-// 	/** Here global providers */
-// );
+const enhance = compose(
+	withAuth,
+	withFetcher
+);
 
-// export default enhance(MyApp);
-export default MyApp;
+export default enhance(MyApp);

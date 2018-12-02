@@ -4,7 +4,15 @@ import PropTypes from "prop-types";
 import { sizeToClassName } from "./utils";
 import styles from "./styles.less";
 
-export const Heading = ({ as, size, children, style, thin, className }) =>
+export const Heading = ({
+	as,
+	size,
+	children,
+	style,
+	thin,
+	className,
+	...rest
+}) =>
 	children &&
 	React.createElement(
 		as,
@@ -15,7 +23,8 @@ export const Heading = ({ as, size, children, style, thin, className }) =>
 				styles.heading,
 				sizeToClassName(size)
 			),
-			style
+			style,
+			...rest
 		},
 		children
 	);

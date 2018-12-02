@@ -1,6 +1,7 @@
 import React from "react";
 import Document, { Head, Main, NextScript } from "next/document";
 import flush from "styled-jsx/server";
+import { getEnvConfig } from "@utils";
 
 class MyDocument extends Document {
 	static getInitialProps({ renderPage }) {
@@ -18,8 +19,11 @@ class MyDocument extends Document {
 	}
 
 	render() {
+		const calculatedConfig = getEnvConfig(process.env.NODE_ENV);
+		const injectScript = `window.config = ${JSON.stringify(calculatedConfig)}`;
 		return (
 			<html>
+				<script dangerouslySetInnerHTML={{ __html: injectScript }} />
 				<Head>
 					<link rel="stylesheet" href="/static/normalize.css" />
 					<link rel="stylesheet" href="/static/nprogress.css" />

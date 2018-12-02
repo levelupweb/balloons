@@ -10,7 +10,10 @@
         "alias": {
           "@components": ["./components"],
           "@root": ["./"],
-          "@static": ["./static"]
+          "@static": ["./static"],
+          "@utils": ["./utils"],
+          "@server": ["./server"],
+          "@consts": ["./consts"]
         }
       }
     ]

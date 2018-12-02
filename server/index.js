@@ -22,7 +22,7 @@ export default dirname =>
 		app.prepare().then(() => {
 			const server = express();
 
-			server.use(bodyParser.urlencoded({ extended: true }));
+			server.use(bodyParser.json());
 			server.use(
 				morgan("combined", {
 					stream: logger.stream,

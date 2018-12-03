@@ -1,0 +1,14 @@
+@import "~@theme/colors";
+
+.noimage {
+  width: 100%;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: fadeout(@black, 90%);
+  &.error {
+    border: 1px solid @red;
+    background: fadeout(@red, 90%);
+  }
+}

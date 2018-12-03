@@ -3,7 +3,16 @@ import PropTypes from "prop-types";
 import classes from "classnames";
 import styles from "./styles";
 
-const Margin = ({ children, top, left, right, bottom, double, half }) => (
+const Margin = ({
+	className,
+	children,
+	top,
+	left,
+	right,
+	bottom,
+	double,
+	half
+}) => (
 	<div
 		className={classes(
 			styles.margin,
@@ -12,7 +21,8 @@ const Margin = ({ children, top, left, right, bottom, double, half }) => (
 			{ [styles.left]: left },
 			{ [styles.right]: right },
 			{ [styles.bottom]: bottom },
-			{ [styles.half]: half }
+			{ [styles.half]: half },
+			className
 		)}
 	>
 		{children}
@@ -27,11 +37,13 @@ Margin.propTypes = {
 	right: PropTypes.bool,
 	half: PropTypes.bool,
 	bottom: PropTypes.bool,
+	className: PropTypes.string,
 	double: PropTypes.bool
 };
 
 Margin.defaultProps = {
 	top: false,
+	className: null,
 	left: false,
 	half: false,
 	double: false,

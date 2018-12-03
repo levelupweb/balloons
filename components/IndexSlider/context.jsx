@@ -45,6 +45,11 @@ class IndexSliderProviderClass extends React.Component {
 			info: newInfo
 		});
 
+	handleSlides = getNewSlides =>
+		this.asyncSetState({
+			slides: getNewSlides(this.state.slides)
+		});
+
 	render = () => (
 		<IndexSliderContext.Provider
 			value={{
@@ -53,7 +58,8 @@ class IndexSliderProviderClass extends React.Component {
 				handleInfo: this.handleInfo,
 				info: this.state.info,
 				error: this.state.error,
-				fetchSlidesStart: this.fetchSlidesStart
+				fetchSlidesStart: this.fetchSlidesStart,
+				handleSlides: this.handleSlides
 			}}
 		>
 			{this.props.children}

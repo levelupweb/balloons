@@ -1,7 +1,5 @@
 import React from "react";
-import { getApiUrl } from "@utils";
-import axios from "axios";
-import cookies from "js-cookie";
+import { createAxios } from "@utils";
 import { TOKEN } from "@consts/_common";
 import { FetcherProvider } from "@providers";
 
@@ -12,27 +10,29 @@ export const withFetcher = Component => {
 
 			const token = appContext.ctx.req && appContext.ctx.req.cookies[TOKEN];
 
+			const axiosInstance = await createAxios(token);
+
 			if (typeof Component.getInitialProps === "function") {
 				appProps = await Component.getInitialProps.call(Component, {
 					...appContext,
-					axiosInstance: axios.create({
-						baseURL: getApiUrl(),
-						headers: { authorization: token || cookies.get(TOKEN) }
-					})
+					axiosInstance
 				});
 			}
 
 			return {
 				...appProps,
+				axiosInstance,
 				token
 			};
 		}
 
 		render = () => {
-			const { token, axiosInstance, ...rest } = this.props;
 			return (
-				<FetcherProvider axiosInstance={axiosInstance} token={token}>
-					<Component {...rest} />
+				<FetcherProvider
+					axiosInstance={createAxios(this.props.token)}
+					token={this.props.token}
+				>
+					<Component {...this.props} />
 				</FetcherProvider>
 			);
 		};

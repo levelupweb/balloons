@@ -1,3 +1,4 @@
 export const FETCH_AUTH = "FETCH_AUTH";
 export const FETCH_SIGNIN = "FETCH_SIGNIN";
 export const FETCH_UI_ELEMENTS = "FETCH_UI_ELEMENTS";
+export const FETCH_FILE_UPLOAD = "FETCH_FILE_UPLOAD";

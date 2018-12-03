@@ -10,3 +10,5 @@ export { getApiUrl } from "./getApiUrl";
 export { parseError } from "./parseError";
 export { fetch } from "./fetch";
 export { getWidthElement } from "./getWidthElement";
+export { getStorageUrl } from "./getStorageUrl";
+export { createAxios } from "./createAxios";

@@ -38,6 +38,7 @@ class Navigation extends React.Component {
 	};
 
 	handleWrapper = element =>
+		element &&
 		this.setState({
 			bounds: element.getBoundingClientRect()
 		});

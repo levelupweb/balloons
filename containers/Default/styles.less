@@ -1,5 +1,6 @@
 @import "~@theme/common";
 @import "~@theme/colors";
+@import "~@theme/spacings";
 
 body {
   font-family: @font-family;
@@ -34,6 +35,13 @@ a {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
+}
+
+.edit {
+  position: fixed;
+  left: @global-space;
+  bottom: @global-space;
 }
 
 .main {

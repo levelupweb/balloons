@@ -1,0 +1,19 @@
+@import "~@theme/colors";
+@import "~@theme/spacings";
+
+.slide {
+  margin-top: @global-space;
+  border-top: 1px solid fadeout(@black, 90%);
+  padding-top: @global-space;
+  &:first-child {
+    border-top: 0;
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
+
+.createNew {
+  margin-top: @global-space;
+  padding-top: @global-space;
+  border-top: 1px solid fadeout(@black, 90%);
+}

@@ -49,8 +49,16 @@ class Item extends React.Component {
 						[styles.focused]: isFocused
 					})}
 				>
-					{item.title}
-					<Icon className={styles.icon} icon="keyboard-arrow-down" size={18} />
+					<span className={styles.wrapper}>
+						<span className={styles.title}>
+							{item.title}
+							<Icon
+								className={styles.icon}
+								icon="keyboard-arrow-down"
+								size={18}
+							/>
+						</span>
+					</span>
 					{isFocused && (
 						<ul className={styles.sub} ref={this.mutateSubElement}>
 							{item.elements.map((el, index) => (
@@ -70,9 +78,13 @@ class Item extends React.Component {
 
 		return (
 			<li className={styles.item}>
-				<Link href={`/article/${item.slug}`}>
-					<a>{item.title}</a>
-				</Link>
+				<span className={styles.wrapper}>
+					<span className={styles.title}>
+						<Link href={`/article/${item.slug}`}>
+							<a>{item.title}</a>
+						</Link>
+					</span>
+				</span>
 			</li>
 		);
 	};

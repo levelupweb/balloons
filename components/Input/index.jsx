@@ -59,7 +59,6 @@ class Input extends React.Component {
 		this.setState({
 			displayError: false
 		});
-
 	render = () => {
 		const { focused, displayError } = this.state;
 
@@ -72,7 +71,8 @@ class Input extends React.Component {
 			className,
 			style,
 			placeholder,
-			fluid
+			fluid,
+			labelLeft
 		} = this.props;
 
 		return (
@@ -80,24 +80,29 @@ class Input extends React.Component {
 				className={classes(
 					styles.wrapper,
 					{ [styles.focused]: focused },
-					{ [styles.fluid]: fluid }
+					{ [styles.fluid]: fluid },
+					{ [styles.labelLeft]: labelLeft }
 				)}
 			>
-				<Heading as="label" htmlFor={name} size={5}>
-					{label}
-				</Heading>
-				<div className={styles.input}>
-					<input
-						ref={this.input}
-						style={style}
-						onFocus={this.handleFocus}
-						onBlur={this.handleBlur}
-						placeholder={placeholder}
-						onChange={this.handleChange}
-						className={classes(styles.element, className)}
-						type={type}
-						value={value}
-					/>
+				<div className={styles.main}>
+					{label && (
+						<Heading as="label" htmlFor={name} size={6}>
+							{label}
+						</Heading>
+					)}
+					<div className={styles.input}>
+						<input
+							ref={this.input}
+							style={style}
+							onFocus={this.handleFocus}
+							onBlur={this.handleBlur}
+							placeholder={placeholder}
+							onChange={this.handleChange}
+							className={classes(styles.element, className)}
+							type={type}
+							value={value}
+						/>
+					</div>
 				</div>
 				{displayError && error && (
 					<Margin top half>
@@ -117,8 +122,9 @@ class Input extends React.Component {
 Input.propTypes = {
 	type: PropTypes.string,
 	name: PropTypes.string.isRequired,
-	label: PropTypes.string.isRequired,
+	label: PropTypes.string,
 	focused: PropTypes.bool,
+	labelLeft: PropTypes.bool,
 	onChange: PropTypes.func.isRequired,
 	value: PropTypes.string,
 	fluid: PropTypes.bool,
@@ -131,8 +137,10 @@ Input.propTypes = {
 
 Input.defaultProps = {
 	value: "",
+	label: null,
 	error: null,
 	focused: false,
+	labelLeft: false,
 	handleRef: null,
 	placeholder: null,
 	type: "text",

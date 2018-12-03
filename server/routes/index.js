@@ -3,6 +3,7 @@ import user from "./user";
 import article from "./article";
 import category from "./category";
 import ui from "./ui";
+import slide from "./slide";
 
 const router = express.Router();
 
@@ -10,5 +11,6 @@ router.use("/user", user);
 router.use("/article", article);
 router.use("/category", category);
 router.use("/ui", ui);
+router.use("/slide", slide);
 
 export default router;

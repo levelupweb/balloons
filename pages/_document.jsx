@@ -31,6 +31,10 @@ class MyDocument extends Document {
 						href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=cyrillic"
 						rel="stylesheet"
 					/>
+					<link
+						href="https://fonts.googleapis.com/css?family=Noto+Sans"
+						rel="stylesheet"
+					/>
 					<meta name="theme-color" content="#ffffff" />
 					<meta name="viewport" content="width=device-width, initial-scale=1" />
 				</Head>

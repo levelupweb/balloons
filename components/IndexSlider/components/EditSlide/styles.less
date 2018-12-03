@@ -1,0 +1,29 @@
+@import "~@theme/spacings";
+
+.actions {
+  & > * {
+    margin-right: @global-space * 0.5;
+    display: inline-block;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.main {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row nowrap;
+}
+
+.image {
+  min-width: 200px;
+  width: 200px;
+  img {
+    width: 100%;
+  }
+}
+
+.content {
+  flex-grow: 1;
+}

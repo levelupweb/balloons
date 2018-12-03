@@ -20,6 +20,24 @@ class Icon extends React.Component {
 		const { icon } = this.props;
 
 		switch (icon) {
+		case "add":
+			return (
+				<g>
+					<path d="M19 13h-6v6h-2v-6h-6v-2h6v-6h2v6h6v2z" />
+				</g>
+			);
+		case "check":
+			return (
+				<g>
+					<path d="M9 16.17l-4.17-4.17-1.42 1.41 5.59 5.59 12-12-1.41-1.41z" />
+				</g>
+			);
+		case "upload":
+			return (
+				<g>
+					<path d="M19.35 10.04c-.68-3.45-3.71-6.04-7.35-6.04-2.89 0-5.4 1.64-6.65 4.04-3.01.32-5.35 2.87-5.35 5.96 0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zm-5.35 2.96v4h-4v-4h-3l5-5 5 5h-3z" />
+				</g>
+			);
 		case "close":
 			return (
 				<g>

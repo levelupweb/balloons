@@ -1,21 +1,32 @@
 @import "~@theme/colors";
 @import "~@theme/spacings";
+@import "~@theme/long-shadow";
 
 .item {
-  padding: @global-space;
   white-space: nowrap;
   cursor: pointer;
   transition: 0.2s all ease-in-out;
   flex: 1;
   text-align: center;
+
+  .wrapper {
+    overflow: hidden;
+    padding: @global-space;
+    display: block;
+    .title {
+      #long-shadow.inline(darken(@secondary, 10%), 45, 45);
+    }
+  }
+
   &:hover {
     background: fadeout(@black, 90%);
-    box-shadow: inset 0 -5px 0 lighten(@secondary, 20%);
   }
+
   .icon {
     margin-left: @global-space * 0.5;
     color: fadeout(@white, 50%);
   }
+
   a {
     color: @white;
     text-transform: none;
@@ -38,7 +49,7 @@
     }
     .sub {
       position: absolute;
-
+      z-index: 15;
       top: 100%;
       left: 0;
       min-width: 300px;
@@ -53,6 +64,7 @@
         left: auto;
       }
       .item {
+        box-shadow: none;
         padding: 0;
         width: 100%;
         text-align: left;

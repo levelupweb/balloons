@@ -72,6 +72,7 @@ class FileUploader extends React.Component {
 
 	render = () => {
 		const { error, isUploading } = this.state;
+		const { buttonProps } = this.props;
 
 		return (
 			<div className={styles.uploader}>
@@ -79,6 +80,7 @@ class FileUploader extends React.Component {
 					variant={BUTTON_VARIANT_PRIMARY}
 					loading={isUploading}
 					onClick={() => this.input.current.click()}
+					{...buttonProps}
 				>
 					Загрузить файл
 				</Button>
@@ -106,7 +108,12 @@ class FileUploader extends React.Component {
 
 FileUploader.propTypes = {
 	onUrl: PropTypes.func.isRequired,
-	fetcher: PropTypes.func.isRequired
+	fetcher: PropTypes.func.isRequired,
+	buttonProps: PropTypes.object
+};
+
+FileUploader.defaultProps = {
+	buttonProps: null
 };
 
 const FileUploaderWithAsyncSetState = withAsyncSetState(FileUploader);

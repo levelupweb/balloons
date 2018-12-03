@@ -1,6 +1,13 @@
 @import "~@theme/colors";
 @import "~@theme/spacings";
 @import "~@theme/common";
+@import "~@theme/long-shadow";
+
+.icon {
+  margin-left: @global-space * 0.5;
+  color: fadeout(@black, 50%);
+  transition: 0.2s all ease-in-out;
+}
 
 .button {
   cursor: pointer;
@@ -8,7 +15,6 @@
   transition: all 150ms linear;
   text-transform: capitalize;
   background: @white;
-  min-width: 180px;
   border: 3px solid transparent;
   box-shadow: 2px 5px 10px fadeout(@black, 95%);
   position: relative;
@@ -16,7 +22,17 @@
   white-space: nowrap;
   outline: none;
   border-radius: 4.5px;
-  padding: @global-space * 0.51;
+  padding: @global-space * 0.51 @global-space * 0.8;
+
+  &:hover {
+    .icon {
+      color: @black;
+    }
+  }
+
+  &:not(.basic) {
+    min-width: 180px;
+  }
 
   &:before {
     content: "";
@@ -39,7 +55,7 @@
   }
 
   &:hover:not(.loading) {
-    background: fadeout(@black, 95%);
+    background: fadeout(@white, 40%);
     box-shadow: 2px 10px 10px fadeout(@black, 98%);
   }
 
@@ -66,6 +82,12 @@
   &.primary {
     background: @primary;
     color: @white;
+    .icon {
+      color: @white;
+    }
+    &.withShadow {
+      #long-shadow.block(darken(@primary, 10%), 45, 10, 1);
+    }
 
     &:hover:not(.loading) {
       background: fadeout(@primary, 10%);
@@ -81,6 +103,64 @@
     &:active:not(.loading) {
       background: fadeout(@primary, 15%);
       box-shadow: 2px 10px 10px fadeout(@primary, 89%);
+    }
+
+    &:before {
+      border-color: @white;
+    }
+  }
+
+  &.success {
+    background: @green;
+    color: @white;
+
+    .icon {
+      color: @white;
+    }
+
+    &:hover:not(.loading) {
+      background: fadeout(@green, 10%);
+      box-shadow: 2px 10px 10px fadeout(@green, 89%);
+    }
+
+    &:focus:not(.loading) {
+      background: fadeout(@green, 10%);
+      box-shadow: 2px 10px 10px fadeout(@green, 89%);
+      border-color: darken(@green, 5%);
+    }
+
+    &:active:not(.loading) {
+      background: fadeout(@green, 15%);
+      box-shadow: 2px 10px 10px fadeout(@green, 89%);
+    }
+
+    &:before {
+      border-color: @white;
+    }
+  }
+
+  &.danger {
+    background: @red;
+    color: @white;
+
+    .icon {
+      color: @white;
+    }
+
+    &:hover:not(.loading) {
+      background: fadeout(@red, 10%);
+      box-shadow: 2px 10px 10px fadeout(@red, 89%);
+    }
+
+    &:focus:not(.loading) {
+      background: fadeout(@red, 10%);
+      box-shadow: 2px 10px 10px fadeout(@red, 89%);
+      border-color: darken(@red, 5%);
+    }
+
+    &:active:not(.loading) {
+      background: fadeout(@red, 15%);
+      box-shadow: 2px 10px 10px fadeout(@red, 89%);
     }
 
     &:before {

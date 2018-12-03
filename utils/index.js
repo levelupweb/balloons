@@ -12,3 +12,4 @@ export { fetch } from "./fetch";
 export { getWidthElement } from "./getWidthElement";
 export { getStorageUrl } from "./getStorageUrl";
 export { createAxios } from "./createAxios";
+export { deepEqual } from "./deepEqual";

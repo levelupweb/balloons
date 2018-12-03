@@ -4,11 +4,6 @@
 
 .wrapper {
   max-width: 230px;
-  label {
-    // text-transform: uppercase;
-    // letter-spacing: 1px;
-    // font-size: @font-size * 0.75;
-  }
   &.fluid {
     width: 100%;
     max-width: 100%;
@@ -23,6 +18,25 @@
       }
       &:before {
         transform: translateX(0);
+      }
+    }
+  }
+  &.labelLeft {
+    .main {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      label {
+        padding-top: @global-space * 0.5;
+        margin-right: @global-space * 1.5;
+        flex-basis: 170px;
+        color: @black;
+        font-weight: 900;
+        font-family: @font-family-secondary;
+        font-size: @font-size;
+      }
+      .input {
+        flex: 1;
       }
     }
   }

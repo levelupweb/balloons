@@ -58,7 +58,7 @@ export default dirname =>
 				form.on("end", () => {
 					if (shouldResponse) {
 						res.json({
-							url: getStorageUrl(filename)
+							url: filename
 						});
 					}
 				});

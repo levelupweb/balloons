@@ -1,0 +1,30 @@
+@import "~@theme/colors";
+@import "~@theme/common";
+@import "~@theme/long-shadow";
+
+.slide {
+  min-height: 400px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  background-size: cover;
+  background-position: center center;
+
+  align-items: center;
+  justify-content: center;
+  font-family: @font-family-secondary;
+  flex-direction: column;
+  color: @white;
+
+  .title {
+    font-size: @font-size * 4.5;
+    line-height: @line-height * 4.5;
+    #long-shadow.inline(@secondary, 45, 20);
+  }
+
+  .description {
+    font-size: @font-size * 1.5;
+    line-height: @line-height * 1.5;
+    #long-shadow.inline(@secondary, 45, 10);
+  }
+}

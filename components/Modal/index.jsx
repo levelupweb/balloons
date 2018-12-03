@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { isBrowser } from "@utils";
 import ReactModal from "react-modal";
 import { isFunction } from "util";
+import styles from "./styles";
 
 class Modal extends React.Component {
 	state = {
@@ -11,9 +12,11 @@ class Modal extends React.Component {
 
 	constructor(props) {
 		super(props);
+
 		if (isBrowser()) {
 			ReactModal.setAppElement(document.getElementById("__next"));
 		}
+
 		this.state = {
 			open: false
 		};

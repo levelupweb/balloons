@@ -35,7 +35,9 @@ const Header = () => (
 			<Paragraph>г. Владимир, ул. Комиссарова, дом 10а</Paragraph>
 			<Margin top half>
 				<CallMeBack>
-					<Button variant={BUTTON_VARIANT_PRIMARY}>Обратный звонок</Button>
+					<Button withShadow variant={BUTTON_VARIANT_PRIMARY}>
+						Обратный звонок
+					</Button>
 				</CallMeBack>
 			</Margin>
 		</div>

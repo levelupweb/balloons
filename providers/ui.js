@@ -1,55 +1,38 @@
-// import React from "react";
-// import PropTypes from "prop-types";
-// import { withAsyncSetState } from "@utils";
-// import { fetchUI } from "@fetch/common";
+import React from "react";
+import PropTypes from "prop-types";
+import { withAsyncSetState } from "@utils";
 
-// export const UIContext = React.createContext();
+export const UIContext = React.createContext();
 
-// class UIProviderClass extends React.Component {
-// 	state = {
-// 		isHydrating: false,
-// 		isFetched: false,
-// 		error: null,
-// 		elements: {
-// 			navigation: null
-// 		}
-// 	};
+class UIProviderClass extends React.Component {
+	state = {
+		error: this.props.error,
+		ui: this.props.ui
+	};
 
-// 	componentDidMount = () => {
-// 		this.fetchUIIfNeeded();
-// 	};
+	render = () => (
+		<UIContext.Provider
+			value={{
+				error: this.state.error,
+				ui: this.state.ui
+			}}
+		>
+			{this.props.children}
+		</UIContext.Provider>
+	);
+}
 
-// 	fetchUIIfNeeded = () => {
-// 		const { isFetched } = this.state;
+UIProviderClass.propTypes = {
+	children: PropTypes.any.isRequired,
+	error: PropTypes.string,
+	ui: PropTypes.any
+};
 
-// 		if (!isFetched) {
-// 			return this.asyncSetState({
-// 				isHydrating: true,
-// 				error: null,
-// 				elements: {}
-// 			}).then(() => fetchUI()).then(() => )
-// 		}
+UIProviderClass.defaultProps = {
+	ui: null,
+	error: null
+};
 
-// 		return Promise.resolve();
-// 	};
+const UIProviderClassWithAsyncSetState = withAsyncSetState(UIProviderClass);
 
-// 	render = () => (
-// 		<UIContext.Provider
-// 			value={{
-// 				isHydrating: this.state.isHydrating,
-// 				error: this.state.error,
-// 				elements: this.state.elements
-// 			}}
-// 		>
-// 			{this.props.children}
-// 		</UIContext.Provider>
-// 	);
-// }
-
-// UIProviderClass.propTypes = {
-// 	children: PropTypes.any.isRequired
-// };
-
-// const UIProviderClassWithAsyncSetState = withAsyncSetState(UIProviderClass);
-
-// export const UIProvider = UIProviderClassWithAsyncSetState;
+export const UIProvider = UIProviderClassWithAsyncSetState;

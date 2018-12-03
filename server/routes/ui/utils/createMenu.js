@@ -9,32 +9,41 @@ const createSingle = article => ({
 });
 
 export const createMenu = allArticles =>
-	allArticles.reduce((prev, curr) => {
-		if (curr[ARTICLE_CATEGORY]) {
-			const categoryId = curr[ARTICLE_CATEGORY]._id;
+	allArticles.reduce(
+		(prev, curr) => {
+			if (curr[ARTICLE_CATEGORY]) {
+				const categoryId = curr[ARTICLE_CATEGORY]._id;
 
-			if (prev[categoryId]) {
-				return {
-					...prev,
-					[categoryId]: {
-						...prev[categoryId],
-						elements: [...prev[categoryId].elements, createSingle(curr)]
-					}
-				};
-			} else {
-				return {
-					...prev,
-					[categoryId]: {
-						title: curr[ARTICLE_CATEGORY][CATEGORY_TITLE],
-						elements: [createSingle(curr)]
-					}
-				};
+				if (prev[categoryId]) {
+					return {
+						...prev,
+						[categoryId]: {
+							...prev[categoryId],
+							elements: [...prev[categoryId].elements, createSingle(curr)]
+						}
+					};
+				} else {
+					return {
+						...prev,
+						[categoryId]: {
+							title: curr[ARTICLE_CATEGORY][CATEGORY_TITLE],
+							elements: [createSingle(curr)]
+						}
+					};
+				}
+			}
+			const articleId = curr._id;
+
+			return {
+				...prev,
+				[articleId]: createSingle(curr)
+			};
+		},
+		{
+			promo: {
+				title: "Акции",
+				slug: "promos",
+				id: "promos"
 			}
 		}
-		const articleId = curr._id;
-
-		return {
-			...prev,
-			[articleId]: createSingle(curr)
-		};
-	}, {});
+	);

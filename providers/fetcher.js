@@ -1,9 +1,6 @@
 import React from "react";
-import axios from "axios";
-import cookies from "js-cookie";
 import PropTypes from "prop-types";
-import { TOKEN } from "@consts/_common";
-import { withAsyncSetState, getApiUrl } from "@utils";
+import { withAsyncSetState } from "@utils";
 
 export const FetcherContext = React.createContext();
 
@@ -12,18 +9,9 @@ class FetcherProviderClass extends React.Component {
 		super(props);
 
 		this.state = {
-			fetcher: this.createAxios()
+			fetcher: props.axiosInstance
 		};
 	}
-
-	createAxios = () => {
-		const { token } = this.props;
-
-		return axios.create({
-			baseURL: getApiUrl(),
-			headers: { authorization: token || cookies.get(TOKEN) }
-		});
-	};
 
 	render = () => (
 		<FetcherContext.Provider
@@ -38,7 +26,8 @@ class FetcherProviderClass extends React.Component {
 
 FetcherProviderClass.propTypes = {
 	children: PropTypes.any.isRequired,
-	token: PropTypes.string
+	token: PropTypes.string,
+	axiosInstance: PropTypes.func.isRequired
 };
 
 FetcherProviderClass.defaultProps = {

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
 import Container from "@components/Container";
-// import Navigation from "@components/Navigation";
+import Navigation from "@components/Navigation";
 import styles from "./styles";
 
 const Default = ({ children }) => (
@@ -14,7 +14,9 @@ const Default = ({ children }) => (
 			</Container>
 		</header>
 		<nav className={styles.nav}>
-			<Container>{/* <Navigation /> */}</Container>
+			<Container>
+				<Navigation />
+			</Container>
 		</nav>
 		<div className={styles.main}>
 			<Container>{children}</Container>

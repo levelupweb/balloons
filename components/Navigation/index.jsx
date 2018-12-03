@@ -1,64 +1,18 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { withRouter } from "next/router";
-import Link from "next/link";
+import PropTypes from "prop-types";
+import { UIContext } from "@providers";
+import Item from "./components/Item";
 import styles from "./styles";
 
+class Navigation extends React.Component {
+	constructor(props) {
+		super(props);
 
-const elements = [
-	{
-		type: "dropdown",
-		title: "Печать на шарах",
-		elements: [{
-			link: "/how-to",
-			title: "Как заказать",
-		},
-		{
-			link: "/preparing",
-			title: "Подготовка дизайн-макета",
-		}, {
-			link: "/choosing",
-			title: "Выбор типа и цвета шара",
-		}, {
-			link: "/faq",
-			title: "Вопросы и ответы",
-		}]
-	},
-	{
-		type: "dropdown",
-		title: "Услуги",
-		elements: [{
-			link: "/prices",
-			title: "Цены",
-		},
-		{
-			link: "/accessories",
-			title: "Аксессуары",
-		}, {
-			link: "/more",
-			title: "Сопутствующие услуги",
-		}]
-	},
-	{
-		type: "simple",
-		title: "Акции",
-		link: "/hot"
-	},
-	{
-		type: "simple",
-		title: "Оплата и доставка",
-		link: "/payments"
-	},
-	{
-		type: "simple",
-		title: "Контакты",
-		link: "/contacts"
-	},
-]
-
-class Navigation extends React.PureComponent {
-	state = {
-		activeElement: null,
+		this.state = {
+			activeElement: null,
+			bounds: null
+		};
 	}
 
 	isActive = link => {
@@ -67,30 +21,47 @@ class Navigation extends React.PureComponent {
 		return router.pathname === link;
 	};
 
-	handleActiveElement = element => 
+	handleActiveElement = element =>
 		this.setState({
 			activeElement: element
 		});
 
+	renderElements = () => {
+		const { ui } = this.props;
+		const { bounds } = this.state;
+
+		return Object.keys(ui.menu).map((item, index) => {
+			const value = ui.menu[item];
+
+			return <Item bounds={bounds} item={value} key={index} />;
+		});
+	};
+
+	handleWrapper = element =>
+		this.setState({
+			bounds: element.getBoundingClientRect()
+		});
+
 	render = () => {
-		const { activeElement } = this.state;
+		// const { activeElement } = this.state;
 
 		return (
-			<ul className={styles.nav}>
-				<li onClick={this.handleActiveElement()} className={styles.drop}>
-					Hello world
-					<
-				</li>
-				<li>Hello world</li>
-				<li>Hello world</li>
-				<li>Hello world</li>
-			</ul>
-		)
-	}
+			<div ref={this.handleWrapper} className={styles.wrapper}>
+				<ul className={styles.nav}>{this.renderElements()}</ul>
+			</div>
+		);
+	};
 }
 
 Navigation.propTypes = {
-	router: PropTypes.object.isRequired
+	router: PropTypes.object.isRequired,
+	ui: PropTypes.any.isRequired
 };
 
-export default withRouter(Navigation);
+const NavigationWithUIProvider = props => (
+	<UIContext.Consumer>
+		{ctx => <Navigation {...props} ui={ctx.ui} />}
+	</UIContext.Consumer>
+);
+
+export default withRouter(NavigationWithUIProvider);

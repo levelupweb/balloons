@@ -1,7 +1,7 @@
 import React from "react";
 import App, { Container } from "next/app";
 import { bindNProgress, compose } from "@utils";
-import { withFetcher, withAuth } from "@HOC";
+import { withFetcher, withAuth, withUi } from "@HOC";
 // import moment from "moment";
 
 bindNProgress();
@@ -34,7 +34,8 @@ class MyApp extends App {
 
 const enhance = compose(
 	withAuth,
-	withFetcher
+	withFetcher,
+	withUi
 );
 
 export default enhance(MyApp);

@@ -11,7 +11,7 @@ const Header = () => (
 	<div className={styles.header}>
 		<div className={styles.logo}>
 			<Link href="/">
-				<a>
+				<a className="simple">
 					<img
 						title="Золотая стрекоза - печать на воздушных шарах"
 						className={styles.image}

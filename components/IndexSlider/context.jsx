@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withAsyncSetState, fetch, parseError } from "@utils";
-import { FetcherContext } from "@providers";
+import { SLIDE_MODEL } from "@consts/_models";
+import { FetcherContext, CollectionsContext } from "@providers";
 import { FETCH_SLIDES } from "@consts/_fetch";
 
 const defaultState = {
@@ -28,11 +29,16 @@ class IndexSliderProviderClass extends React.Component {
 		return fetch(fetcher, FETCH_SLIDES);
 	};
 
-	fetchSlidesSuccess = ({ data }) =>
-		this.asyncSetState({
-			slides: data,
-			isHydrating: false
-		});
+	fetchSlidesSuccess = ({ data }) => {
+		const { insertSlides } = this.props;
+
+		return insertSlides(data).then(() =>
+			this.asyncSetState({
+				slides: data.map(slide => slide._id),
+				isHydrating: false
+			})
+		);
+	};
 
 	fetchSlidesFail = reason =>
 		this.asyncSetState({
@@ -69,7 +75,8 @@ class IndexSliderProviderClass extends React.Component {
 
 IndexSliderProviderClass.propTypes = {
 	children: PropTypes.element.isRequired,
-	fetcher: PropTypes.func.isRequired
+	fetcher: PropTypes.func.isRequired,
+	insertSlides: PropTypes.func.isRequired
 };
 
 const IndexSliderProviderWithAsyncSetState = withAsyncSetState(
@@ -84,4 +91,15 @@ const IndexSliderProviderWithFetcher = props => (
 	</FetcherContext.Consumer>
 );
 
-export const IndexSliderProvider = IndexSliderProviderWithFetcher;
+const IndexSliderProviderWithCollectionsContext = props => (
+	<CollectionsContext.Consumer>
+		{ctx => (
+			<IndexSliderProviderWithFetcher
+				{...props}
+				insertSlides={slides => ctx.insertDocuments(SLIDE_MODEL, slides)}
+			/>
+		)}
+	</CollectionsContext.Consumer>
+);
+
+export const IndexSliderProvider = IndexSliderProviderWithCollectionsContext;

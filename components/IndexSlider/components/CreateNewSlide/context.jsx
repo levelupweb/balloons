@@ -114,7 +114,9 @@ const CreateNewSlideContextWithIndexSliderContext = props => (
 		{ctx => (
 			<CreateNewSlideProviderWithAsyncSetState
 				{...props}
-				appendSlide={slide => ctx.handleSlides(slides => [...slides, slide])}
+				appendSlide={slide =>
+					ctx.handleSlides(slides => [...slides, slide._id])
+				}
 			/>
 		)}
 	</IndexSliderContext.Consumer>

@@ -20,7 +20,7 @@ class IndexSlider extends React.Component {
 		const { slides } = this.props;
 
 		if (slides) {
-			return slides.map((slide, index) => <Slide key={index} slide={slide} />);
+			return slides.map(slideId => <Slide key={slideId} slideId={slideId} />);
 		}
 	};
 

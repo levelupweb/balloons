@@ -29,9 +29,9 @@ class EditBar extends React.Component {
 			return "Слайды не найдены";
 		}
 
-		return slides.map((slide, index) => (
-			<div key={index} className={styles.slide}>
-				<EditSlide index={index + 1} slide={slide} />
+		return slides.map((slideId, index) => (
+			<div key={slideId} className={styles.slide}>
+				<EditSlide index={index + 1} slideId={slideId} />
 			</div>
 		));
 	};

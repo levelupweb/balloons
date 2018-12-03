@@ -32,6 +32,18 @@ class Icon extends React.Component {
 					<path d="M7.41 7.84l4.59 4.58 4.59-4.58 1.41 1.41-6 6-6-6z" />
 				</g>
 			);
+		case "chevron-right":
+			return (
+				<g>
+					<path d="M10 6l-1.41 1.41 4.58 4.59-4.58 4.59 1.41 1.41 6-6z" />
+				</g>
+			);
+		case "chevron-left":
+			return (
+				<g>
+					<path d="M15.41 7.41l-1.41-1.41-6 6 6 6 1.41-1.41-4.58-4.59z" />
+				</g>
+			);
 
 		default:
 			return null;

@@ -9,3 +9,4 @@ export { withAsyncSetState } from "./withAsyncSetState";
 export { getApiUrl } from "./getApiUrl";
 export { parseError } from "./parseError";
 export { fetch } from "./fetch";
+export { getWidthElement } from "./getWidthElement";

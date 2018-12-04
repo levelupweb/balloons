@@ -27,6 +27,7 @@
   position: fixed;
   left: @global-space;
   bottom: @global-space;
+  z-index: 999;
 }
 
 .main {
@@ -38,4 +39,8 @@
   background: @secondary;
   color: @white;
   box-shadow: 0 5px 20px rgba(79, 153, 197, 0.52);
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1000;
 }

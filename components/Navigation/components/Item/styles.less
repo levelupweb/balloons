@@ -8,6 +8,11 @@
   flex: 1;
   text-align: center;
   color: @white;
+  border-right: 1px solid fadeout(@white, 90%);
+
+  &:last-child {
+    border-right: 0;
+  }
 
   .wrapper {
     overflow: hidden;
@@ -56,6 +61,7 @@
       .item {
         box-shadow: none;
         padding: 0;
+        border-right: 0;
         width: 100%;
         text-align: left;
         .inner {

@@ -1,12 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, Icon } from "semantic-ui-react";
+import { Button, Popup } from "semantic-ui-react";
 import { withAsyncSetState, parseError, fetch } from "@utils";
 import { FetcherContext } from "@providers";
-import Margin from "@components/Margin";
-import { Paragraph } from "@components/Typography";
 import { FETCH_FILE_UPLOAD } from "@consts/_fetch";
-import styles from "./styles";
 
 class FileUploader extends React.Component {
 	constructor(props) {
@@ -74,25 +71,23 @@ class FileUploader extends React.Component {
 
 		return (
 			<React.Fragment>
-				<Button
-					primary
-					loading={isUploading}
-					circular
-					onClick={() => this.input.current.click()}
-					{...buttonProps}
+				<Popup
+					open={!!error}
+					trigger={
+						<Button
+							primary
+							loading={isUploading}
+							circular
+							onClick={() => this.input.current.click()}
+							{...buttonProps}
+						>
+							{text ? text : "Загрузить файл"}
+						</Button>
+					}
 				>
-					{text ? text : "Загрузить файл"}
-				</Button>
-				{error && (
-					<Margin top half>
-						<div className={styles.error}>
-							<Paragraph className={styles.content}>{error}</Paragraph>
-							<button onClick={this.hideError} className={styles.close}>
-								<Icon name="close" size={17} />
-							</button>
-						</div>
-					</Margin>
-				)}
+					{error}
+				</Popup>
+
 				<input
 					type="file"
 					hidden

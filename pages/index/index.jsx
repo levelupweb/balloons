@@ -11,9 +11,11 @@ import BlockHeader from "@components/BlockHeader";
 import styles from "./styles";
 
 const IndexPage = () => (
-	<DefaultContainer mainClassName={styles.wrapper}>
+	<DefaultContainer
+		afterNavigation={<IndexSlider />}
+		mainClassName={styles.wrapper}
+	>
 		<div className={styles.indexPage}>
-			<IndexSlider />
 			<Margin top bottom double className={styles.field}>
 				<BlockHeader
 					title="О компании"
@@ -66,22 +68,22 @@ const IndexPage = () => (
 							[
 								"Точные сроки выполнения",
 								"Вы можете быть спокойны, ведь главное для нас это выполнить свою задачу качественно и в срок. Мы не подведем ни вас ни ваш праздник",
-								require("./img/balloons.png")
+								require("./img/time.png")
 							],
 							[
 								"Низкие цены",
 								"Вы будете рады низким ценам на нашу качественную продукцию. К тому же вы можете получить индивидуальную скидку. Сделаем наше взаимное сотрудничество еще выгоднее!",
-								require("./img/balloons.png")
+								require("./img/lowcosts.png")
 							],
 							[
 								"Собственный склад",
 								"У нас имеется большой запас шаров, необходимых для оперативной печати или оформления.",
-								require("./img/balloons.png")
+								require("./img/sklad.png")
 							],
 							[
 								"Доставка в регионы",
 								"Территориально деятельность компании не ограничивается Москвой: используя службы курьерской доставки, мы оперативно выполняем и доставляем заказы для всей страны.",
-								require("./img/balloons.png")
+								require("./img/deliveri.png")
 							]
 						]}
 					</Advantages>

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Margin from "@components/Margin";
 import Field from "./components/Field";
 import Plot from "./components/Plot";
+import Block from "@components/Block";
 import Number from "./components/Number";
 import TypeSelector from "./components/TypeSelector";
 import ColorPicker from "./components/ColorPicker";
@@ -18,8 +19,8 @@ const Calculator = ({ params, handleParams, hasLogo }) => (
 			<Plot />
 		</div>
 
-		<div className={styles.selectors}>
-			<Margin left>
+		<Block className={styles.selectors}>
+			<React.Fragment>
 				<Margin bottom>
 					<Field title="Тип шара" description="Обязательное поле">
 						<TypeSelector />
@@ -44,20 +45,20 @@ const Calculator = ({ params, handleParams, hasLogo }) => (
 						<DiameterSelector />
 					</Field>
 				</Margin>
-				<Margin bottom>
+				<Margin>
 					<Field title="Тираж" description="Обязательное поле">
 						<Number />
 					</Field>
 				</Margin>
 				{hasLogo && (
-					<Margin bottom>
+					<Margin top>
 						<Field title="Стороны печати" description="Обязательное поле">
 							<SidesSelector />
 						</Field>
 					</Margin>
 				)}
-			</Margin>
-		</div>
+			</React.Fragment>
+		</Block>
 	</div>
 );
 

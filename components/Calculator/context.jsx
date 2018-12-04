@@ -13,7 +13,7 @@ export const CalculatorContext = React.createContext();
 class CalculatorProviderClass extends React.Component {
 	state = {
 		params: {
-			[CALCULATOR_PARAM_COLOR]: "#dcdcdc",
+			[CALCULATOR_PARAM_COLOR]: "#e6652c",
 			[CALCULATOR_PARAM_LOGO_COLORS]: ["#3998cb"],
 			[CALCULATOR_PARAM_LOGO_COLORS_2]: ["#3998cb"]
 		}

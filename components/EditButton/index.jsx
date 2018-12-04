@@ -1,11 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "@components/Button";
-import { BUTTON_VARIANT_PRIMARY } from "@components/Button/consts";
+import { Button } from "semantic-ui-react";
 import { EditContext } from "@providers";
 
 const EditButton = ({ toggleEditing, isEditing }) => (
-	<Button variant={BUTTON_VARIANT_PRIMARY} onClick={toggleEditing}>
+	<Button onClick={toggleEditing}>
 		{isEditing ? "Выйти из редактирования" : "Войти в редактор"}
 	</Button>
 );

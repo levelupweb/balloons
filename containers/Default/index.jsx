@@ -16,7 +16,7 @@ class Default extends React.Component {
 	};
 
 	render = () => {
-		const { children, canEdit, mainClassName } = this.props;
+		const { children, afterNavigation, canEdit, mainClassName } = this.props;
 		return (
 			<div className={classes(styles.wrapper, { [styles.editable]: canEdit })}>
 				{canEdit && (
@@ -34,6 +34,7 @@ class Default extends React.Component {
 						<Navigation />
 					</Container>
 				</nav>
+				{afterNavigation}
 				<div className={classes(styles.main, mainClassName)}>
 					<Container>{children}</Container>
 				</div>
@@ -50,12 +51,14 @@ class Default extends React.Component {
 Default.propTypes = {
 	canEdit: PropTypes.bool.isRequired,
 	mainClassName: PropTypes.string,
+	afterNavigation: PropTypes.element,
 	children: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
 		.isRequired
 };
 
 Default.defaultProps = {
-	mainClassName: null
+	mainClassName: null,
+	afterNavigation: null
 };
 
 const DefaultWithAuthContext = props => (

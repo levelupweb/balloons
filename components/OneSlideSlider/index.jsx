@@ -139,8 +139,8 @@ class OneSlideSlider extends React.Component {
 						<Button
 							icon
 							circular
-							secondary
 							size="big"
+							inverted
 							className={classes(styles.arrow, styles.left, arrowClassName)}
 							onClick={() => this.handleSlide(currentSlide - 1)}
 						>
@@ -149,7 +149,7 @@ class OneSlideSlider extends React.Component {
 						<Button
 							icon
 							circular
-							secondary
+							inverted
 							size="big"
 							className={classes(styles.arrow, styles.right, arrowClassName)}
 							onClick={() => this.handleSlide(currentSlide + 1)}

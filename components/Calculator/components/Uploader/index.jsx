@@ -10,7 +10,8 @@ const Uploader = ({ onUpload, index }) => (
 			text={`Загрузить ${index} лого`}
 			onUrl={onUpload}
 			buttonProps={{
-				color: "black",
+				primary: false,
+				inverted: true,
 				size: "medium"
 			}}
 		/>

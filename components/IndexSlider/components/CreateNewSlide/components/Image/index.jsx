@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Image as SemanticImage } from "semantic-ui-react";
 import classes from "classnames";
 import { getStorageUrl } from "@utils";
 import { SLIDE_IMAGE_URL } from "@consts/slide";
@@ -9,7 +10,7 @@ import styles from "./styles";
 
 const Image = ({ image, hasError }) => {
 	if (image) {
-		return <img src={getStorageUrl(image)} width="100%" />;
+		return <SemanticImage rounded src={getStorageUrl(image)} width="100%" />;
 	}
 
 	return (

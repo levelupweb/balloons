@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classes from "classnames";
-import Icon from "@components/Icon";
+import { Button, Icon } from "semantic-ui-react";
 import { withAsyncSetState, getWidthElement, isFunction } from "@utils";
 import styles from "./styles";
 
@@ -136,18 +136,26 @@ class OneSlideSlider extends React.Component {
 				</div>
 				{displayArrows && children.length > 1 && (
 					<React.Fragment>
-						<div
+						<Button
+							icon
+							circular
+							secondary
+							size="big"
 							className={classes(styles.arrow, styles.left, arrowClassName)}
 							onClick={() => this.handleSlide(currentSlide - 1)}
 						>
-							<Icon className={styles.icon} icon="chevron-left" size={22} />
-						</div>
-						<div
+							<Icon name="chevron left" />
+						</Button>
+						<Button
+							icon
+							circular
+							secondary
+							size="big"
 							className={classes(styles.arrow, styles.right, arrowClassName)}
 							onClick={() => this.handleSlide(currentSlide + 1)}
 						>
-							<Icon className={styles.icon} icon="chevron-right" size={22} />
-						</div>
+							<Icon name="chevron right" />
+						</Button>
 					</React.Fragment>
 				)}
 			</div>

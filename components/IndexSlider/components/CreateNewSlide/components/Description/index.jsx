@@ -1,24 +1,36 @@
 import React from "react";
-import TextArea from "@components/TextArea";
-import { CreateNewSlideContext } from "../../context";
+import { TextArea, Popup } from "semantic-ui-react";
 import { SLIDE_DESCRIPTION } from "@consts/slide";
+import { CreateNewSlideContext } from "../../context";
 
 const Description = () => (
 	<CreateNewSlideContext.Consumer>
-		{ctx => (
-			<TextArea
-				fluid
-				autoHeight
-				error={ctx.getTypeError(SLIDE_DESCRIPTION)}
-				placeholder="Введите текст под заголовком.."
-				value={ctx.temporarySlide[SLIDE_DESCRIPTION]}
-				onChange={(_, value) =>
-					ctx.handleTemporarySlide({
-						[SLIDE_DESCRIPTION]: value
-					})
-				}
-			/>
-		)}
+		{ctx => {
+			const error = ctx.getTypeError(SLIDE_DESCRIPTION);
+
+			return (
+				<Popup
+					open={!!error}
+					trigger={
+						<TextArea
+							fluid
+							autoHeight
+							rows={2}
+							error={!!error}
+							placeholder="Введите подзаголовок для слайда"
+							value={ctx.temporarySlide[SLIDE_DESCRIPTION]}
+							onChange={(_, { value }) =>
+								ctx.handleTemporarySlide({
+									[SLIDE_DESCRIPTION]: value
+								})
+							}
+						/>
+					}
+				>
+					{error}
+				</Popup>
+			);
+		}}
 	</CreateNewSlideContext.Consumer>
 );
 

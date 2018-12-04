@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withAsyncSetState } from "@utils";
+import { Form, Button } from "semantic-ui-react";
 import Margin from "@components/Margin";
+import Field from "@components/Field";
 import StartButton from "./components/StartButton";
 import Image from "./components/Image";
 import Title from "./components/Title";
@@ -22,15 +24,25 @@ const CreateNewSlide = ({ isCreating, hasError }) => {
 	}
 
 	return (
-		<div className={styles.form}>
+		<Form className={styles.form}>
 			<div className={styles.main}>
 				<Margin className={styles.image} right>
 					<Image />
 				</Margin>
 				<div className={styles.content}>
-					<Title />
+					<Field title="Заголовок">
+						<Title />
+					</Field>
 					<Margin top>
-						<Description />
+						<Field title="Подзаголовок">
+							<Description />
+						</Field>
+					</Margin>
+					<Margin className={styles.actions} top>
+						<Button.Group>
+							<UploadFile />
+							<Submit />
+						</Button.Group>
 					</Margin>
 				</div>
 			</div>
@@ -39,11 +51,7 @@ const CreateNewSlide = ({ isCreating, hasError }) => {
 					<Error />
 				</Margin>
 			)}
-			<Margin className={styles.actions} top>
-				<UploadFile />
-				<Submit />
-			</Margin>
-		</div>
+		</Form>
 	);
 };
 

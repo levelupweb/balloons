@@ -1,16 +1,11 @@
 import React from "react";
-import Button from "@components/Button";
+import { Button } from "semantic-ui-react";
 import { EditSlideContext } from "../../context";
 
 const SaveButton = () => (
 	<EditSlideContext.Consumer>
 		{ctx => (
-			<Button
-				basic
-				onClick={ctx.updateSlideStart}
-				loading={ctx.updating.isHydrating}
-				icon="check"
-			>
+			<Button onClick={ctx.updateSlideStart} loading={ctx.updating.isHydrating}>
 				Сохранить
 			</Button>
 		)}

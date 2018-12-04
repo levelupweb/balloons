@@ -7,7 +7,7 @@ import routes from "@server/routes";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import { createMongooseConnection } from "./db";
-import { getEnvConfig, isValidExtension } from "@utils";
+import { getEnvConfig, isValidMime } from "@utils";
 import { parseExtension, createError } from "@server/utils";
 import { error, auth } from "@server/middlewares";
 import { logger } from "./logger";
@@ -47,8 +47,7 @@ export default dirname =>
 
 				form.on("fileBegin", (_, file) => {
 					const extension = parseExtension(file.name);
-
-					if (!isValidExtension(extension)) {
+					if (!isValidMime(file.type)) {
 						form._error("Неверный формат файла");
 						shouldResponse = false;
 						return;

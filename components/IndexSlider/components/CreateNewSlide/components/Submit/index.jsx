@@ -1,6 +1,5 @@
 import React from "react";
-import Button from "@components/Button";
-import { BUTTON_VARIANT_SUCCESS } from "@components/Button/consts";
+import { Button } from "semantic-ui-react";
 import { CreateNewSlideContext } from "../../context";
 
 const Submit = () => (
@@ -8,12 +7,10 @@ const Submit = () => (
 		{ctx => (
 			<Button
 				loading={ctx.isHydrating}
-				basic
-				icon="check"
-				variant={BUTTON_VARIANT_SUCCESS}
+				color="green"
 				onClick={ctx.createSlideStart}
 			>
-				Готово
+				Создать
 			</Button>
 		)}
 	</CreateNewSlideContext.Consumer>

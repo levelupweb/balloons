@@ -1,16 +1,11 @@
 import React from "react";
-import Button from "@components/Button";
+import { Button } from "semantic-ui-react";
 import { EditSlideContext } from "../../context";
 
 const RemoveButton = () => (
 	<EditSlideContext.Consumer>
 		{ctx => (
-			<Button
-				loading={ctx.removing.isHydrating}
-				onClick={ctx.removeSlideStart}
-				basic
-				icon="close"
-			>
+			<Button loading={ctx.removing.isHydrating} onClick={ctx.removeSlideStart}>
 				Удалить
 			</Button>
 		)}

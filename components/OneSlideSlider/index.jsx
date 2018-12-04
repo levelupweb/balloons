@@ -86,6 +86,7 @@ class OneSlideSlider extends React.Component {
 
 		const {
 			children,
+			arrowClassName,
 			displayArrows,
 			gap,
 			style,
@@ -136,13 +137,13 @@ class OneSlideSlider extends React.Component {
 				{displayArrows && children.length > 1 && (
 					<React.Fragment>
 						<div
-							className={classes(styles.arrow, styles.left)}
+							className={classes(styles.arrow, styles.left, arrowClassName)}
 							onClick={() => this.handleSlide(currentSlide - 1)}
 						>
 							<Icon className={styles.icon} icon="chevron-left" size={22} />
 						</div>
 						<div
-							className={classes(styles.arrow, styles.right)}
+							className={classes(styles.arrow, styles.right, arrowClassName)}
 							onClick={() => this.handleSlide(currentSlide + 1)}
 						>
 							<Icon className={styles.icon} icon="chevron-right" size={22} />
@@ -162,11 +163,13 @@ OneSlideSlider.propTypes = {
 	displayDots: PropTypes.bool,
 	displayArrows: PropTypes.bool,
 	className: PropTypes.string,
-	style: PropTypes.object
+	style: PropTypes.object,
+	arrowClassName: PropTypes.string
 };
 
 OneSlideSlider.defaultProps = {
 	children: [],
+	arrowClassName: null,
 	className: null,
 	style: {},
 	displayArrows: true,

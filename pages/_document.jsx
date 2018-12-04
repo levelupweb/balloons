@@ -27,6 +27,7 @@ class MyDocument extends Document {
 				<Head>
 					<link rel="stylesheet" href="/static/normalize.css" />
 					<link rel="stylesheet" href="/static/nprogress.css" />
+					<link rel="stylesheet" href="/semantic/semantic.min.css" />
 					<link
 						href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=cyrillic"
 						rel="stylesheet"

@@ -14,9 +14,12 @@ const Button = ({
 	size,
 	basic,
 	icon,
+	style,
+	onlyIcon,
 	withShadow
 }) => (
 	<button
+		style={style}
 		onClick={!loading ? onClick : null}
 		className={classes(
 			styles.button,
@@ -24,11 +27,12 @@ const Button = ({
 			sizeToStyle(size),
 			{ [styles.loading]: loading },
 			{ [styles.withShadow]: withShadow },
-			{ [styles.basic]: basic }
+			{ [styles.basic]: basic },
+			{ [styles.onlyIcon]: onlyIcon }
 		)}
 	>
-		{children}
-		{icon && <Icon className={styles.icon} icon={icon} size={17} />}
+		{!!children && children}
+		{!!icon && <Icon className={styles.icon} icon={icon} size={17} />}
 	</button>
 );
 
@@ -41,13 +45,17 @@ Button.propTypes = {
 	basic: PropTypes.bool,
 	icon: PropTypes.string,
 	onClick: PropTypes.func,
-	withShadow: PropTypes.bool
+	style: PropTypes.object,
+	withShadow: PropTypes.bool,
+	onlyIcon: PropTypes.bool
 };
 
 Button.defaultProps = {
 	basic: false,
+	style: {},
 	variant: BUTTON_VARIANT_DEFAULT,
 	onClick: null,
+	onlyIcon: false,
 	size: BUTTON_SIZE_DEFAULT,
 	loading: false,
 	icon: null,

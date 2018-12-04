@@ -7,7 +7,7 @@ import routes from "@server/routes";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import { createMongooseConnection } from "./db";
-import { getEnvConfig, getStorageUrl } from "@utils";
+import { getEnvConfig, isValidExtension } from "@utils";
 import { parseExtension, createError } from "@server/utils";
 import { error, auth } from "@server/middlewares";
 import { logger } from "./logger";
@@ -35,7 +35,7 @@ export default dirname =>
 
 			server.use(cookieParser());
 
-			server.post("/api/image", [auth()], (req, res, next) => {
+			server.post("/api/image", (req, res, next) => {
 				const form = new formidable.IncomingForm();
 				const timestamp = new Date().getTime();
 
@@ -46,13 +46,26 @@ export default dirname =>
 				form.maxFileSize = 200 * 1024 * 1024;
 
 				form.on("fileBegin", (_, file) => {
-					filename = `${timestamp}.${parseExtension(file.name)}`;
+					const extension = parseExtension(file.name);
+
+					if (!isValidExtension(extension)) {
+						form._error("Неверный формат файла");
+						shouldResponse = false;
+						return;
+					}
+
+					filename = `${timestamp}.${extension}`;
 					file.path = __dirname + "/uploads/" + filename;
 				});
 
 				form.on("error", err => {
-					next(createError("Не удалось загрузить файл", err));
 					shouldResponse = false;
+
+					if (typeof err === "string") {
+						return next(createError(err));
+					}
+
+					next(createError("Не удалось загрузить файл", err));
 				});
 
 				form.on("end", () => {
@@ -68,6 +81,7 @@ export default dirname =>
 			server.use("/api", error);
 			server.use("/storage", express.static(__dirname + "/uploads"));
 			server.use("/static", express.static(dirname + "/.next/static"));
+			server.use("/semantic", express.static(dirname + "/semantic/dist"));
 			server.get("*", (req, res) => handle(req, res));
 
 			server.listen(envConfig.port, err => {

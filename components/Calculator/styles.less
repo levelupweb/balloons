@@ -1,0 +1,27 @@
+@import "~@theme/spacings";
+
+.wrapper {
+  display: flex;
+  align-items: stretch;
+  flex-flow: row nowrap;
+  .plot {
+    max-width: 600px;
+    width: 600px;
+    min-width: 600px;
+    height: 600px;
+    margin: auto;
+  }
+  .selectors {
+    flex: 1;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .wrapper {
+    flex-flow: column;
+    .plot {
+      height: 600px;
+      margin-bottom: @global-space;
+    }
+  }
+}

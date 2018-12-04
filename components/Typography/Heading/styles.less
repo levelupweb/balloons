@@ -1,12 +1,24 @@
 @import "~@theme/common";
 @import "~@theme/responsive";
+@import "~@theme/colors";
 
 .heading {
   line-height: @line-height * 2.45;
   font-size: @font-size * 2.45;
   margin: 0;
-  font-family: @font-family-secondary;
+  // font-family: @font-family-secondary;
   padding: 0;
+
+  &.primary {
+    letter-spacing: 2px;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+
+  &.sub {
+    color: fadeout(@black, 50%);
+    font-weight: 300;
+  }
 
   &.h2 {
     line-height: @line-height * 1.8;

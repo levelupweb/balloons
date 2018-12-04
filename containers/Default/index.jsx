@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import classes from "classnames";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
 import EditButton from "@components/EditButton";
@@ -17,7 +18,7 @@ class Default extends React.Component {
 	render = () => {
 		const { children, canEdit } = this.props;
 		return (
-			<div className={styles.wrapper}>
+			<div className={classes(styles.wrapper, { [styles.editable]: canEdit })}>
 				{canEdit && (
 					<div className={styles.edit}>
 						<EditButton />

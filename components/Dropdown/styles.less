@@ -1,0 +1,109 @@
+@import "~@theme/colors";
+@import "~@theme/spacings";
+@import "~@theme/common";
+
+.wrapper {
+  max-width: 230px;
+  &.fluid {
+    width: 100%;
+    max-width: 100%;
+  }
+  &.focused {
+    .select {
+      border-color: transparent;
+      .element {
+        &::placeholder {
+          color: transparent;
+        }
+      }
+      &:before {
+        transform: translateX(0);
+      }
+    }
+  }
+  &.labelLeft {
+    .main {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      label {
+        padding-top: @global-space * 0.5;
+        margin-right: @global-space * 1.5;
+        flex-basis: 170px;
+        color: @black;
+        font-weight: 900;
+        font-family: @font-family-secondary;
+        font-size: @font-size;
+      }
+      .select {
+        flex: 1;
+      }
+    }
+  }
+}
+
+.select {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-bottom: 2px solid fadeout(@black, 90%);
+  &:before {
+    content: "";
+    height: 2px;
+    background: @secondary;
+    transition: 0.2s all ease-in-out;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    will-change: transform;
+    transform: translateX(-100%);
+  }
+}
+
+.element {
+  border: 0;
+  background: transparent;
+  padding: @global-space * 0.5 0;
+  outline: none;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.error {
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: flex-start;
+  flex-flow: row nowrap;
+  background: @red;
+  color: @white;
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    left: @global-space;
+    bottom: 100%;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid @red;
+  }
+  .content {
+    padding: @global-space * 0.5;
+  }
+  .close {
+    padding: @global-space * 0.5;
+    background: none;
+    color: inherit;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    &:focus {
+      background: fadeout(@white, 90%);
+    }
+  }
+}

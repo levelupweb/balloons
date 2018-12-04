@@ -30,6 +30,10 @@ class Navigation extends React.Component {
 		const { ui } = this.props;
 		const { bounds } = this.state;
 
+		if (!ui || !ui.menu) {
+			return;
+		}
+
 		return Object.keys(ui.menu).map((item, index) => {
 			const value = ui.menu[item];
 

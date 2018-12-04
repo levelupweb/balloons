@@ -13,6 +13,14 @@ const Header = () => (
 			<Link href="/">
 				<a className="simple">
 					<img
+						src={require("./img/logo.png")}
+						title="Золотая стрекоза - печать на воздушных шарах"
+					/>
+				</a>
+			</Link>
+			{/* <Link href="/">
+				<a className="simple">
+					<img
 						title="Золотая стрекоза - печать на воздушных шарах"
 						className={styles.image}
 						src={require("./img/logo.png")}
@@ -26,7 +34,7 @@ const Header = () => (
 				<Paragraph className={styles.secondary}>
 					Печать на воздушных шарах
 				</Paragraph>
-			</div>
+			</div> */}
 		</div>
 		<div className={styles.contact}>
 			<Heading as="p" size={4}>

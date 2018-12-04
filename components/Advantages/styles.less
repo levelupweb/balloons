@@ -1,0 +1,36 @@
+@import "~@theme/responsive";
+@import "~@theme/spacings";
+@import "~@theme/colors";
+
+.items {
+  display: flex;
+  align-items: stretch;
+  flex-flow: row wrap;
+  align-content: stretch;
+}
+
+.item {
+  max-width: 33%;
+  margin-bottom: @global-space;
+  transition: 0.3s all ease-in-out;
+  &:hover {
+    background: fadeout(@white, 10%);
+    border-radius: 5px;
+    box-shadow: 2px 10px 18px fadeout(@black, 93%);
+  }
+  .inner {
+    padding: @global-space;
+  }
+}
+
+@media @mobile {
+  .item {
+    max-width: 50%;
+  }
+}
+
+@media @tablet {
+  .item {
+    max-width: 33%;
+  }
+}

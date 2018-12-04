@@ -1,0 +1,46 @@
+@import "~@theme/spacings";
+@import "~@theme/colors";
+
+.picker {
+  display: flex;
+  align-items: flex-start;
+  &.fluid {
+    & > * {
+      width: 100% !important;
+    }
+  }
+}
+
+.menu {
+  min-width: 135px !important;
+}
+
+.item {
+  margin-bottom: @global-space * 0.5;
+}
+
+.color {
+  border-radius: 100%;
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin-right: @global-space * 0.5;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+}
+
+.removeIcon {
+  margin-left: @global-space * 0.5;
+  transition: 0.2s all ease-in-out;
+  cursor: pointer;
+  &:hover {
+    color: fadeout(@white, 50%);
+  }
+}
+
+.addIcon {
+  margin-right: @global-space * 0.5;
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "@components/Button";
+import { Button } from "semantic-ui-react";
 import { withAsyncSetState, parseError, fetch } from "@utils";
 import { FetcherContext } from "@providers";
 import Icon from "@components/Icon";
@@ -72,17 +72,19 @@ class FileUploader extends React.Component {
 
 	render = () => {
 		const { error, isUploading } = this.state;
-		const { buttonProps } = this.props;
+		const { buttonProps, text, accept } = this.props;
 
 		return (
-			<div className={styles.uploader}>
+			<React.Fragment>
 				<Button
-					variant={BUTTON_VARIANT_PRIMARY}
+					primary
 					loading={isUploading}
+					icon="cloud upload"
+					circular
 					onClick={() => this.input.current.click()}
 					{...buttonProps}
 				>
-					Загрузить файл
+					{text ? text : "Загрузить файл"}
 				</Button>
 				{error && (
 					<Margin top half>
@@ -99,9 +101,10 @@ class FileUploader extends React.Component {
 					hidden
 					name="file-uploader"
 					ref={this.input}
+					accept={accept}
 					onChange={this.handleChange}
 				/>
-			</div>
+			</React.Fragment>
 		);
 	};
 }
@@ -109,11 +112,15 @@ class FileUploader extends React.Component {
 FileUploader.propTypes = {
 	onUrl: PropTypes.func.isRequired,
 	fetcher: PropTypes.func.isRequired,
-	buttonProps: PropTypes.object
+	buttonProps: PropTypes.object,
+	accept: PropTypes.string,
+	text: PropTypes.string
 };
 
 FileUploader.defaultProps = {
-	buttonProps: null
+	buttonProps: null,
+	accept: null,
+	text: null
 };
 
 const FileUploaderWithAsyncSetState = withAsyncSetState(FileUploader);

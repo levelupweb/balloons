@@ -11,6 +11,8 @@ export const Heading = ({
 	style,
 	thin,
 	className,
+	sub,
+	primary,
 	...rest
 }) =>
 	children &&
@@ -19,6 +21,8 @@ export const Heading = ({
 		{
 			className: classes(
 				{ [styles.thin]: thin },
+				{ [styles.primary]: primary },
+				{ [styles.sub]: sub },
 				className,
 				styles.heading,
 				sizeToClassName(size)
@@ -35,11 +39,15 @@ Heading.propTypes = {
 	className: PropTypes.string,
 	style: PropTypes.object,
 	thin: PropTypes.bool,
+	primary: PropTypes.bool,
+	sub: PropTypes.bool,
 	children: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
 };
 
 Heading.defaultProps = {
 	as: "h1",
+	primary: false,
+	sub: false,
 	thin: false,
 	children: null,
 	className: null,

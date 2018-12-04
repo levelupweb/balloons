@@ -59,7 +59,11 @@ router.post("/signin", (req, res, next) => {
 				}
 			);
 		})
-		.catch(err => next(createError("Не удалось выполнить авторизацию", err)));
+		.catch(
+			err =>
+				console.log(err) ||
+				next(createError("Не удалось выполнить авторизацию", err))
+		);
 });
 
 router.get("/auth", [auth()], (req, res) => {

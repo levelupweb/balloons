@@ -11,7 +11,7 @@ import BlockHeader from "@components/BlockHeader";
 import styles from "./styles";
 
 const IndexPage = () => (
-	<DefaultContainer>
+	<DefaultContainer mainClassName={styles.wrapper}>
 		<div className={styles.indexPage}>
 			<IndexSlider />
 			<Margin top bottom double className={styles.field}>

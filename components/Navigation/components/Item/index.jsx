@@ -62,13 +62,13 @@ class Item extends React.Component {
 					{isFocused && (
 						<ul className={styles.sub} ref={this.mutateSubElement}>
 							{item.elements.map((el, index) => (
-								<li key={index} className={styles.item}>
-									<span className={styles.inner}>
-										<Link href={`/article/${el.slug}`}>
-											<a>{el.title}</a>
-										</Link>
-									</span>
-								</li>
+								<Link key={index} href={`/article/${el.slug}`}>
+									<a className={styles.item}>
+										<li>
+											<span className={styles.inner}>{el.title}</span>
+										</li>
+									</a>
+								</Link>
 							))}
 						</ul>
 					)}
@@ -77,15 +77,15 @@ class Item extends React.Component {
 		}
 
 		return (
-			<li className={styles.item}>
-				<span className={styles.wrapper}>
-					<span className={styles.title}>
-						<Link href={`/article/${item.slug}`}>
-							<a>{item.title}</a>
-						</Link>
-					</span>
-				</span>
-			</li>
+			<Link href={`/article/${item.slug}`}>
+				<a className={styles.item}>
+					<li>
+						<span className={styles.wrapper}>
+							<span className={styles.title}>{item.title}</span>
+						</span>
+					</li>
+				</a>
+			</Link>
 		);
 	};
 }

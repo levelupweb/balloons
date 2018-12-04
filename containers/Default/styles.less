@@ -2,7 +2,7 @@
 @import "~@theme/colors";
 @import "~@theme/spacings";
 
-body {
+:global(.main-body) {
   font-family: @font-family;
   background: whitesmoke;
   font-size: @font-size;
@@ -10,24 +10,6 @@ body {
   min-width: 100vw;
   min-height: 100vh;
   color: fadeout(@black, 20%);
-}
-
-a {
-  text-decoration: none;
-  border-bottom: 2px solid @primary;
-  box-shadow: inset 0 -5px 0 @primary;
-  color: inherit;
-  transition: background 0.1s cubic-bezier(0.33, 0.66, 0.66, 1);
-  &:hover {
-    background: @primary;
-  }
-  &:global(.simple) {
-    box-shadow: none;
-    border: 0;
-    &:hover {
-      background: transparent !important;
-    }
-  }
 }
 
 .wrapper {
@@ -49,10 +31,11 @@ a {
 
 .main {
   flex-grow: 1;
+  padding-top: @global-space * 2;
 }
 
 .nav {
   background: @secondary;
   color: @white;
-  box-shadow: 0 5px 20px rgba(79, 153, 197, 0.32);
+  box-shadow: 0 5px 20px rgba(79, 153, 197, 0.52);
 }

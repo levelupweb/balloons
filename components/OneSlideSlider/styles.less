@@ -66,20 +66,26 @@
 }
 
 .dots {
+  position: absolute;
+  bottom: @global-space;
+  left: 0;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: auto;
   margin-top: @global-space;
   .dot {
     cursor: pointer;
-    width: 7px;
-    height: 7px;
+    width: 10px;
+    height: 10px;
     border-radius: 100%;
-    background: fadeout(@black, 70%);
+    background: fadeout(@black, 85%);
     margin-right: @global-space * 0.5;
     &.active {
       background: @secondary;
+      border: 3px solid @white;
+      width: 15px;
+      height: 15px;
     }
     &:last-child {
       margin-right: 0;

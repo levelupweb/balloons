@@ -1,8 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Heading, Paragraph } from "@components/Typography";
-import Button from "@components/Button";
-import { BUTTON_VARIANT_PRIMARY } from "@components/Button/consts";
+import { Button, Icon } from "semantic-ui-react";
 import CallMeBack from "@components/CallMeBack";
 import Margin from "@components/Margin";
 import styles from "./styles";
@@ -18,23 +17,6 @@ const Header = () => (
 					/>
 				</a>
 			</Link>
-			{/* <Link href="/">
-				<a className="simple">
-					<img
-						title="Золотая стрекоза - печать на воздушных шарах"
-						className={styles.image}
-						src={require("./img/logo.png")}
-					/>
-				</a>
-			</Link>
-			<div className={styles.text}>
-				<Heading className={styles.primary} as="h1" size={3}>
-					Золотая стрекоза
-				</Heading>
-				<Paragraph className={styles.secondary}>
-					Печать на воздушных шарах
-				</Paragraph>
-			</div> */}
 		</div>
 		<div className={styles.contact}>
 			<Heading as="p" size={4}>
@@ -43,8 +25,8 @@ const Header = () => (
 			<Paragraph>г. Владимир, ул. Комиссарова, дом 10а</Paragraph>
 			<Margin top half>
 				<CallMeBack>
-					<Button withShadow variant={BUTTON_VARIANT_PRIMARY}>
-						Обратный звонок
+					<Button icon labelPosition="left" primary>
+						Обратный звонок <Icon name="phone" />
 					</Button>
 				</CallMeBack>
 			</Margin>

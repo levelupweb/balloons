@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import OneSlideSlider from "@components/OneSlideSlider";
+import { Loader } from "semantic-ui-react";
 import { EditContext } from "@providers";
 import Slide from "./components/Slide";
 import EditBar from "./components/EditBar";
@@ -24,12 +25,26 @@ class IndexSlider extends React.Component {
 		}
 	};
 
+	renderSlider = () => {
+		const { isHydrating, slides } = this.props;
+
+		if (!slides || isHydrating) {
+			return (
+				<div className={styles.placeholder}>
+					<Loader active centered inline />
+				</div>
+			);
+		}
+
+		return this.renderSlides();
+	};
+
 	render = () => {
 		const { isEditing } = this.props;
 
 		return (
 			<div className={styles.slider}>
-				<OneSlideSlider>{this.renderSlides()}</OneSlideSlider>
+				<OneSlideSlider>{this.renderSlider()}</OneSlideSlider>
 				{isEditing && (
 					<div className={styles.editBar}>
 						<EditBar />
@@ -44,6 +59,7 @@ IndexSlider.propTypes = {
 	isEditing: PropTypes.bool.isRequired,
 	slides: PropTypes.arrayOf(PropTypes.object),
 	error: PropTypes.string,
+	isHydrating: PropTypes.bool.isRequired,
 	fetchSlidesStart: PropTypes.func.isRequired
 };
 

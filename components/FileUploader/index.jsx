@@ -1,12 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button } from "semantic-ui-react";
+import { Button, Icon } from "semantic-ui-react";
 import { withAsyncSetState, parseError, fetch } from "@utils";
 import { FetcherContext } from "@providers";
-import Icon from "@components/Icon";
 import Margin from "@components/Margin";
 import { Paragraph } from "@components/Typography";
-import { BUTTON_VARIANT_PRIMARY } from "@components/Button/consts";
 import { FETCH_FILE_UPLOAD } from "@consts/_fetch";
 import styles from "./styles";
 
@@ -79,7 +77,6 @@ class FileUploader extends React.Component {
 				<Button
 					primary
 					loading={isUploading}
-					icon="cloud upload"
 					circular
 					onClick={() => this.input.current.click()}
 					{...buttonProps}
@@ -91,7 +88,7 @@ class FileUploader extends React.Component {
 						<div className={styles.error}>
 							<Paragraph className={styles.content}>{error}</Paragraph>
 							<button onClick={this.hideError} className={styles.close}>
-								<Icon icon="close" size={17} />
+								<Icon name="close" size={17} />
 							</button>
 						</div>
 					</Margin>

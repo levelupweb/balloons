@@ -21,6 +21,24 @@
   &.editable {
     padding-bottom: 100px;
   }
+  .dimmer {
+    transform: translateY(100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: @black;
+    opacity: 0;
+    z-index: 2500;
+    transition: 0.2s opacity ease-in-out;
+    height: 100%;
+  }
+  &:global(.dimmed) {
+    .dimmer {
+      opacity: 0.4;
+      transform: translateY(0);
+    }
+  }
 }
 
 .edit {

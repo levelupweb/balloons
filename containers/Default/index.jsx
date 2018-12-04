@@ -18,7 +18,14 @@ class Default extends React.Component {
 	render = () => {
 		const { children, afterNavigation, canEdit, mainClassName } = this.props;
 		return (
-			<div className={classes(styles.wrapper, { [styles.editable]: canEdit })}>
+			<div
+				id="main-container"
+				className={classes(styles.wrapper, {
+					[styles.editable]: canEdit
+				})}
+			>
+				<div className={styles.dimmer} />
+
 				{canEdit && (
 					<div className={styles.edit}>
 						<EditButton />

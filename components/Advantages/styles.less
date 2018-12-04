@@ -2,35 +2,64 @@
 @import "~@theme/spacings";
 @import "~@theme/colors";
 
-.items {
-  display: flex;
-  align-items: stretch;
-  flex-flow: row wrap;
-  align-content: stretch;
-}
-
 .item {
   max-width: 33%;
   margin-bottom: @global-space;
-  transition: 0.3s all ease-in-out;
+  transition: 0.4s all ease-in-out;
+  max-height: 220px;
+  background: fadeout(@white, 100%);
+  position: relative;
+  overflow: hidden;
+  will-change: opacity transform;
+
+  &:before {
+    content: "";
+    z-index: 100;
+    height: 100px;
+    transition: 0.2s opacity ease-in-out;
+
+    opacity: 1;
+    background: linear-gradient(to top, whitesmoke, fadeout(@white, 100%));
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  &.focused {
+    z-index: 3000 !important;
+    transform: scale(1.02);
+    &:before {
+      opacity: 0;
+      z-index: -1;
+    }
+  }
+
   &:hover {
-    background: fadeout(@white, 10%);
+    background: @white;
+    z-index: 100;
+    max-height: 100%;
     border-radius: 5px;
     box-shadow: 2px 10px 18px fadeout(@black, 93%);
   }
   .inner {
     padding: @global-space;
+    position: relative;
   }
+}
+
+.sizer {
+  width: 33%;
+  max-width: 33%;
 }
 
 @media @mobile {
   .item {
+    width: 50%;
     max-width: 50%;
   }
 }
 
-@media @tablet {
-  .item {
-    max-width: 33%;
-  }
+.masonry {
+  width: 100%;
 }

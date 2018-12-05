@@ -5,16 +5,17 @@
 .head {
   color: fadeout(@white, 70%);
   font-size: @font-size * 1.1 !important;
-  margin-bottom: @global-space;
+  margin-bottom: @global-space * 1.2;
   position: relative;
+
   &:after {
     content: "";
     position: absolute;
     top: 100%;
     margin-top: 7px;
-    height: 4px;
-    background: fadeout(@white, 90%);
+    height: 2px;
+    background: fadeout(@white, 95%);
     left: 0;
-    width: 50px;
+    width: 100%;
   }
 }

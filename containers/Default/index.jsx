@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classes from "classnames";
+import { Container } from "semantic-ui-react";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
-import EditButton from "@components/EditButton";
-import Container from "@components/Container";
+import EditorMenu from "@components/EditorMenu";
 import Navigation from "@components/Navigation";
 import smoothscroll from "smoothscroll-polyfill";
 import styles from "./styles";
@@ -28,7 +28,7 @@ class Default extends React.Component {
 
 				{canEdit && (
 					<div className={styles.edit}>
-						<EditButton />
+						<EditorMenu />
 					</div>
 				)}
 				<header>

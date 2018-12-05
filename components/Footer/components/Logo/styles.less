@@ -1,15 +1,30 @@
+@import "~@theme/spacings";
+@import "~@theme/colors";
+
+.logoWrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
 .logo {
-  max-width: 100%;
-  -webkit-filter: grayscale(80%);
-  filter: grayscale(80%);
-  transition: 0.2s all ease-in-out;
-  &:hover {
-    -webkit-filter: grayscale(0%);
-    filter: grayscale(0%);
-  }
+  max-height: 60px;
+}
+
+.content {
+  margin-left: @global-space;
+}
+
+.title {
+  color: @primary;
+}
+
+.description {
+  color: @secondary;
 }
 
 .paragraph {
   font-size: 14px;
+  color: fadeout(@white, 40%);
   line-height: 14px * 1.5;
 }

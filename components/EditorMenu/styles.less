@@ -1,0 +1,14 @@
+@import "~@theme/colors";
+@import "~@theme/spacings";
+
+.menu {
+  background: @white;
+  box-shadow: -2px 0 10px fadeout(@black, 80%);
+}
+
+.item {
+  padding: @global-space * 0.5 @global-space !important;
+  &:hover {
+    background: fadeout(@black, 90%) !important;
+  }
+}

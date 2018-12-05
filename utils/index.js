@@ -14,3 +14,4 @@ export { getStorageUrl } from "./getStorageUrl";
 export { createAxios } from "./createAxios";
 export { deepEqual } from "./deepEqual";
 export { isValidMime } from "./isValidMime";
+export { formatDate } from "./formatDate";

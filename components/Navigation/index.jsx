@@ -1,9 +1,12 @@
 import React from "react";
 import { withRouter } from "next/router";
+import Link from "next/link";
+import { Button, Icon } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { UIContext } from "@providers";
 import Item from "./components/Item";
 import styles from "./styles";
+import { EditContext } from "../../providers";
 
 class Navigation extends React.Component {
 	constructor(props) {
@@ -48,11 +51,22 @@ class Navigation extends React.Component {
 		});
 
 	render = () => {
-		// const { activeElement } = this.state;
+		const { isEditing } = this.props;
 
 		return (
 			<div ref={this.handleWrapper} className={styles.wrapper}>
 				<ul className={styles.nav}>{this.renderElements()}</ul>
+				{isEditing && (
+					<div className={styles.edit}>
+						<Link href="/admin/articles">
+							<a>
+								<Button circular icon>
+									<Icon name="settings" />
+								</Button>
+							</a>
+						</Link>
+					</div>
+				)}
 			</div>
 		);
 	};
@@ -60,6 +74,7 @@ class Navigation extends React.Component {
 
 Navigation.propTypes = {
 	router: PropTypes.object.isRequired,
+	isEditing: PropTypes.bool.isRequired,
 	ui: PropTypes.any.isRequired
 };
 
@@ -69,4 +84,10 @@ const NavigationWithUIProvider = props => (
 	</UIContext.Consumer>
 );
 
-export default withRouter(NavigationWithUIProvider);
+const NavigationWithEditContext = props => (
+	<EditContext.Consumer>
+		{ctx => <NavigationWithUIProvider {...props} isEditing={ctx.isEditing} />}
+	</EditContext.Consumer>
+);
+
+export default withRouter(NavigationWithEditContext);

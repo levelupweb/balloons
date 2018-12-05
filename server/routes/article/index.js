@@ -4,6 +4,7 @@ import { createError, createSlug } from "@server/utils";
 import { ARTICLE_SLUG, ARTICLE_TITLE } from "@consts/article";
 import { Article } from "@server/models";
 import { createValidation, updateValidation } from "./middlewares";
+import { ARTICLE_CATEGORY } from "../../../consts/article";
 
 const router = express.Router();
 
@@ -21,8 +22,8 @@ router.post(
 			)
 );
 
-router.get("/entry/:slug", (req, res, next) =>
-	Article.getArticle(req.params.slug)
+router.get("/entry", (req, res, next) =>
+	Article.getArticle({ [ARTICLE_SLUG]: req.query.slug })
 		.then(article => {
 			if (!article || !article._id) {
 				return next(createError("Статья не была найдена в базе данных"));
@@ -32,8 +33,26 @@ router.get("/entry/:slug", (req, res, next) =>
 		.catch(error => next(createError("Не удалось найсти статью", error)))
 );
 
+router.get("/entry/id", (req, res, next) =>
+	Article.getArticle({ _id: req.query.articleId })
+		.then(article => {
+			if (!article || !article._id) {
+				return next(createError("Статья не была найдена в базе данных"));
+			}
+			return res.json(article);
+		})
+		.catch(error => next(createError("Не удалось найсти статью", error)))
+);
+
+router.get("/entries", (_, res, next) =>
+	Article.find({})
+		.populate(ARTICLE_CATEGORY)
+		.then(articles => res.json(articles))
+		.catch(error => next(createError("Не удалось найсти статьи", error)))
+);
+
 router.delete("/entry", [auth()], (req, res, next) =>
-	Article.getArticle(req.query.articleId).then(article => {
+	Article.getArticle({ _id: req.query.articleId }).then(article => {
 		if (!article || !article._id) {
 			return next(createError("Статья не была найдена в базе данных"));
 		}
@@ -45,7 +64,7 @@ router.delete("/entry", [auth()], (req, res, next) =>
 );
 
 router.put("/entry", [auth(), updateValidation, validation], (req, res, next) =>
-	Article.getArticle(req.query.articleId).then(article => {
+	Article.getArticle({ _id: req.query.articleId }).then(article => {
 		if (!article || !article._id) {
 			return next(createError("Статья не была найдена в базе данных"));
 		}

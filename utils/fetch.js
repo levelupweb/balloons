@@ -5,7 +5,10 @@ import {
 	FETCH_SLIDES,
 	FETCH_UPDATE_SLIDE,
 	FETCH_REMOVE_SLIDE,
-	FETCH_ADD_SLIDE
+	FETCH_ARTICLE_BY_ID,
+	FETCH_ARTICLE_BY_SLUG,
+	FETCH_ADD_SLIDE,
+	FETCH_ARTICLES
 } from "@consts/_fetch";
 
 export const fetch = (fetcher, action, ...rest) => {
@@ -43,6 +46,18 @@ export const fetch = (fetcher, action, ...rest) => {
 
 	if (action === FETCH_ADD_SLIDE) {
 		return fetcher.post("/slide/create", ...rest);
+	}
+
+	if (action === FETCH_ARTICLES) {
+		return fetcher.get("/article/entries");
+	}
+
+	if (action === FETCH_ARTICLE_BY_ID) {
+		return fetcher.get("/article/entry/id", ...rest);
+	}
+
+	if (action === FETCH_ARTICLE_BY_SLUG) {
+		return fetcher.get("/article/entry", ...rest);
 	}
 
 	throw new Error("Unknown action");

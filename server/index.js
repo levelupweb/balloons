@@ -9,7 +9,7 @@ import bodyParser from "body-parser";
 import { createMongooseConnection } from "./db";
 import { getEnvConfig, isValidMime } from "@utils";
 import { parseExtension, createError } from "@server/utils";
-import { error } from "@server/middlewares";
+import { error, auth } from "@server/middlewares";
 import { logger } from "./logger";
 
 const envConfig = getEnvConfig(process.env.NODE_ENV);
@@ -35,7 +35,7 @@ export default dirname =>
 
 			server.use(cookieParser());
 
-			server.post("/api/image", (req, res, next) => {
+			server.post("/api/image", [auth(false)], (req, res, next) => {
 				const form = new formidable.IncomingForm();
 				const timestamp = new Date().getTime();
 
@@ -53,7 +53,12 @@ export default dirname =>
 						return;
 					}
 
-					filename = `${timestamp}.${extension}`;
+					// temp/smapmsadl.png
+					// admin/fni0qfnqif.png
+
+					filename = req.user
+						? `/admin/${timestamp}.${extension}`
+						: `/temp/${timestamp}.${extension}`;
 					file.path = __dirname + "/uploads/" + filename;
 				});
 

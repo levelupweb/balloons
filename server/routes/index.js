@@ -5,6 +5,7 @@ import category from "./category";
 import ui from "./ui";
 import slide from "./slide";
 import contact from "./contact";
+import calculation from "./calculation";
 
 const router = express.Router();
 
@@ -14,5 +15,6 @@ router.use("/category", category);
 router.use("/ui", ui);
 router.use("/slide", slide);
 router.use("/contact", contact);
+router.use("/calculation", calculation);
 
 export default router;

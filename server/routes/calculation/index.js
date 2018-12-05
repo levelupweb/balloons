@@ -17,7 +17,7 @@ router.post(
 	[middlewares.createValidation, validation],
 	(req, res, next) =>
 		Calculation.createCalculation(req.matchedData)
-			.then(() => res.send(200) || res.end())
+			.then(() => res.send(200))
 			.catch(error => next(createError("Не удалось создать статистику", error)))
 );
 

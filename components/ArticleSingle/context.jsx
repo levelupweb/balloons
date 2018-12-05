@@ -24,6 +24,7 @@ class ArticleSingleProviderClass extends React.Component {
 		...defaultState,
 		otherArticlesIds: this.props.otherArticlesIds,
 		temporaryArticle: this.props.article,
+		isEditing: this.props.isEditing,
 		fetchError: this.props.error
 	};
 
@@ -82,8 +83,39 @@ class ArticleSingleProviderClass extends React.Component {
 		});
 	};
 
+	handleIsEditing = isEditing =>
+		this.asyncSetState({
+			isEditing
+		});
+
+	handleTemporaryArticle = data =>
+		this.asyncSetState({
+			temporaryArticle: {
+				...this.state.temporaryArticle,
+				...data
+			}
+		});
+
+	getTypeErrorMessage = field => {
+		const { updating } = this.state;
+
+		return (
+			updating.typeErrors &&
+			updating.typeErrors[field] &&
+			updating.typeErrors[field].msg
+		);
+	};
+
 	render = () => (
-		<ArticleSingleContext.Provider value={this.state}>
+		<ArticleSingleContext.Provider
+			value={{
+				...this.state,
+				handleIsEditing: this.handleIsEditing,
+				updateArticleStart: this.updateArticleStart,
+				getTypeErrorMessage: this.getTypeErrorMessage,
+				handleTemporaryArticle: this.handleTemporaryArticle
+			}}
+		>
 			{this.props.children}
 		</ArticleSingleContext.Provider>
 	);
@@ -95,12 +127,14 @@ ArticleSingleProviderClass.propTypes = {
 	error: PropTypes.string,
 	fetcher: PropTypes.func.isRequired,
 	removeArticle: PropTypes.func.isRequired,
+	isEditing: PropTypes.bool,
 	article: PropTypes.object,
 	otherArticlesIds: PropTypes.arrayOf(PropTypes.object)
 };
 
 ArticleSingleProviderClass.defaultProps = {
 	error: null,
+	isEditing: false,
 	otherArticlesIds: null,
 	article: null
 };

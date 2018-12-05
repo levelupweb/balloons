@@ -1,0 +1,23 @@
+@import "~@theme/spacings";
+@import "~@theme/responsive";
+
+.article {
+  display: flex;
+  align-items: flex-start;
+  flex-flow: row nowrap;
+}
+
+@media @mobile {
+  .article {
+    flex-direction: column;
+  }
+}
+
+.main {
+  flex-grow: 1;
+}
+
+.sidebar {
+  width: 300px;
+  margin-left: @global-space;
+}

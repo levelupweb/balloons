@@ -1,0 +1,44 @@
+@import "~@theme/responsive";
+@import "~@theme/spacings";
+
+.form {
+  max-width: 700px;
+  width: 100%;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  flex-flow: row nowrap;
+  .item {
+    width: 50%;
+  }
+}
+
+@media @mobile {
+  .row {
+    flex-flow: row wrap;
+    .item {
+      width: 100%;
+    }
+  }
+}
+.action {
+  display: flex;
+  align-items: center;
+  flex-flow: row wrap;
+  .button {
+    margin-right: @global-space !important;
+  }
+}
+
+@media @mobile {
+  .action {
+    flex-direction: column;
+    align-items: center;
+    .button {
+      width: 100%;
+    }
+  }
+}

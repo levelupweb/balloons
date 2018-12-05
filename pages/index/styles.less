@@ -1,4 +1,6 @@
 @import "~@theme/spacings";
+@import "~@theme/colors";
+@import "~@theme/responsive";
 
 .wrapper {
   padding-top: 0;
@@ -17,6 +19,23 @@
     padding: 0;
     li {
       margin-bottom: @global-space * 0.25;
+    }
+  }
+}
+
+.c6 {
+  margin-top: @global-space * 4;
+  margin: auto;
+  .block {
+    padding: @global-space * 2;
+  }
+}
+
+@media @mobile {
+  .c6 {
+    margin-top: @global-space * 2;
+    .block {
+      padding: @global-space;
     }
   }
 }

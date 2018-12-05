@@ -1,0 +1,28 @@
+@import "~@theme/colors";
+@import "~@theme/spacings";
+@import "~@theme/common";
+
+.socials {
+  display: flex;
+  align-items: center;
+}
+
+.social {
+  font-size: @font-size * 1.2;
+  background: fadeout(@white, 90%);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 19px;
+
+  margin-right: @global-space * 0.5;
+  transition: 0.2s all ease-in-out;
+  color: fadeout(@white, 50%);
+
+  &:hover {
+    color: @white;
+    background: fadeout(@white, 95%);
+  }
+}

@@ -1,0 +1,23 @@
+@import "~@theme/colors";
+@import "~@theme/spacings";
+
+.listListItem {
+  margin-bottom: @global-space * 0.5 !important;
+}
+
+.listIcon {
+  color: fadeout(@white, 80%) !important;
+}
+
+.listHeader {
+  color: fadeout(@white, 20%) !important;
+}
+
+.listItem {
+  font-size: 14px;
+  transition: 0.2s all ease-in-out;
+  color: fadeout(@white, 40%);
+  &:hover {
+    color: @white !important;
+  }
+}

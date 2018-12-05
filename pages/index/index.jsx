@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "classnames";
 import DefaultContainer from "@containers/Default";
-import { Paragraph, Heading, List, Segment } from "@components/Typography";
+import { Paragraph, Heading, List } from "@components/Typography";
 import IndexSlider from "@components/IndexSlider";
 import Advantages from "@components/Advantages";
 import Margin from "@components/Margin";

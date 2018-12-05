@@ -1,0 +1,42 @@
+@import "~@theme/spacings";
+@import "~@theme/colors";
+@import "~@theme/responsive";
+
+.body {
+  padding: @global-space * 4 0;
+  color: @white;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.column {
+  width: 33%;
+  padding-right: @global-space * 2;
+  display: flex;
+  flex-direction: column;
+}
+
+@media @mobile {
+  .body {
+    flex-flow: column;
+  }
+  .column {
+    width: 100%;
+    padding-right: 0;
+    margin-bottom: @global-space * 1.5;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.logoWrapper {
+  flex-grow: 1;
+}
+
+.nav {
+  margin-bottom: @global-space;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

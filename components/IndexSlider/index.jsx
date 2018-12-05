@@ -1,7 +1,8 @@
 import React from "react";
+import classes from "classnames";
 import PropTypes from "prop-types";
-import OneSlideSlider from "@components/OneSlideSlider";
-import { Loader } from "semantic-ui-react";
+import NukaCarousel from "nuka-carousel";
+import { Loader, Button, Icon } from "semantic-ui-react";
 import { EditContext } from "@providers";
 import Slide from "./components/Slide";
 import EditBar from "./components/EditBar";
@@ -9,12 +10,31 @@ import styles from "./styles";
 import { IndexSliderContext, IndexSliderProvider } from "./context";
 
 class IndexSlider extends React.Component {
+	state = {
+		carousel: null
+	};
+
+	handleDimensions = () => {
+		const { carousel } = this.state;
+
+		if (carousel) {
+			carousel.setDimensions();
+		}
+	};
+
+	handleCarouselRef = carousel =>
+		this.setState({
+			carousel
+		});
+
 	componentDidMount = () => {
 		const { slides, fetchSlidesStart } = this.props;
 
 		if (!slides) {
-			fetchSlidesStart();
+			return fetchSlidesStart().then(this.handleDimensions);
 		}
+
+		this.handleDimensions();
 	};
 
 	renderSlides = () => {
@@ -39,12 +59,49 @@ class IndexSlider extends React.Component {
 		return this.renderSlides();
 	};
 
+	renderLeft = ({ previousSlide }) => (
+		<Button
+			circular
+			inverted
+			onClick={previousSlide}
+			className={classes(styles.button, styles.left)}
+			icon
+		>
+			<Icon name="chevron left" />
+		</Button>
+	);
+
+	renderRight = ({ nextSlide }) => (
+		<Button
+			circular
+			inverted
+			onClick={nextSlide}
+			className={classes(styles.button, styles.right)}
+			icon
+		>
+			<Icon name="chevron right" />
+		</Button>
+	);
+
 	render = () => {
 		const { isEditing } = this.props;
 
 		return (
 			<div className={styles.slider}>
-				<OneSlideSlider elements={1}>{this.renderSlider()}</OneSlideSlider>
+				<NukaCarousel
+					heightMode="first"
+					width="100%"
+					ref={this.handleCarouselRef}
+					autoplay
+					autoplayInterval={10000}
+					slidesToShow={1}
+					wrapAround
+					initialSlideWidth="100%"
+					renderCenterLeftControls={data => this.renderLeft(data)}
+					renderCenterRightControls={data => this.renderRight(data)}
+				>
+					{this.renderSlider()}
+				</NukaCarousel>
 				{isEditing && (
 					<div className={styles.editBar}>
 						<EditBar />

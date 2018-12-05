@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import cookies from "js-cookie";
 import axios from "axios";
-import { withAsyncSetState, getApiUrl } from "@utils";
+import { withAsyncSetState, getApiUrl, parseToken } from "@utils";
 import { TOKEN } from "@consts/_common";
 
 export const AuthContext = React.createContext();
@@ -19,7 +19,7 @@ class AuthProviderClass extends React.Component {
 
 	makeAuthIfNeeded = () => {
 		const { user } = this.state;
-		const token = this.getToken();
+		const token = parseToken();
 
 		if (!user && token) {
 			return this.authStart(token)
@@ -36,12 +36,15 @@ class AuthProviderClass extends React.Component {
 			token
 		});
 
-	performAuth = () =>
-		axios.get(getApiUrl("/user/auth"), {
+	performAuth = () => {
+		const { token } = this.state;
+
+		return axios.get(getApiUrl("/user/auth"), {
 			headers: {
-				authorization: this.state.token
+				authorization: token
 			}
 		});
+	};
 
 	authSuccess = ({ data }) =>
 		this.asyncSetState({
@@ -52,23 +55,23 @@ class AuthProviderClass extends React.Component {
 		cookies.remove(TOKEN);
 	};
 
-	getToken = () => {
-		const { token } = this.props;
+	setUser = ({ token, user }) => {
+		cookies.set(TOKEN, token);
 
-		return token ? token : cookies.get(TOKEN);
-	};
-
-	setUser = ({ token, user }) =>
-		this.asyncSetState({
+		return this.asyncSetState({
 			user,
 			token
-		}).then(() => cookies.set(TOKEN, token));
+		});
+	};
 
-	logout = () =>
-		this.asyncSetState({
+	logout = () => {
+		cookies.remove(TOKEN);
+
+		return this.asyncSetState({
 			user: null,
 			token: null
-		}).then(() => cookies.remove(TOKEN));
+		});
+	};
 
 	render = () => (
 		<AuthContext.Provider

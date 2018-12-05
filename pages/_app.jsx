@@ -38,8 +38,8 @@ class MyApp extends App {
 }
 
 const enhance = compose(
-	withFetcher,
 	withAuth,
+	withFetcher,
 	withUi
 );
 

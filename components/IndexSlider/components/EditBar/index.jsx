@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Modal from "@components/Modal";
-import { Button, Icon } from "semantic-ui-react";
-import EditSlide from "../EditSlide";
-import CreateNewSlide from "../CreateNewSlide";
+import { Button } from "semantic-ui-react";
 import { NOTIFICATION_VARIANT_SUCCESS } from "@components/Notification/consts";
 import Notification from "@components/Notification";
 import Margin from "@components/Margin";
+import EditSlide from "../EditSlide";
+import CreateNewSlide from "../CreateNewSlide";
 import { IndexSliderContext } from "../../context";
 import styles from "./styles.less";
 
@@ -40,9 +40,8 @@ class EditBar extends React.Component {
 		return (
 			<Modal
 				trigger={
-					<Button icon labelPosition="left">
-						Редактировать
-						<Icon name="settings" />
+					<Button inverted icon circular>
+						Редактировать слайды
 					</Button>
 				}
 			>

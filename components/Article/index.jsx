@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { ARTICLE_MODEL } from "@consts/_models";
 import { CollectionsContext } from "@providers";
 
-const Article = ({ children, article }) => article && children(article);
+const Article = ({ children, article }) => (article ? children(article) : null);
 
 Article.propTypes = {
 	article: PropTypes.object.isRequired,

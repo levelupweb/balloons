@@ -81,6 +81,14 @@ export default dirname =>
 			server.use("/storage", express.static(__dirname + "/uploads"));
 			server.use("/static", express.static(dirname + "/.next/static"));
 			server.use("/semantic", express.static(dirname + "/semantic/dist"));
+
+			server.get("/article/:slug", (req, res) => {
+				return app.render(req, res, "/article", {
+					slug: req.params.slug,
+					edit: req.query.edit
+				});
+			});
+
 			server.get("*", (req, res) => handle(req, res));
 
 			server.listen(envConfig.port, err => {

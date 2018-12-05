@@ -3,16 +3,13 @@ import App, { Container } from "next/app";
 import { bindNProgress, compose } from "@utils";
 import { withFetcher, withAuth, withUi } from "@HOC";
 import { EditProvider, CollectionsProvider } from "@providers";
-// import moment from "moment";
+import { getDefaultCollections } from "@utils";
 
 bindNProgress();
-// moment.locale("ru");
 
 class MyApp extends App {
 	static async getInitialProps({ Component, ctx }) {
 		let pageProps = {};
-
-		// console.log(ctx);
 
 		if (Component.getInitialProps) {
 			pageProps = await Component.getInitialProps(ctx);
@@ -25,9 +22,12 @@ class MyApp extends App {
 
 	render() {
 		const { Component, pageProps } = this.props;
+
 		return (
 			<Container>
-				<CollectionsProvider>
+				<CollectionsProvider
+					defaultCollections={getDefaultCollections(pageProps)}
+				>
 					<EditProvider>
 						<Component {...pageProps} />
 					</EditProvider>

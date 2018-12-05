@@ -15,3 +15,5 @@ export { createAxios } from "./createAxios";
 export { deepEqual } from "./deepEqual";
 export { isValidMime } from "./isValidMime";
 export { formatDate } from "./formatDate";
+export { parseToken } from "./parseToken";
+export { getDefaultCollections } from "./getDefaultCollections";

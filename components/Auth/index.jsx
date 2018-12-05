@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "next/router";
 import { Heading, Paragraph } from "@components/Typography";
 import Margin from "@components/Margin";
+import Field from "@components/Field";
 import Login from "./components/Login";
 import ErrorNotification from "./components/ErrorNotification";
 import Actions from "./components/Actions";
@@ -49,7 +50,7 @@ class Auth extends React.Component {
 		const { hasError } = this.props;
 
 		if (redirecting) {
-			return "redirecting..";
+			return <Paragraph>Телепортация на главную..</Paragraph>;
 		}
 
 		return (
@@ -66,10 +67,19 @@ class Auth extends React.Component {
 					</Margin>
 				)}
 				<Margin top>
-					<Login />
+					<Field title="Логин">
+						<Login />
+					</Field>
 				</Margin>
 				<Margin top>
-					<Password />
+					<Field title="Пароль">
+						<Password />
+					</Field>
+				</Margin>
+				<Margin top>
+					<Paragraph>
+						При авторизации будут использоваться ваши Cookies-файлы
+					</Paragraph>
 				</Margin>
 				<Margin top>
 					<Actions />

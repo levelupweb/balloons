@@ -76,6 +76,7 @@ class Clients extends React.Component {
 					autoplay
 					autoplayInterval={4000}
 					slidesToShow={3}
+					wrapAround
 					initialSlideWidth="33%"
 					slidesToScroll={3}
 					renderCenterLeftControls={data => this.renderLeft(data)}

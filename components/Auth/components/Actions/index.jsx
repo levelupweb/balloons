@@ -1,6 +1,5 @@
 import React from "react";
-import { BUTTON_VARIANT_PRIMARY } from "@components/Button/consts";
-import Button from "@components/Button";
+import { Button } from "semantic-ui-react";
 import { AuthComponentContext } from "../../context";
 import styles from "./styles";
 
@@ -9,9 +8,11 @@ const Actions = () => (
 		{ctx => (
 			<div className={styles.actions}>
 				<Button
-					variant={BUTTON_VARIANT_PRIMARY}
 					onClick={ctx.authStart}
+					fluid
 					loading={ctx.isHydrating}
+					size="large"
+					basic
 				>
 					Авторизоваться
 				</Button>

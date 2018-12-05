@@ -9,7 +9,7 @@ import bodyParser from "body-parser";
 import { createMongooseConnection } from "./db";
 import { getEnvConfig, isValidMime } from "@utils";
 import { parseExtension, createError } from "@server/utils";
-import { error, auth } from "@server/middlewares";
+import { error } from "@server/middlewares";
 import { logger } from "./logger";
 
 const envConfig = getEnvConfig(process.env.NODE_ENV);

@@ -3,3 +3,4 @@ export { Category } from "./Category";
 export { Article } from "./Article";
 export { Slide } from "./Slide";
 export { Contact } from "./Contact";
+export { Calculation } from "./Calculation";

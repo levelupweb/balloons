@@ -1,0 +1,27 @@
+@import "~@theme/spacings";
+
+.item {
+  padding: @global-space;
+  .inner {
+    text-align: center;
+    img {
+      max-height: 100px;
+      width: auto;
+      margin: auto;
+    }
+  }
+}
+
+.carousel {
+  padding-left: @global-space * 2;
+  padding-right: @global-space * 2;
+}
+
+.button {
+  &.left {
+    margin-left: -50px !important;
+  }
+  &.right {
+    margin-right: -50px !important;
+  }
+}

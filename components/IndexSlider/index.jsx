@@ -44,7 +44,7 @@ class IndexSlider extends React.Component {
 
 		return (
 			<div className={styles.slider}>
-				<OneSlideSlider>{this.renderSlider()}</OneSlideSlider>
+				<OneSlideSlider elements={1}>{this.renderSlider()}</OneSlideSlider>
 				{isEditing && (
 					<div className={styles.editBar}>
 						<EditBar />

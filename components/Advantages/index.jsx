@@ -11,6 +11,27 @@ class Advantage extends React.Component {
 		isFocused: false
 	};
 
+	componentDidMount = () => {
+		window.addEventListener("scroll", this.handleScroll);
+	};
+
+	componentWillUnmount = () => {
+		window.removeEventListener("scroll", this.handleScroll);
+	};
+
+	handleScroll = () => {
+		const { isFocused } = this.state;
+
+		if (isFocused) {
+			return this.handleFocused(false);
+		}
+
+		const main = document.getElementById("main-container");
+		if (main.classList.contains("dimmed")) {
+			main.classList.remove("dimmed");
+		}
+	};
+
 	handleFocused = isFocused =>
 		this.setState(
 			{
@@ -32,6 +53,7 @@ class Advantage extends React.Component {
 	render = () => {
 		const { img, title, description } = this.props;
 		const { isFocused } = this.state;
+
 		return (
 			<div
 				onMouseEnter={() => this.handleFocused(true)}

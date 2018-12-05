@@ -38,9 +38,10 @@ class OneSlideSlider extends React.Component {
 
 	resizeHandler = () => {
 		const { ref } = this.state;
+		const { elements } = this.props;
 
 		this.setState({
-			slideWidth: getWidthElement(ref, true)
+			slideWidth: getWidthElement(ref, true) / elements
 		});
 	};
 
@@ -169,6 +170,7 @@ OneSlideSlider.propTypes = {
 	slide: PropTypes.number,
 	gap: PropTypes.number,
 	displayDots: PropTypes.bool,
+	elements: PropTypes.number,
 	displayArrows: PropTypes.bool,
 	className: PropTypes.string,
 	style: PropTypes.object,
@@ -177,6 +179,7 @@ OneSlideSlider.propTypes = {
 
 OneSlideSlider.defaultProps = {
 	children: [],
+	elements: 1,
 	arrowClassName: null,
 	className: null,
 	style: {},

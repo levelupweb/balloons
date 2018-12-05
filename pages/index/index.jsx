@@ -5,6 +5,7 @@ import { Paragraph, Heading, List } from "@components/Typography";
 import IndexSlider from "@components/IndexSlider";
 import Advantages from "@components/Advantages";
 import Margin from "@components/Margin";
+import Clients from "@components/Clients";
 import Calculator from "@components/Calculator";
 import BlockHeader from "@components/BlockHeader";
 
@@ -138,6 +139,12 @@ const IndexPage = () => (
 							]
 						]}
 					</Advantages>
+				</div>
+			</Margin>
+			<Margin top bottom double className={styles.field}>
+				<BlockHeader title="Наши клиенты" description="Присоединяйтесь и вы!" />
+				<div className={classes(styles.content, styles.c5)}>
+					<Clients />
 				</div>
 			</Margin>
 		</div>

@@ -39,6 +39,7 @@
     "next": "^7.0.2",
     "next-compose": "0.0.2",
     "nprogress": "^0.2.0",
+    "nuka-carousel": "^4.4.3",
     "password-hash-and-salt": "^0.1.4",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",

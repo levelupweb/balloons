@@ -2,8 +2,10 @@ import express from "express";
 import { auth, validation } from "@server/middlewares";
 import { createError, createSlug } from "@server/utils";
 import { Category } from "@server/models";
+import { ARTICLE_CATEGORY } from "@consts/article";
 import { CATEGORY_SLUG, CATEGORY_TITLE } from "@consts/category";
 import { createValidation, updateValidation } from "./middlewares";
+import Article from "../../models/Article";
 
 const router = express.Router();
 
@@ -19,6 +21,12 @@ router.post(
 			.catch(error =>
 				next(createError("Не удалось создать новую категорию", error))
 			)
+);
+
+router.get("/articles", (req, res, next) =>
+	Article.getArticles({ [ARTICLE_CATEGORY]: req.query.categoryId })
+		.then(articles => res.json(articles))
+		.catch(err => next(createError("Не удалось найти статьи", err)))
 );
 
 router.get("/entry/:slug", (req, res, next) =>

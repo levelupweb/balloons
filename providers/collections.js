@@ -5,8 +5,33 @@ import { withAsyncSetState } from "@utils";
 export const CollectionsContext = React.createContext();
 
 class CollectionsProviderClass extends React.Component {
-	state = {
-		collections: this.props.defaultCollections
+	constructor(props) {
+		super(props);
+		this.state = {
+			collections: this.setup()
+		};
+	}
+
+	setup = () => {
+		const { defaultCollections } = this.props;
+
+		if (defaultCollections) {
+			return Object.keys(defaultCollections).reduce(
+				(prev, curr) => ({
+					...prev,
+					[curr]: defaultCollections[curr].reduce(
+						(prev, curr) => ({
+							...prev,
+							[curr._id]: curr
+						}),
+						{}
+					)
+				}),
+				{}
+			);
+		}
+
+		return {};
 	};
 
 	insertDocuments = (model, documents) => {

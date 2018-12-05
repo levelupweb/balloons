@@ -1,15 +1,4 @@
-import {
-	FETCH_SIGNIN,
-	FETCH_UI_ELEMENTS,
-	FETCH_FILE_UPLOAD,
-	FETCH_SLIDES,
-	FETCH_UPDATE_SLIDE,
-	FETCH_REMOVE_SLIDE,
-	FETCH_ARTICLE_BY_ID,
-	FETCH_ARTICLE_BY_SLUG,
-	FETCH_ADD_SLIDE,
-	FETCH_ARTICLES
-} from "@consts/_fetch";
+import * as fetchConsts from "@consts/_fetch";
 
 export const fetch = (fetcher, action, ...rest) => {
 	if (typeof fetcher !== "function") {
@@ -20,44 +9,48 @@ export const fetch = (fetcher, action, ...rest) => {
 		throw new Error("Fetcher is not valid axios instance");
 	}
 
-	if (action === FETCH_SIGNIN) {
+	if (action === fetchConsts.FETCH_SIGNIN) {
 		return fetcher.post("/user/signin", ...rest);
 	}
 
-	if (action === FETCH_UI_ELEMENTS) {
+	if (action === fetchConsts.FETCH_UI_ELEMENTS) {
 		return fetcher.get("/ui/elements");
 	}
 
-	if (action === FETCH_FILE_UPLOAD) {
+	if (action === fetchConsts.FETCH_FILE_UPLOAD) {
 		return fetcher.post("/image", ...rest);
 	}
 
-	if (action === FETCH_SLIDES) {
+	if (action === fetchConsts.FETCH_SLIDES) {
 		return fetcher.get("/slide/entries");
 	}
 
-	if (action === FETCH_UPDATE_SLIDE) {
+	if (action === fetchConsts.FETCH_UPDATE_SLIDE) {
 		return fetcher.put("/slide/entry", ...rest);
 	}
 
-	if (action === FETCH_REMOVE_SLIDE) {
+	if (action === fetchConsts.FETCH_REMOVE_SLIDE) {
 		return fetcher.delete("/slide/entry", ...rest);
 	}
 
-	if (action === FETCH_ADD_SLIDE) {
+	if (action === fetchConsts.FETCH_ADD_SLIDE) {
 		return fetcher.post("/slide/create", ...rest);
 	}
 
-	if (action === FETCH_ARTICLES) {
+	if (action === fetchConsts.FETCH_ARTICLES) {
 		return fetcher.get("/article/entries");
 	}
 
-	if (action === FETCH_ARTICLE_BY_ID) {
+	if (action === fetchConsts.FETCH_ARTICLE_BY_ID) {
 		return fetcher.get("/article/entry/id", ...rest);
 	}
 
-	if (action === FETCH_ARTICLE_BY_SLUG) {
+	if (action === fetchConsts.FETCH_ARTICLE_BY_SLUG) {
 		return fetcher.get("/article/entry", ...rest);
+	}
+
+	if (action === fetchConsts.FETCH_CATEGORY_GET_ARTICLES) {
+		return fetcher.get("/category/articles", ...rest);
 	}
 
 	throw new Error("Unknown action");

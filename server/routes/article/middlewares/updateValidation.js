@@ -11,7 +11,10 @@ export const updateValidation = [
 		.custom(validation.content),
 	check(consts.ARTICLE_CATEGORY)
 		.optional()
-		.custom(validation.category)
+		.custom(validation.category),
+	check(consts.ARTICLE_DISPLAY_HEADER)
+		.optional()
+		.custom(validation.displayHeader)
 ];
 
 export default updateValidation;

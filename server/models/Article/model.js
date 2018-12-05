@@ -23,6 +23,10 @@ const ArticleSchema = new Schema(
 		[consts.ARTICLE_SLUG]: {
 			type: String,
 			required: true
+		},
+		[consts.ARTICLE_DISPLAY_HEADER]: {
+			type: Boolean,
+			default: true
 		}
 	},
 	{

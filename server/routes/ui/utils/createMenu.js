@@ -1,6 +1,8 @@
 import { ARTICLE_CATEGORY } from "@consts/article";
 import { ARTICLE_TITLE, ARTICLE_SLUG } from "@consts/article";
 import { CATEGORY_TITLE } from "@consts/category";
+import { ARTICLE_DISPLAY_HEADER } from "../../../../consts/article";
+import { CATEGORY_DISPLAY_HEADER } from "../../../../consts/category";
 
 const createSingle = article => ({
 	title: article[ARTICLE_TITLE],
@@ -11,8 +13,15 @@ const createSingle = article => ({
 export const createMenu = allArticles =>
 	allArticles.reduce(
 		(prev, curr) => {
+			if (!curr[ARTICLE_DISPLAY_HEADER]) {
+				return prev;
+			}
 			if (curr[ARTICLE_CATEGORY]) {
 				const categoryId = curr[ARTICLE_CATEGORY]._id;
+
+				if (!curr[ARTICLE_CATEGORY][CATEGORY_DISPLAY_HEADER]) {
+					return prev;
+				}
 
 				if (prev[categoryId]) {
 					return {
@@ -33,7 +42,6 @@ export const createMenu = allArticles =>
 				}
 			}
 			const articleId = curr._id;
-
 			return {
 				...prev,
 				[articleId]: createSingle(curr)

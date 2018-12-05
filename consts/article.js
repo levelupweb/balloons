@@ -4,3 +4,4 @@ export const ARTICLE_SLUG = "slug";
 export const ARTICLE_CATEGORY = "category";
 export const ARTICLE_CREATED = "created";
 export const ARTICLE_UPDATED = "updated";
+export const ARTICLE_DISPLAY_HEADER = "displayHeader";

@@ -83,7 +83,11 @@ class Multi extends React.Component {
 				{isExpanded && (
 					<ul className={styles.sub} ref={this.mutateSubElement}>
 						{item.elements.map((el, index) => (
-							<Link shallow key={index} href={`/article/${el.slug}`}>
+							<Link
+								shallow
+								key={index}
+								href={el.link ? el.link : `/article/${el.slug}`}
+							>
 								<a>
 									<Atomic vertical>
 										<span className={styles.inner}>{el.title}</span>

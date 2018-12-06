@@ -34,18 +34,18 @@ const Footer = () => (
 			<Grid.Column>
 				<FooterNav title="О компании">
 					{[
-						["Контактная информация", "/"],
-						["Наши реквизиты", "/"],
-						["Сотрудничество", "/"]
+						["Контактная информация", "/kontaktnaya-informaciya"],
+						["Наши реквизиты", "/article/nashi-rekvizity"],
+						["Сотрудничество", "/sotrudnichestvo"]
 					]}
 				</FooterNav>
 				<Margin top double>
 					<FooterNav title="Полезная информация">
 						{[
-							["Оплата и доставка", "/"],
-							["Наши услуги", "/"],
-							["Активные акции", "/"],
-							["Наши работы", "/"]
+							["Оплата и доставка", "/article/oplata-i-dostavka"],
+							["Наши услуги", "/article/ceny"],
+							["Активные акции", "/sales"],
+							["Наши работы", "/works"]
 						]}
 					</FooterNav>
 				</Margin>

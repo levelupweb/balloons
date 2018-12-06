@@ -3,7 +3,6 @@ import {
 	CALCULATOR_PARAM_LOGO_2,
 	CALCULATOR_PARAM_LOGO_COLORS_2,
 	CALCULATOR_PARAM_LOGO_COLORS,
-	CALCULATOR_PARAM_TYPE,
 	CALCULATOR_PARAM_DIAMETER,
 	CALCULATOR_DIAMETER_14
 } from "./consts";
@@ -25,7 +24,7 @@ export const defineType = params => {
 
 export const defineBasicPrice = (type, rawNumber, params) => {
 	const number = parseFloat(rawNumber);
-	
+
 	if (params[CALCULATOR_PARAM_DIAMETER] !== CALCULATOR_DIAMETER_14) {
 		if (number === 1) {
 			return 2100;

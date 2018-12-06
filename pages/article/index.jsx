@@ -36,6 +36,7 @@ class ArticlePage extends React.Component {
 			}
 
 			return {
+				...answer,
 				collectionsArticles: [article.data]
 			};
 		} catch (err) {

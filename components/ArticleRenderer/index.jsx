@@ -4,7 +4,7 @@ import ReactDOMServer from "react-dom/server";
 import HtmlToReact, { Parser } from "html-to-react";
 import { Heading, Paragraph } from "@components/Typography";
 import { parseStyles } from "@utils";
-import { Image, List } from "semantic-ui-react";
+import { Image } from "semantic-ui-react";
 import styles from "./styles";
 
 const ArticleRenderer = ({ content }) => {

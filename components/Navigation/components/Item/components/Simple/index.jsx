@@ -6,7 +6,7 @@ import Atomic from "../Atomic";
 import styles from "./styles";
 
 const Simple = ({ vertical, item }) => (
-	<Link shallow href={`/article/${item.slug}`}>
+	<Link shallow href={item.link ? item.link : `/article/${item.slug}`}>
 		<a>
 			<Atomic className={classes(styles.item, { [styles.vertical]: vertical })}>
 				<span className={styles.wrapper}>

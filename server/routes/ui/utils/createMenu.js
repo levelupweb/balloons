@@ -50,8 +50,8 @@ export const createMenu = allArticles =>
 		{
 			promo: {
 				title: "Акции",
-				slug: "promos",
-				id: "promos"
+				link: "/sales",
+				id: "sales"
 			}
 		}
 	);

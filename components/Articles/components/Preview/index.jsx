@@ -3,20 +3,22 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 import { Paragraph } from "@components/Typography";
 import { formatDate } from "@utils";
+import { CATEGORY_TITLE } from "@consts/category";
+import styles from "./styles";
+
 import {
 	ARTICLE_CATEGORY,
 	ARTICLE_TITLE,
-	ARTICLE_UPDATED
+	ARTICLE_UPDATED,
+	ARTICLE_SLUG
 } from "@consts/article";
-import { CATEGORY_TITLE } from "@consts/category";
-import styles from "./styles";
 
 const Preview = ({ article }) => (
 	<div className={styles.preview}>
 		<div className={styles.left}>
 			<Link
 				href={{
-					pathname: "/article",
+					pathname: `/article/${article[ARTICLE_SLUG]}`,
 					query: {
 						edit: "true"
 					}

@@ -8,7 +8,8 @@ import Block from "@components/Block";
 import Number from "./components/Number";
 import TypeSelector from "./components/TypeSelector";
 import ColorPicker from "./components/ColorPicker";
-import SidesSelector from "./components/SidesSelector";
+import MetalSelector from "./components/MetalSelector";
+import Price from "./components/Price";
 import DiameterSelector from "./components/DiameterSelector";
 import styles from "./styles.less";
 import { CalculatorProvider, CalculatorContext } from "./context";
@@ -54,10 +55,13 @@ const Calculator = ({ params, handleParams, hasLogo }) => (
 				{hasLogo && (
 					<Margin top>
 						<Field title="Стороны печати" description="Обязательное поле">
-							<SidesSelector />
+							<MetalSelector />
 						</Field>
 					</Margin>
 				)}
+				<Margin top>
+					<Price />
+				</Margin>
 			</Form>
 		</Block>
 	</div>

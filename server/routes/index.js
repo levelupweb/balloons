@@ -6,6 +6,7 @@ import ui from "./ui";
 import slide from "./slide";
 import contact from "./contact";
 import calculation from "./calculation";
+import sale from "./sale";
 
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.use("/ui", ui);
 router.use("/slide", slide);
 router.use("/contact", contact);
 router.use("/calculation", calculation);
+router.use("/sale", sale);
 
 export default router;

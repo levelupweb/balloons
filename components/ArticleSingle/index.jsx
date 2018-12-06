@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Segment } from "semantic-ui-react";
+import Margin from "@components/Margin";
 import { Paragraph } from "@components/Typography";
 import Title from "./components/Title";
 import Sidebar from "./components/Sidebar";
+import Meta from "./components/Meta";
 import Content from "./components/Content";
 import { ArticleSingleProvider, ArticleSingleContext } from "./context";
 import styles from "./styles";
@@ -22,10 +24,13 @@ const ArticleSingle = ({ fetchError, hasArticle }) => {
 			<div className={styles.article}>
 				<main className={styles.main}>
 					<div className={styles.title}>
+						<Meta />
 						<Title />
 					</div>
 					<div className={styles.content}>
-						<Content />
+						<Margin top>
+							<Content />
+						</Margin>
 					</div>
 				</main>
 				<aside className={styles.sidebar}>

@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import { Segment } from "semantic-ui-react";
 import Margin from "@components/Margin";
 import { Paragraph } from "@components/Typography";
+import Block from "@components/Block";
 import Title from "./components/Title";
 import Sidebar from "./components/Sidebar";
+import Actions from "./components/Actions";
 import Meta from "./components/Meta";
 import Content from "./components/Content";
 import { ArticleSingleProvider, ArticleSingleContext } from "./context";
@@ -23,15 +25,20 @@ const ArticleSingle = ({ fetchError, hasArticle }) => {
 		return (
 			<div className={styles.article}>
 				<main className={styles.main}>
-					<div className={styles.title}>
-						<Meta />
-						<Title />
-					</div>
-					<div className={styles.content}>
-						<Margin top>
-							<Content />
-						</Margin>
-					</div>
+					<Block>
+						<div className={styles.title}>
+							<Meta />
+							<Title />
+						</div>
+						<div className={styles.content}>
+							<Margin top>
+								<Content />
+							</Margin>
+							<Margin top>
+								<Actions />
+							</Margin>
+						</div>
+					</Block>
 				</main>
 				<aside className={styles.sidebar}>
 					<Sidebar />

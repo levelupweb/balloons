@@ -53,6 +53,10 @@ export const fetch = (fetcher, action, ...rest) => {
 		return fetcher.get("/category/articles", ...rest);
 	}
 
+	if (action === fetchConsts.FETCH_UPDATE_ARTICLE) {
+		return fetcher.put("/article/entry", ...rest);
+	}
+
 	throw new Error("Unknown action");
 };
 

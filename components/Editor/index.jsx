@@ -2,6 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { debounce } from "throttle-debounce";
 import { EditorState, ContentState, convertToRaw } from "draft-js";
+import { FETCH_FILE_UPLOAD } from "@consts/_fetch";
+import { Editor } from "react-draft-wysiwyg";
+import { FetcherContext } from "@providers";
+import htmlToDraft from "html-to-draftjs";
+import draftToHtml from "draftjs-to-html";
+import { toolbar } from "./toolbar";
+import styles from "./styles";
+
 import {
 	isFunction,
 	fetch,
@@ -9,14 +17,6 @@ import {
 	withAsyncSetState,
 	getStorageUrl
 } from "@utils";
-import { FETCH_FILE_UPLOAD } from "@consts/_fetch";
-import { Editor } from "react-draft-wysiwyg";
-import { FetcherContext } from "@providers";
-import htmlToDraft from "html-to-draftjs";
-import blockRender from "./blockRender";
-import draftToHtml from "draftjs-to-html";
-import { toolbar } from "./toolbar";
-import styles from "./styles";
 
 class ControlledEditor extends Component {
 	constructor(props) {
@@ -110,6 +110,7 @@ class ControlledEditor extends Component {
 					editorState={editorState}
 					placeholder="Начните писать статью здесь.."
 					toolbarClassName={styles.toolbar}
+					stripPastedStyles={true}
 					localization={{
 						locale: "ru"
 					}}

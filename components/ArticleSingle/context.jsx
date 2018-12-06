@@ -4,6 +4,7 @@ import { fetch, parseError, withAsyncSetState } from "@utils";
 import { ARTICLE_MODEL } from "@consts/_models";
 import { CollectionsContext, FetcherContext } from "@providers";
 import { FETCH_UPDATE_ARTICLE } from "@consts/_fetch";
+import { prepareArticle } from "./utils";
 
 const defaultState = {
 	updating: {
@@ -24,6 +25,7 @@ class ArticleSingleProviderClass extends React.Component {
 		...defaultState,
 		otherArticlesIds: this.props.otherArticlesIds,
 		temporaryArticle: this.props.article,
+		defaultArticle: this.props.article,
 		isEditing: this.props.isEditing,
 		fetchError: this.props.error
 	};
@@ -50,19 +52,28 @@ class ArticleSingleProviderClass extends React.Component {
 		const { temporaryArticle } = this.state;
 		const { fetcher } = this.props;
 
-		return fetch(fetcher, FETCH_UPDATE_ARTICLE, temporaryArticle, {
-			params: {
-				articleId: temporaryArticle._id
+		return fetch(
+			fetcher,
+			FETCH_UPDATE_ARTICLE,
+			prepareArticle(temporaryArticle),
+			{
+				params: {
+					articleId: temporaryArticle._id
+				}
 			}
-		});
+		);
 	};
 
 	updateArticleSuccess = ({ data }) => {
 		const { updateArticle } = this.props;
 
 		return updateArticle(data).then(() =>
-			this.handleUpdatingState({
-				isHydrating: false
+			this.asyncSetState({
+				updating: {
+					...this.state.updating,
+					isHydrating: false
+				},
+				defaultArticle: data
 			})
 		);
 	};
@@ -71,22 +82,26 @@ class ArticleSingleProviderClass extends React.Component {
 		const error = parseError(reason);
 
 		if (typeof error === "string") {
-			return this.asyncSetState({
+			return this.handleUpdatingState({
 				isHydrating: false,
 				error
 			});
 		}
 
-		return this.asyncSetState({
+		return this.handleUpdatingState({
 			isHydrating: false,
 			typeError: error
 		});
 	};
 
-	handleIsEditing = isEditing =>
+	handleIsEditing = isEditing => {
+		const { defaultArticle, temporaryArticle } = this.state;
+
 		this.asyncSetState({
-			isEditing
+			isEditing,
+			temporaryArticle: isEditing === false ? defaultArticle : temporaryArticle
 		});
+	};
 
 	handleTemporaryArticle = data =>
 		this.asyncSetState({
@@ -149,7 +164,7 @@ const ArticleSingleProviderClassWithCollectionsContext = props => (
 			<ArticleSingleProviderClassWithAsyncSetState
 				{...props}
 				updateArticle={article =>
-					ctx.updateArticle(ARTICLE_MODEL, article._id, article)
+					ctx.updateDocument(ARTICLE_MODEL, article._id, article)
 				}
 				removeArticle={articleId =>
 					ctx.removeDocuments(ARTICLE_MODEL, [articleId])

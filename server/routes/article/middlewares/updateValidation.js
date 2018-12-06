@@ -6,6 +6,9 @@ export const updateValidation = [
 	check(consts.ARTICLE_TITLE)
 		.optional()
 		.custom(validation.title),
+	check(consts.ARTICLE_DESCRIPTION)
+		.optional()
+		.custom(validation.description),
 	check(consts.ARTICLE_CONTENT)
 		.optional()
 		.custom(validation.content),

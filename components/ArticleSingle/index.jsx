@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Segment } from "semantic-ui-react";
+import { Segment, Grid, Form } from "semantic-ui-react";
 import Margin from "@components/Margin";
 import { Paragraph } from "@components/Typography";
 import Block from "@components/Block";
 import Title from "./components/Title";
 import Sidebar from "./components/Sidebar";
+import Description from "./components/Description";
 import Actions from "./components/Actions";
 import Meta from "./components/Meta";
 import Content from "./components/Content";
@@ -23,27 +24,36 @@ const ArticleSingle = ({ fetchError, hasArticle }) => {
 
 	if (hasArticle) {
 		return (
-			<div className={styles.article}>
-				<main className={styles.main}>
-					<Block>
-						<div className={styles.title}>
-							<Meta />
-							<Title />
-						</div>
-						<div className={styles.content}>
-							<Margin top>
-								<Content />
-							</Margin>
-							<Margin top>
-								<Actions />
-							</Margin>
-						</div>
-					</Block>
-				</main>
-				<aside className={styles.sidebar}>
-					<Sidebar />
-				</aside>
-			</div>
+			<Grid>
+				<Grid.Column mobile={16} tablet={12} computer={11}>
+					<main className={styles.main}>
+						<Block>
+							<Form>
+								<div className={styles.title}>
+									<Meta />
+									<Title />
+									<Margin top>
+										<Description />
+									</Margin>
+								</div>
+							</Form>
+							<div className={styles.content}>
+								<Margin top>
+									<Content />
+								</Margin>
+								<Margin top>
+									<Actions />
+								</Margin>
+							</div>
+						</Block>
+					</main>
+				</Grid.Column>
+				<Grid.Column mobile={16} tablet={4} computer={5}>
+					<aside className={styles.sidebar}>
+						<Sidebar />
+					</aside>
+				</Grid.Column>
+			</Grid>
 		);
 	}
 

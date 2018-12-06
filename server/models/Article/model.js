@@ -27,6 +27,10 @@ const ArticleSchema = new Schema(
 		[consts.ARTICLE_DISPLAY_HEADER]: {
 			type: Boolean,
 			default: true
+		},
+		[consts.ARTICLE_DESCRIPTION]: {
+			type: String,
+			required: true
 		}
 	},
 	{

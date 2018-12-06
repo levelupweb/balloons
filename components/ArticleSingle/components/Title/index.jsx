@@ -31,11 +31,15 @@ const Title = ({ title, isEditing, handleChange, error }) => {
 		);
 	}
 
-	return (
-		<Heading as="h2" size={2}>
-			{title}
-		</Heading>
-	);
+	if (title) {
+		return (
+			<Heading as="h2" size={2}>
+				{title}
+			</Heading>
+		);
+	}
+
+	return null;
 };
 
 Title.propTypes = {

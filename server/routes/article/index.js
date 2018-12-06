@@ -1,10 +1,9 @@
 import express from "express";
 import { auth, validation } from "@server/middlewares";
 import { createError, createSlug } from "@server/utils";
-import { ARTICLE_SLUG, ARTICLE_TITLE } from "@consts/article";
+import { ARTICLE_SLUG, ARTICLE_TITLE, ARTICLE_CATEGORY } from "@consts/article";
 import { Article } from "@server/models";
 import { createValidation, updateValidation } from "./middlewares";
-import { ARTICLE_CATEGORY } from "../../../consts/article";
 
 const router = express.Router();
 

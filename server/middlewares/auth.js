@@ -8,7 +8,6 @@ export const auth = (required = true) => (req, _, next) => {
 		return verifyToken(token)
 			.then(decoded => {
 				req.userId = decoded.userId;
-
 				return User.getUser({
 					_id: decoded.userId
 				})

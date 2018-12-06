@@ -53,9 +53,6 @@ export default dirname =>
 						return;
 					}
 
-					// temp/smapmsadl.png
-					// admin/fni0qfnqif.png
-
 					filename = req.user
 						? `/admin/${timestamp}.${extension}`
 						: `/temp/${timestamp}.${extension}`;

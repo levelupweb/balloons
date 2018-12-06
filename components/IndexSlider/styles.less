@@ -1,5 +1,6 @@
 @import "~@theme/spacings";
 @import "~@theme/colors";
+@import "~@theme/responsive";
 
 .slider {
   position: relative;
@@ -29,4 +30,10 @@
 
 .right {
   margin-right: @global-space !important;
+}
+
+@media @mobile {
+  .slider {
+    height: 100vh;
+  }
 }

@@ -1,5 +1,6 @@
 @import "~@theme/colors";
 @import "~@theme/spacings";
+@import "~@theme/responsive";
 
 .menu {
   background: @white;
@@ -10,5 +11,11 @@
   padding: @global-space * 0.5 @global-space !important;
   &:hover {
     background: fadeout(@black, 90%) !important;
+  }
+}
+
+@media @mobile {
+  .menu {
+    display: none;
   }
 }

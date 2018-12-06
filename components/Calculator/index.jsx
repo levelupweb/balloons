@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Form } from "semantic-ui-react";
 import Margin from "@components/Margin";
 import Field from "./components/Field";
 import Plot from "./components/Plot";
@@ -20,7 +21,7 @@ const Calculator = ({ params, handleParams, hasLogo }) => (
 		</div>
 
 		<Block className={styles.selectors}>
-			<React.Fragment>
+			<Form>
 				<Margin bottom>
 					<Field title="Тип шара" description="Обязательное поле">
 						<TypeSelector />
@@ -57,7 +58,7 @@ const Calculator = ({ params, handleParams, hasLogo }) => (
 						</Field>
 					</Margin>
 				)}
-			</React.Fragment>
+			</Form>
 		</Block>
 	</div>
 );

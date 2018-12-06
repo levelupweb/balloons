@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "classnames";
+import { Grid } from "semantic-ui-react";
 import DefaultContainer from "@containers/Default";
 import { Paragraph, Heading, List } from "@components/Typography";
 import IndexSlider from "@components/IndexSlider";
@@ -24,35 +25,37 @@ const IndexPage = () => (
 					title="О компании"
 					description={"ООО \"Золотая стрекоза\""}
 				/>
-				<div className={classes(styles.content, styles.c1)}>
-					<div className={styles.left}>
-						<Paragraph>
-							{`
+				<div className={styles.content}>
+					<Grid stackable columns={2}>
+						<Grid.Column>
+							<Paragraph>
+								{`
 							Общество с ограниченной ответственностью "Золотая стрекоза"
 							работает на российском рынке с 2010 года. По адресу Владимир, ул.
 							Комиссарова, д. 10а. к Вашим услугам ПА "Золотая стрекоза"
 							`}
-						</Paragraph>
-						<Margin top>
-							<Heading size={5} as="h4">
-								Основные направления нашей работы:
-							</Heading>
-						</Margin>
-						<Margin top left>
-							<List>
-								{[
-									"Печать на воздушных шарах",
-									`Оформление праздничных мероприятий, внутреннее и наружное
+							</Paragraph>
+							<Margin top>
+								<Heading size={5} as="h4">
+									Основные направления нашей работы:
+								</Heading>
+							</Margin>
+							<Margin top left>
+								<List>
+									{[
+										"Печать на воздушных шарах",
+										`Оформление праздничных мероприятий, внутреннее и наружное
 								оформление шарами торговых помещений`,
-									"Услуги по накачке, доставке и раздаче шаров",
-									"И многое другое.."
-								]}
-							</List>
-						</Margin>
-					</div>
-					<Margin left className={styles.right}>
-						<img src={require("./img/logo.png")} />
-					</Margin>
+										"Услуги по накачке, доставке и раздаче шаров",
+										"И многое другое.."
+									]}
+								</List>
+							</Margin>
+						</Grid.Column>
+						<Grid.Column>
+							<img width="100%" src={require("./img/logo.png")} />
+						</Grid.Column>
+					</Grid>
 				</div>
 			</Margin>
 			<Margin top bottom double className={styles.field}>

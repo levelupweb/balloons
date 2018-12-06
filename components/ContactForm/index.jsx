@@ -18,6 +18,7 @@ import {
 	Segment,
 	Button,
 	Popup,
+	Grid,
 	Checkbox
 } from "semantic-ui-react";
 
@@ -50,25 +51,29 @@ class ContactForm extends React.Component {
 		const { error, data, isHydrating } = this.state;
 		return (
 			<div className={styles.form}>
-				<Heading thin as="h2" size={2}>
-					Отправьте нам сообщение
-				</Heading>
-				<Margin top half>
-					<Paragraph>
-						Отправьте нам ваше сообщение, чтобы мы могли получить вашу обратную
-						связь
-					</Paragraph>
-				</Margin>
-				{error && (
-					<Segment inverted color="red">
-						{error}
-					</Segment>
-				)}
 				<Margin top>
 					<Form inverted loading={isHydrating}>
-						<div className={styles.row}>
-							<div className={styles.item}>
-								<Margin bottom right>
+						<Grid stackable>
+							<Grid.Row>
+								<Grid.Column width={16}>
+									<Heading thin as="h2" size={2}>
+										Отправьте нам сообщение
+									</Heading>
+									<Margin top half>
+										<Paragraph>
+											Отправьте нам ваше сообщение, чтобы мы могли получить вашу
+											обратную связь
+										</Paragraph>
+									</Margin>
+									{error && (
+										<Segment inverted color="red">
+											{error}
+										</Segment>
+									)}
+								</Grid.Column>
+							</Grid.Row>
+							<Grid.Row>
+								<Grid.Column width={8}>
 									<Field title="Ваше имя">
 										<Popup
 											open={!!this.getTypeError(CONTACT_NAME)}
@@ -88,10 +93,8 @@ class ContactForm extends React.Component {
 											{this.getTypeError(CONTACT_NAME)}
 										</Popup>
 									</Field>
-								</Margin>
-							</div>
-							<div className={styles.item}>
-								<Margin bottom>
+								</Grid.Column>
+								<Grid.Column width={8}>
 									<Popup
 										open={!!this.getTypeError(CONTACT_PHONE)}
 										trigger={
@@ -110,50 +113,52 @@ class ContactForm extends React.Component {
 									>
 										{this.getTypeError(CONTACT_PHONE)}
 									</Popup>
-								</Margin>
-							</div>
-						</div>
-						<Margin bottom>
-							<Field title="Ваше сообщение">
-								<Popup
-									open={!!this.getTypeError(CONTACT_MESSAGE)}
-									trigger={
-										<TextArea
-											value={data[CONTACT_MESSAGE]}
-											onChange={(_, { value }) =>
+								</Grid.Column>
+							</Grid.Row>
+							<Grid.Row>
+								<Grid.Column width={16}>
+									<Field title="Ваше сообщение">
+										<Popup
+											open={!!this.getTypeError(CONTACT_MESSAGE)}
+											trigger={
+												<TextArea
+													value={data[CONTACT_MESSAGE]}
+													onChange={(_, { value }) =>
+														this.handleData({
+															[CONTACT_MESSAGE]: value
+														})
+													}
+													autoHeight
+													rows={2}
+													placeholder="Начните с приветствия.."
+												/>
+											}
+										>
+											{this.getTypeError(CONTACT_MESSAGE)}
+										</Popup>
+									</Field>
+								</Grid.Column>
+							</Grid.Row>
+							<Grid.Row>
+								<Grid.Column width={16}>
+									<div className={styles.action}>
+										<Button className={styles.button} loading={isHydrating}>
+											Отправить
+										</Button>
+										<Checkbox
+											inverted
+											label="Я соглашаюсь с правилами обработки данных"
+											checked={data[CONTACT_AGREEMENT]}
+											onChange={(_, { checked }) =>
 												this.handleData({
-													[CONTACT_MESSAGE]: value
+													[CONTACT_AGREEMENT]: checked
 												})
 											}
-											autoHeight
-											rows={2}
-											placeholder="Начните с приветствия.."
 										/>
-									}
-								>
-									{this.getTypeError(CONTACT_MESSAGE)}
-								</Popup>
-							</Field>
-						</Margin>
-						<div className={styles.action}>
-							<Button
-								className={styles.button}
-								loading={isHydrating}
-								size="big"
-							>
-								Отправить
-							</Button>
-							<Checkbox
-								inverted
-								label="Я соглашаюсь с правилами обработки данных"
-								checked={data[CONTACT_AGREEMENT]}
-								onChange={(_, { checked }) =>
-									this.handleData({
-										[CONTACT_AGREEMENT]: checked
-									})
-								}
-							/>
-						</div>
+									</div>
+								</Grid.Column>
+							</Grid.Row>
+						</Grid>
 					</Form>
 				</Margin>
 			</div>

@@ -3,7 +3,7 @@ import { Category } from "@server/models";
 export const category = value =>
 	new Promise((resolve, reject) => {
 		if (!value) {
-			return reject("Поле 'Категория' не заполнено");
+			return resolve();
 		}
 
 		if (typeof value !== "string") {

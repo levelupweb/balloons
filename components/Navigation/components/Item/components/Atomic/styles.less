@@ -1,0 +1,21 @@
+@import "~@theme/spacings";
+@import "~@theme/colors";
+
+.atomic {
+  padding: @global-space;
+  color: fadeout(@white, 10%);
+  transition: 0.2s all ease-in-out;
+
+  &:hover {
+    color: fadeout(@white, 0%);
+    background: fadeout(@black, 95%);
+  }
+
+  &.vertical {
+    width: 100%;
+  }
+
+  &.expanded {
+    background: fadeout(@black, 95%);
+  }
+}

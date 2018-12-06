@@ -1,0 +1,58 @@
+@import "~@theme/colors";
+@import "~@theme/spacings";
+
+.item {
+  position: relative;
+}
+
+.title {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+
+  &.vertical {
+    .text {
+      flex-grow: 1;
+    }
+  }
+
+  .icon {
+    color: fadeout(@white, 50%);
+    margin-left: @global-space * 0.25;
+  }
+}
+
+.sub {
+  z-index: 15;
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  flex-direction: column;
+  align-items: flex-start;
+
+  list-style-type: none;
+  background: fadeout(@secondary, 20%);
+
+  min-width: 300px;
+  width: 300px;
+  padding: 0;
+
+  animation: fadeIn 200ms;
+
+  &.reverse {
+    right: 0;
+    left: auto;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}

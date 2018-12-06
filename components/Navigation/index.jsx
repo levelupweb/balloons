@@ -1,66 +1,106 @@
 import React from "react";
+import classes from "classnames";
+import PropTypes from "prop-types";
 import { withRouter } from "next/router";
+import { deepEqual, isFunction } from "@utils";
+import { debounce } from "throttle-debounce";
 import Link from "next/link";
 import { Button, Icon } from "semantic-ui-react";
-import PropTypes from "prop-types";
-import { UIContext } from "@providers";
-import Item from "./components/Item";
+import { UIContext, EditContext } from "@providers";
+import Items from "./components/Items";
+import Expander from "./components/Expander";
 import styles from "./styles";
-import { EditContext } from "../../providers";
 
 class Navigation extends React.Component {
 	constructor(props) {
 		super(props);
 
+		this.debounceVerifyIsFitted = debounce(50, this.verifyIsElementsFitting);
+		this.list = React.createRef();
+
 		this.state = {
 			activeElement: null,
-			bounds: null
+			cantFit: false,
+			rect: null
 		};
 	}
 
-	isActive = link => {
-		const { router } = this.props;
-
-		return router.pathname === link;
+	componentDidMount = () => {
+		this.verifyIsElementsFitting();
+		window.addEventListener("resize", this.debounceVerifyIsFitted);
 	};
+
+	componentWillUnmount = () => {
+		window.removeEventListener("resize", this.debounceVerifyIsFitted);
+	};
+
+	shouldComponentUpdate = (_, prevState) => !deepEqual(prevState, this.state);
+
+	verifyIsElementsFitting = () => {
+		const { onChangeCantFit } = this.props;
+
+		if (!this.list || !this.list.current) {
+			return;
+		}
+
+		const width = this.list.current.offsetWidth;
+		const cantFit = width > document.body.clientWidth - 40;
+
+		this.setState(
+			{
+				cantFit
+			},
+			() => isFunction(onChangeCantFit) && onChangeCantFit(cantFit)
+		);
+	};
+
+	isActive = link => this.props.router.pathname === link;
 
 	handleActiveElement = element =>
 		this.setState({
 			activeElement: element
 		});
 
-	renderElements = () => {
-		const { ui } = this.props;
-		const { bounds } = this.state;
+	isUiReady = () => this.props.ui && this.props.ui.menu;
 
-		if (!ui || !ui.menu) {
-			return;
-		}
-
-		return Object.keys(ui.menu).map((item, index) => {
-			const value = ui.menu[item];
-
-			return <Item bounds={bounds} item={value} key={index} />;
+	handleWrapper = wrapper =>
+		this.setState({
+			wrapper
 		});
+
+	getWrapperRect = () => {
+		const { wrapper } = this.state;
+
+		return wrapper && wrapper.getBoundingClientRect();
 	};
 
-	handleWrapper = element =>
-		element &&
-		this.setState({
-			bounds: element.getBoundingClientRect()
-		});
-
 	render = () => {
-		const { isEditing } = this.props;
+		const { isEditing, ui } = this.props;
+		const { cantFit } = this.state;
+
+		if (!this.isUiReady()) {
+			return null;
+		}
 
 		return (
 			<div ref={this.handleWrapper} className={styles.wrapper}>
-				<ul className={styles.nav}>{this.renderElements()}</ul>
+				<div
+					ref={this.list}
+					className={classes(styles.nav, { [styles.cantFit]: cantFit })}
+				>
+					<Expander expandable={cantFit}>
+						<Items
+							vertical={cantFit}
+							rect={this.getWrapperRect()}
+							items={ui.menu}
+						/>
+					</Expander>
+				</div>
 				{isEditing && (
 					<div className={styles.edit}>
 						<Link href="/admin/articles">
 							<a>
-								<Button circular icon>
+								<Button inverted circular icon>
 									<Icon name="settings" />
 								</Button>
 							</a>
@@ -75,7 +115,12 @@ class Navigation extends React.Component {
 Navigation.propTypes = {
 	router: PropTypes.object.isRequired,
 	isEditing: PropTypes.bool.isRequired,
-	ui: PropTypes.any.isRequired
+	ui: PropTypes.any.isRequired,
+	onChangeCantFit: PropTypes.func
+};
+
+Navigation.defaultProps = {
+	onChangeCantFit: null
 };
 
 const NavigationWithUIProvider = props => (

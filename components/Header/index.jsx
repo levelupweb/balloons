@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Heading, Paragraph } from "@components/Typography";
-import { Button, Icon } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 import CallMeBack from "@components/CallMeBack";
 import Margin from "@components/Margin";
 import styles from "./styles";
@@ -25,8 +25,8 @@ const Header = () => (
 			<Paragraph>г. Владимир, ул. Комиссарова, дом 10а</Paragraph>
 			<Margin top half>
 				<CallMeBack>
-					<Button icon labelPosition="left" primary>
-						Обратный звонок <Icon name="phone" />
+					<Button className={styles.call} icon circular primary>
+						Обратный звонок
 					</Button>
 				</CallMeBack>
 			</Margin>

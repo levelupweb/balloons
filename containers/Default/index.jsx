@@ -1,22 +1,33 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classes from "classnames";
+import smoothscroll from "smoothscroll-polyfill";
 import { Container } from "semantic-ui-react";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
 import EditorMenu from "@components/EditorMenu";
+import { AuthContext } from "@providers";
 import Navigation from "@components/Navigation";
-import smoothscroll from "smoothscroll-polyfill";
 import styles from "./styles";
-import { AuthContext } from "../../providers";
 
 class Default extends React.Component {
+	state = {
+		cantFit: false
+	};
+
 	componentDidMount = () => {
 		smoothscroll.polyfill();
 	};
 
+	handleCantFit = cantFit =>
+		this.setState({
+			cantFit
+		});
+
 	render = () => {
 		const { children, afterNavigation, canEdit, mainClassName } = this.props;
+		const { cantFit } = this.state;
+
 		return (
 			<div
 				id="main-container"
@@ -36,9 +47,9 @@ class Default extends React.Component {
 						<Header />
 					</Container>
 				</header>
-				<nav className={styles.nav}>
+				<nav className={classes(styles.nav, { [styles.cantFit]: cantFit })}>
 					<Container>
-						<Navigation />
+						<Navigation onChangeCantFit={this.handleCantFit} />
 					</Container>
 				</nav>
 				{afterNavigation}

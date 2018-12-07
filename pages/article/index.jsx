@@ -31,13 +31,13 @@ class ArticlePage extends React.Component {
 
 				return {
 					...answer,
-					collectionsArticles: [article.data, ...otherArticles.data]
+					collectionsArticles: [article.data, ...otherArticles.data] // inserting articles in collections
 				};
 			}
 
 			return {
 				...answer,
-				collectionsArticles: [article.data]
+				collectionsArticles: [article.data] // inserting articles in collections
 			};
 		} catch (err) {
 			return {

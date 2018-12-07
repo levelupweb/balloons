@@ -18,3 +18,4 @@ export { formatDate } from "./formatDate";
 export { parseToken } from "./parseToken";
 export { getDefaultCollections } from "./getDefaultCollections";
 export { parseStyles } from "./parseStyles";
+export { resolveImageUrl } from "./resolveImageUrl";

@@ -57,6 +57,22 @@ export const fetch = (fetcher, action, ...rest) => {
 		return fetcher.put("/article/entry", ...rest);
 	}
 
+	if (action === fetchConsts.FETCH_SALES_ENTRIES) {
+		return fetcher.get("/sale/entries", ...rest);
+	}
+
+	if (action === fetchConsts.FETCH_SALES_CREATE) {
+		return fetcher.post("/sale/create", ...rest);
+	}
+
+	if (action === fetchConsts.FETCH_SALES_UPDATE) {
+		return fetcher.put("/sale/entry", ...rest);
+	}
+
+	if (action === fetchConsts.FETCH_SALES_REMOVE) {
+		return fetcher.delete("/sale/entry", ...rest);
+	}
+
 	throw new Error("Unknown action");
 };
 

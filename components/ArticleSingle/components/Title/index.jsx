@@ -4,28 +4,21 @@ import { ARTICLE_TITLE } from "@consts/article";
 import Field from "@components/Field";
 import Block from "@components/Block";
 import { Heading } from "@components/Typography";
-import { Popup, Input } from "semantic-ui-react";
+import { Input } from "semantic-ui-react";
 import { ArticleSingleContext } from "../../context";
 
-const Title = ({ title, isEditing, handleChange, error }) => {
+const Title = ({ title, isEditing, handleChange, hasError }) => {
 	if (isEditing) {
 		return (
 			<Block>
 				<Field title="Название статьи" description="Обязательное поле">
-					<Popup
-						trigger={
-							<Input
-								fluid
-								placeholder="Введите название статьи"
-								error={!!error}
-								onChange={(_, { value }) => handleChange(value)}
-								value={title}
-							/>
-						}
-						open={!!error}
-					>
-						{error}
-					</Popup>
+					<Input
+						fluid
+						placeholder="Введите название статьи"
+						error={hasError}
+						onChange={(_, { value }) => handleChange(value)}
+						value={title}
+					/>
 				</Field>
 			</Block>
 		);
@@ -46,11 +39,7 @@ Title.propTypes = {
 	title: PropTypes.string.isRequired,
 	handleChange: PropTypes.func.isRequired,
 	isEditing: PropTypes.bool.isRequired,
-	error: PropTypes.string
-};
-
-Title.defaultProps = {
-	error: null
+	hasError: PropTypes.bool.isRequired
 };
 
 const TitleWithArticleSingleContext = props => (
@@ -60,7 +49,7 @@ const TitleWithArticleSingleContext = props => (
 				{...props}
 				isEditing={ctx.isEditing}
 				title={ctx.temporaryArticle[ARTICLE_TITLE]}
-				error={ctx.getTypeErrorMessage(ARTICLE_TITLE)}
+				hasError={!!ctx.getTypeErrorMessage(ARTICLE_TITLE)}
 				handleChange={value =>
 					ctx.handleTemporaryArticle({
 						[ARTICLE_TITLE]: value

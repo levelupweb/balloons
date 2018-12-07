@@ -22,7 +22,7 @@ const Header = () => (
 			<Heading as="p" size={4}>
 				8 (920) 888-86-90
 			</Heading>
-			<Paragraph>г. Владимир, ул. Комиссарова, дом 10а</Paragraph>
+			<Paragraph>г. Москва, Измайловское шоссе, 73Ж</Paragraph>
 			<Margin top half>
 				<CallMeBack>
 					<Button className={styles.call} icon circular primary>

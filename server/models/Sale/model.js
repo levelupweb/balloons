@@ -16,11 +16,17 @@ const SaleSchema = new Schema(
 		},
 		[consts.SALE_DESCRIPTION]: {
 			type: String,
-			default: null
+			required: true
 		},
 		[consts.SALE_END_DATE]: {
 			type: Date,
-			required: true
+			default: null
+		},
+		[consts.SALE_DISCOUNT]: {
+			type: Number,
+			min: 0,
+			max: 100,
+			default: null
 		}
 	},
 	{

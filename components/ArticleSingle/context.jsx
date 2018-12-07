@@ -90,7 +90,7 @@ class ArticleSingleProviderClass extends React.Component {
 
 		return this.handleUpdatingState({
 			isHydrating: false,
-			typeError: error
+			typeErrors: error
 		});
 	};
 

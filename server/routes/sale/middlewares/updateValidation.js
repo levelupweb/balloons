@@ -14,7 +14,10 @@ export const updateValidation = [
 		.custom(validation.image),
 	check(consts.SALE_END_DATE)
 		.optional()
-		.custom(validation.endDate)
+		.custom(validation.endDate),
+	check(consts.SALE_DISCOUNT)
+		.optional()
+		.custom(validation.discount)
 ];
 
 export default updateValidation;

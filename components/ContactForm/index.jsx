@@ -56,7 +56,7 @@ class ContactForm extends React.Component {
 						<Grid stackable>
 							<Grid.Row>
 								<Grid.Column width={16}>
-									<Heading thin as="h2" size={2}>
+									<Heading as="h2" size={2}>
 										Отправьте нам сообщение
 									</Heading>
 									<Margin top half>

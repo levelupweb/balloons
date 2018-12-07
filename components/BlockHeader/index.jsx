@@ -6,10 +6,8 @@ import styles from "./styles";
 
 const BlockHeader = ({ title, description }) => (
 	<Margin bottom className={styles.blockHeader}>
-		<Heading as="h2" size={2}>
-			{title}
-		</Heading>
-		<Heading sub size={4} as="h3">
+		<Heading as="h2">{title}</Heading>
+		<Heading sub size={5} as="h3">
 			{description}
 		</Heading>
 	</Margin>

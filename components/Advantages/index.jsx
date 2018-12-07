@@ -18,9 +18,10 @@ class Advantage extends React.Component {
 
 		window.addEventListener("scroll", this.handleMouseLeave);
 		element.addEventListener("mouseenter", this.handleMouseEnter);
+		element.addEventListener("click", this.handleMouseEnter);
 		element.addEventListener("touchstart", this.handleMouseEnter);
 		element.addEventListener("mouseleave", this.handleMouseLeave);
-		element.addEventListener("touchend", this.handleMouseLeave);
+		element.addEventListener("touchmove", this.handleMouseLeave);
 	};
 
 	handleMouseEnter = () => {

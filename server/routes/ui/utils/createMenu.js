@@ -1,17 +1,26 @@
-import { ARTICLE_CATEGORY } from "@consts/article";
-import { ARTICLE_TITLE, ARTICLE_SLUG } from "@consts/article";
-import { CATEGORY_TITLE } from "@consts/category";
-import { ARTICLE_DISPLAY_HEADER } from "../../../../consts/article";
-import { CATEGORY_DISPLAY_HEADER } from "../../../../consts/category";
+import {
+	ARTICLE_TITLE,
+	ARTICLE_SLUG,
+	ARTICLE_DISPLAY_HEADER,
+	ARTICLE_CATEGORY,
+	ARTICLE_INDEX
+} from "@consts/article";
+
+import {
+	CATEGORY_TITLE,
+	CATEGORY_DISPLAY_HEADER,
+	CATEGORY_INDEX
+} from "@consts/category";
 
 const createSingle = article => ({
 	title: article[ARTICLE_TITLE],
 	slug: article[ARTICLE_SLUG],
+	index: article[ARTICLE_INDEX],
 	id: article._id
 });
 
-export const createMenu = allArticles =>
-	allArticles.reduce(
+export const createMenu = allArticles => {
+	const items = allArticles.reduce(
 		(prev, curr) => {
 			if (!curr[ARTICLE_DISPLAY_HEADER]) {
 				return prev;
@@ -36,6 +45,7 @@ export const createMenu = allArticles =>
 						...prev,
 						[categoryId]: {
 							title: curr[ARTICLE_CATEGORY][CATEGORY_TITLE],
+							index: curr[ARTICLE_CATEGORY][CATEGORY_INDEX],
 							elements: [createSingle(curr)]
 						}
 					};
@@ -51,7 +61,29 @@ export const createMenu = allArticles =>
 			promo: {
 				title: "Акции",
 				link: "/sales",
+				index: 100,
 				id: "sales"
+			},
+			index: {
+				title: "Главная",
+				link: "/",
+				id: "index",
+				index: -1
 			}
 		}
 	);
+
+	const sorted = Object.keys(items)
+		.sort((a, b) => items[a].index - items[b].index)
+		.map(key => {
+			if (typeof items[key] === "object" && items[key].element) {
+				return items[key].elements.sort((a, b) => a.index - b.index);
+			}
+
+			return items[key];
+		});
+
+	console.log(sorted);
+
+	return sorted;
+};

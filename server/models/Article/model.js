@@ -24,6 +24,10 @@ const ArticleSchema = new Schema(
 			type: String,
 			required: true
 		},
+		[consts.ARTICLE_INDEX]: {
+			type: Number,
+			default: 0
+		},
 		[consts.ARTICLE_DISPLAY_HEADER]: {
 			type: Boolean,
 			default: true

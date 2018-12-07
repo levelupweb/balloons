@@ -17,6 +17,10 @@ const CategorySchema = new Schema(
 		[consts.CATEGORY_DISPLAY_HEADER]: {
 			type: Boolean,
 			default: true
+		},
+		[consts.CATEGORY_INDEX]: {
+			type: Number,
+			default: 0
 		}
 	},
 	{

@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "classnames";
 import { Button, Icon } from "semantic-ui-react";
+import { debounce } from "throttle-debounce";
 import Carousel from "nuka-carousel";
 import Block from "@components/Block";
 import styles from "./styles";
@@ -23,12 +24,43 @@ const clients = [
 ];
 
 class Clients extends React.Component {
-	state = {
-		carousel: null
-	};
+	constructor(props) {
+		super(props);
+
+		this.debouncedResizeHandler = debounce(200, this.handleResize);
+		this.state = {
+			carousel: null,
+			slidesToScroll: 3
+		};
+	}
 
 	componentDidMount = () => {
 		this.handleDimensions();
+		this.handleResize();
+		window.addEventListener("resize", this.debouncedResizeHandler);
+	};
+
+	componentWillUnmount = () => {
+		window.removeEventListener("resize", this.debouncedResizeHandler);
+	};
+
+	handleResize = () => {
+		const container = document.getElementById("main-container");
+		if (container.offsetWidth < 740) {
+			this.setState({
+				slidesToScroll: 2
+			});
+		} else {
+			this.setState({
+				slidesToScroll: 3
+			});
+		}
+	};
+
+	shouldComponentUpdate = (_, prevState) => {
+		const { slidesToScroll } = this.state;
+
+		return slidesToScroll !== prevState.slidesToScroll;
 	};
 
 	handleDimensions = () => {
@@ -67,6 +99,8 @@ class Clients extends React.Component {
 	);
 
 	render = () => {
+		const { slidesToScroll } = this.state;
+
 		return (
 			<div className={styles.carousel}>
 				<Carousel
@@ -75,10 +109,10 @@ class Clients extends React.Component {
 					width="100%"
 					autoplay
 					autoplayInterval={4000}
-					slidesToShow={3}
+					slidesToShow={slidesToScroll}
 					wrapAround
 					initialSlideWidth="33%"
-					slidesToScroll={3}
+					slidesToScroll={slidesToScroll}
 					renderCenterLeftControls={data => this.renderLeft(data)}
 					renderCenterRightControls={data => this.renderRight(data)}
 				>

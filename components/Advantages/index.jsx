@@ -11,44 +11,65 @@ class Advantage extends React.Component {
 		isFocused: false
 	};
 
-	componentDidMount = () => {
-		window.addEventListener("scroll", this.handleScroll);
-	};
-
-	componentWillUnmount = () => {
-		window.removeEventListener("scroll", this.handleScroll);
-	};
-
-	handleScroll = () => {
-		const { isFocused } = this.state;
-
-		if (isFocused) {
-			return this.handleFocused(false);
+	handleRef = element => {
+		if (!element) {
+			return;
 		}
 
+		window.addEventListener("scroll", this.handleMouseLeave);
+		element.addEventListener("mouseenter", this.handleMouseEnter);
+		element.addEventListener("touchenter", this.handleMouseEnter);
+		element.addEventListener("mouseleave", this.handleMouseLeave);
+		element.addEventListener("touchleave", this.handleMouseLeave);
+	};
+
+	handleMouseEnter = () => {
+		const { isFocused } = this.state;
+
+		if (!isFocused) {
+			const main = document.getElementById("main-container");
+
+			this.setState(
+				{
+					isFocused: true
+				},
+				() => {
+					setTimeout(() => {
+						const { isFocused } = this.state;
+						if (isFocused && main) {
+							main.classList.add("dimmed");
+						}
+					}, 200);
+				}
+			);
+		}
+	};
+
+	handleMouseLeave = () => {
+		const { isFocused } = this.state;
+
 		const main = document.getElementById("main-container");
-		if (main.classList.contains("dimmed")) {
+
+		if (main && (isFocused || main.classList.contains("dimmed"))) {
+			this.setState(
+				{
+					isFocused: false
+				},
+				() => {
+					main.classList.remove("dimmed");
+				}
+			);
+		}
+	};
+
+	handleMouseMove = () => {
+		const { isFocused } = this.state;
+
+		if (!isFocused) {
+			const main = document.getElementById("main-container");
 			main.classList.remove("dimmed");
 		}
 	};
-
-	handleFocused = isFocused =>
-		this.setState(
-			{
-				isFocused
-			},
-			() => {
-				const main = document.getElementById("main-container");
-
-				if (isFocused) {
-					setTimeout(() => {
-						main.classList.add("dimmed");
-					}, 200);
-				} else {
-					main.classList.remove("dimmed");
-				}
-			}
-		);
 
 	render = () => {
 		const { img, title, description } = this.props;
@@ -56,8 +77,7 @@ class Advantage extends React.Component {
 
 		return (
 			<div
-				onMouseEnter={() => this.handleFocused(true)}
-				onMouseLeave={() => this.handleFocused(false)}
+				ref={this.handleRef}
 				className={classes(styles.item, { [styles.focused]: isFocused })}
 			>
 				<div className={styles.inner}>

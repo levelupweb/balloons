@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { SALE_MODEL } from "@consts/sale";
+import { SALE_MODEL } from "@consts/_models";
 import { parseError, withAsyncSetState, fetch } from "@utils";
 import { FETCH_SALES_UPDATE, FETCH_SALES_REMOVE } from "@consts/_fetch";
 import { CollectionsContext, AuthContext, FetcherContext } from "@providers";

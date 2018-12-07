@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Margin from "@components/Margin";
-import { Button, Message } from "semantic-ui-react";
+import { Button, List, Segment } from "semantic-ui-react";
 import { ArticleSingleContext } from "../../context";
 
 const Actions = ({
@@ -10,31 +10,33 @@ const Actions = ({
 	isUpdating,
 	typeErrors,
 	cancelEditing,
+	isSuccess,
 	error
 }) => {
 	if (isEditing) {
 		return (
 			<React.Fragment>
+				{isSuccess && (
+					<Segment inverted color="green">
+						Статья была успешно обновлена.
+					</Segment>
+				)}
 				{typeErrors && (
 					<Margin bottom>
-						<Message negative>
-							<Message.Header>Ошибки в заполнении полей</Message.Header>
-							<Message.List>
+						<Segment inverted color="red">
+							<List>
 								{Object.keys(typeErrors).map((error, index) => (
-									<Message.Item key={index}>
-										{typeErrors[error].msg}
-									</Message.Item>
+									<List.Item key={index}>{typeErrors[error].msg}</List.Item>
 								))}
-							</Message.List>
-						</Message>
+							</List>
+						</Segment>
 					</Margin>
 				)}
 				{error && (
 					<Margin bottom>
-						<Message negative>
-							<Message.Header>Упс. Ошибка</Message.Header>
+						<Segment inverted color="red">
 							<p>{error}</p>
-						</Message>
+						</Segment>
 					</Margin>
 				)}
 				<Button color="green" onClick={updateArticleStart} loading={isUpdating}>
@@ -54,7 +56,8 @@ Actions.propTypes = {
 	isUpdating: PropTypes.bool.isRequired,
 	error: PropTypes.string.isRequired,
 	cancelEditing: PropTypes.func.isRequired,
-	typeErrors: PropTypes.array
+	typeErrors: PropTypes.array,
+	isSuccess: PropTypes.bool.isRequired
 };
 
 Actions.defaultProps = {
@@ -69,6 +72,7 @@ const ContentWithArticleSingleContext = props => (
 				{...props}
 				isUpdating={ctx.updating.isHydrating}
 				error={ctx.updating.error}
+				isSuccess={ctx.updating.isSuccess}
 				typeErrors={ctx.updating.typeErrors}
 				cancelEditing={() => ctx.handleIsEditing(false)}
 				updateArticleStart={ctx.updateArticleStart}

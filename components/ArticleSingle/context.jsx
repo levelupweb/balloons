@@ -10,7 +10,8 @@ const defaultState = {
 	updating: {
 		isHydrating: false,
 		error: null,
-		typeErrors: null
+		typeErrors: null,
+		isSuccess: false
 	},
 	removing: {
 		isHydrating: false,
@@ -42,6 +43,7 @@ class ArticleSingleProviderClass extends React.Component {
 		this.handleUpdatingState({
 			isHydrating: true,
 			error: null,
+			isSuccess: false,
 			typeErrors: null
 		})
 			.then(this.processUpdate)
@@ -71,7 +73,8 @@ class ArticleSingleProviderClass extends React.Component {
 			this.asyncSetState({
 				updating: {
 					...this.state.updating,
-					isHydrating: false
+					isHydrating: false,
+					isSuccess: true
 				},
 				defaultArticle: data
 			})

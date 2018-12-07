@@ -12,7 +12,7 @@ const Content = ({ content, isEditing, handleChange }) => {
 	if (isEditing) {
 		return (
 			<div className={styles.wrapper}>
-				<Block>
+				<Block className={styles.inner}>
 					<Editor html={content} onChange={html => handleChange(html)} />
 				</Block>
 			</div>

@@ -19,6 +19,7 @@ const Preview = ({ article }) => (
 			<Link
 				href={{
 					pathname: `/article/${article[ARTICLE_SLUG]}`,
+					as: `/article/${article[ARTICLE_SLUG]}`,
 					query: {
 						edit: "true"
 					}

@@ -21,11 +21,17 @@ import {
 class ControlledEditor extends Component {
 	constructor(props) {
 		super(props);
-		this.debounceUpdateOnChange = debounce(300, this.fireOnChange);
 		this.state = {
-			editorState: this.setupEditorState()
+			editorState: null
 		};
+		this.debounceUpdateOnChange = debounce(300, this.fireOnChange);
 	}
+
+	componentDidMount = () => {
+		this.setState({
+			editorState: this.setupEditorState()
+		});
+	};
 
 	setupEditorState = () => {
 		const { html } = this.props;
@@ -103,6 +109,10 @@ class ControlledEditor extends Component {
 
 	render = () => {
 		const { editorState } = this.state;
+
+		if (!editorState) {
+			return null;
+		}
 
 		return (
 			<div className={styles.editor}>

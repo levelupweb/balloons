@@ -42,7 +42,7 @@ const CreateButton = ({
 		<Button onClick={open} circular color="green">
 			Создать новую
 		</Button>
-		<Modal size="tiny" onCancel={cancel} open={isCreating}>
+		<Modal size="tiny" onClose={cancel} open={isCreating}>
 			<Modal.Header>Редактирование акции</Modal.Header>
 			<Modal.Content>
 				{error && (

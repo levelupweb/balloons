@@ -77,6 +77,10 @@ export const fetch = (fetcher, action, ...rest) => {
 		return fetcher.post("/contact/create", ...rest);
 	}
 
+	if (action === fetchConsts.FETCH_SEND_CALLBACK) {
+		return fetcher.post("/callback/create", ...rest);
+	}
+
 	throw new Error("Unknown action");
 };
 

@@ -7,6 +7,7 @@ import slide from "./slide";
 import contact from "./contact";
 import calculation from "./calculation";
 import sale from "./sale";
+import callback from "./callback";
 
 const router = express.Router();
 
@@ -18,5 +19,6 @@ router.use("/slide", slide);
 router.use("/contact", contact);
 router.use("/calculation", calculation);
 router.use("/sale", sale);
+router.use("/callback", callback);
 
 export default router;

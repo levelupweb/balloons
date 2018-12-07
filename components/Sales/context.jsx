@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { parseError, withAsyncSetState, fetch } from "@utils";
 import { SALE_MODEL } from "@consts/sale";
-import { FETCH_SALES_CREATE } from "@consts/_fetch";
+import { FETCH_SALES_CREATE, FETCH_SALES_ENTRIES } from "@consts/_fetch";
 import { FetcherContext, AuthContext, CollectionsContext } from "@providers";
 
 export const SalesContext = React.createContext();
@@ -16,8 +16,59 @@ class SalesProviderClass extends React.Component {
 			error: null,
 			isCreating: false,
 			typeErrors: null
+		},
+		fetching: {
+			isHydrating: false,
+			error: this.props.fetchError
 		}
 	};
+
+	/**
+	 * Fetching
+	 */
+
+	handleFetchingState = data =>
+		this.asyncSetState({
+			fetching: {
+				...this.state.fetching,
+				...data
+			}
+		});
+
+	fetchSalesStart = () =>
+		this.handleFetchingState({
+			isHydrating: true,
+			error: null
+		})
+			.then(this.processFetching)
+			.then(this.fetchSalesSuccess)
+			.catch(this.fetchSalesFail);
+
+	processFetching = () => {
+		const { fetcher } = this.props;
+
+		return fetch(fetcher, FETCH_SALES_ENTRIES);
+	};
+
+	fetchSalesSuccess = ({ data }) => {
+		const { insertSales } = this.props;
+
+		return insertSales(data).then(() =>
+			this.asyncSetState({
+				fetching: {
+					...this.state.fetching,
+					isHydrating: false
+				},
+				salesIds: data.map(sale => sale._id)
+			})
+		);
+	};
+
+	fetchSalesFail = reason =>
+		this.handleFetchingState({
+			isHydrating: false,
+			error: parseError(reason)
+		});
 
 	/**
 	 * Creating
@@ -67,7 +118,6 @@ class SalesProviderClass extends React.Component {
 	};
 
 	createSaleFail = reason => {
-		console.log(reason);
 		const error = parseError(reason);
 
 		if (typeof error === "string") {
@@ -114,9 +164,10 @@ class SalesProviderClass extends React.Component {
 				canEdit: this.props.canEdit,
 				createSaleStart: this.createSaleStart,
 				creating: this.state.creating,
-				fetchError: this.props.fetchError,
 				handleTemporarySale: this.handleTemporarySale,
-				getTemporaryField: this.getTemporaryField
+				getTemporaryField: this.getTemporaryField,
+				fetching: this.state.fetching,
+				fetchSalesStart: this.fetchSalesStart
 			}}
 		>
 			{this.props.children}
@@ -130,7 +181,8 @@ SalesProviderClass.propTypes = {
 	fetcher: PropTypes.func.isRequired,
 	salesIds: PropTypes.arrayOf(PropTypes.string),
 	canEdit: PropTypes.bool.isRequired,
-	insertSale: PropTypes.func.isRequired
+	insertSale: PropTypes.func.isRequired,
+	insertSales: PropTypes.func.isRequired
 };
 
 SalesProviderClass.defaultProps = {
@@ -164,6 +216,7 @@ const SalesProviderClassWithCollectionsContext = props => (
 			<SalesProviderClassWithAuthContext
 				{...props}
 				insertSale={sale => ctx.insertDocuments(SALE_MODEL, [sale])}
+				insertSales={sales => ctx.insertDocuments(SALE_MODEL, sales)}
 			/>
 		)}
 	</CollectionsContext.Consumer>

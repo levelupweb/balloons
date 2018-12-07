@@ -1,34 +1,48 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withAsyncSetState } from "@utils";
+import { withAsyncSetState, deepEqual } from "@utils";
 
 export const CollectionsContext = React.createContext();
 
 class CollectionsProviderClass extends React.Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
-			collections: this.setup()
+			collections: this.reflowCollections()
 		};
 	}
 
-	setup = () => {
+	componentDidUpdate = prevProps => {
+		const { defaultCollections } = this.props;
+
+		if (!deepEqual(defaultCollections, prevProps.defaultCollections)) {
+			this.setState({
+				collections: this.reflowCollections()
+			});
+		}
+	};
+
+	reflowCollections = () => {
 		const { defaultCollections } = this.props;
 
 		if (defaultCollections) {
-			return Object.keys(defaultCollections).reduce(
-				(prev, curr) => ({
-					...prev,
-					[curr]: defaultCollections[curr].reduce(
-						(prev, curr) => ({
-							...prev,
-							[curr._id]: curr
-						}),
-						{}
-					)
-				}),
-				{}
-			);
+			return {
+				...(this.state && this.state.collections ? this.state.collections : {}),
+				...Object.keys(defaultCollections).reduce(
+					(prev, curr) => ({
+						...prev,
+						[curr]: defaultCollections[curr].reduce(
+							(prev, curr) => ({
+								...prev,
+								[curr._id]: curr
+							}),
+							{}
+						)
+					}),
+					{}
+				)
+			};
 		}
 
 		return {};

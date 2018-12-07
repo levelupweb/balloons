@@ -8,41 +8,70 @@ import { Heading, Paragraph } from "@components/Typography";
 
 class Advantage extends React.Component {
 	state = {
-		isFocused: false
+		isFocused: false,
+		element: null
 	};
 
-	handleRef = element => {
-		if (!element) {
-			return;
+	componentWillUnmount = () => {
+		if (this.state.element) {
+			window.removeEventListener("scroll", this.handleScroll);
+			window.removeEventListener("click", this.handleOutsideClick);
 		}
+	};
 
-		window.addEventListener("scroll", this.handleMouseLeave);
+	componentDidUpdate = (_, prevState) => {
+		const { element } = this.state;
+
+		if (prevState.element !== element && element !== null) {
+			this.bindElementEvents(element);
+			this.bindWindowEvents();
+		}
+	};
+
+	bindWindowEvents = () => {
+		window.addEventListener("scroll", this.handleScroll);
+		window.addEventListener("click", this.handleOutsideClick);
+	};
+
+	bindElementEvents = element => {
 		element.addEventListener("mouseenter", this.handleMouseEnter);
-		element.addEventListener("click", this.handleMouseEnter);
-		element.addEventListener("touchstart", this.handleMouseEnter);
 		element.addEventListener("mouseleave", this.handleMouseLeave);
-		element.addEventListener("touchmove", this.handleMouseLeave);
+		element.addEventListener("touchstart", this.handleTouchStart);
+		element.addEventListener("touchmove", this.handleTouchMove);
+	};
+
+	handleRef = element =>
+		this.setState({
+			element
+		});
+
+	handleScroll = () => {
+		if (this.state.isFocused) {
+			this.handleFocus(false);
+		}
+	};
+
+	handleTouchStart = () => {
+		if (!this.state.isFocused) {
+			this.handleFocus(true);
+		}
+	};
+
+	handleElementClick = () => {
+		if (!this.state.isFocused) {
+			this.handleFocus(true);
+		}
+	};
+
+	handleOutsideClick = event => {
+		if (this.state.isFocused && !this.state.element.contains(event.target)) {
+			this.handleFocus(false);
+		}
 	};
 
 	handleMouseEnter = () => {
-		const { isFocused } = this.state;
-
-		if (!isFocused) {
-			const main = document.getElementById("main-container");
-
-			this.setState(
-				{
-					isFocused: true
-				},
-				() => {
-					setTimeout(() => {
-						const { isFocused } = this.state;
-						if (isFocused && main) {
-							main.classList.add("dimmed");
-						}
-					}, 200);
-				}
-			);
+		if (!this.state.isFocused) {
+			this.handleFocus(true);
 		}
 	};
 
@@ -52,24 +81,31 @@ class Advantage extends React.Component {
 		const main = document.getElementById("main-container");
 
 		if (main && (isFocused || main.classList.contains("dimmed"))) {
-			this.setState(
-				{
-					isFocused: false
-				},
-				() => {
-					main.classList.remove("dimmed");
-				}
-			);
+			this.handleFocus(false);
 		}
 	};
 
-	handleMouseMove = () => {
-		const { isFocused } = this.state;
+	handleFocus = isFocused => {
+		const main = document.getElementById("main-container");
 
-		if (!isFocused) {
-			const main = document.getElementById("main-container");
-			main.classList.remove("dimmed");
-		}
+		this.setState(
+			{
+				isFocused
+			},
+			() => {
+				if (!isFocused) {
+					main.classList.remove("dimmed");
+				} else {
+					setTimeout(() => {
+						const { isFocused } = this.state;
+
+						if (isFocused && main) {
+							main.classList.add("dimmed");
+						}
+					}, 200);
+				}
+			}
+		);
 	};
 
 	render = () => {

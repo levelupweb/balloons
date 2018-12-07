@@ -25,12 +25,12 @@ const EditorMenu = ({ toggleEditing, isEditing, logout }) => (
 						Редактировать статьи
 					</Menu.Item>
 				</Link>
-				<Link href="/article/create">
+				{/* <Link href="/article/create">
 					<Menu.Item as="a" className={styles.item}>
 						<Icon name="add" />
 						Создать статью
 					</Menu.Item>
-				</Link>
+				</Link> */}
 				<Menu.Menu position="right">
 					<Menu.Item onClick={logout} className={styles.item}>
 						<Icon name="sign out" />

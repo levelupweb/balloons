@@ -17,6 +17,16 @@ class Default extends React.Component {
 
 	componentDidMount = () => {
 		smoothscroll.polyfill();
+
+		if (screen.width < 590) {
+			const viewport = document.querySelector("meta[name=viewport]");
+			viewport.parentNode.removeChild(viewport);
+			const newViewport = document.createElement("meta");
+
+			newViewport.setAttribute("name", "viewport");
+			newViewport.setAttribute("content", "width=590");
+			document.head.appendChild(newViewport);
+		}
 	};
 
 	handleCantFit = cantFit =>

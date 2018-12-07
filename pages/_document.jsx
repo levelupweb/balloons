@@ -24,6 +24,7 @@ class MyDocument extends Document {
 		return (
 			<html>
 				<script dangerouslySetInnerHTML={{ __html: injectScript }} />
+
 				<Head>
 					<link rel="stylesheet" href="/static/normalize.css" />
 					<link rel="stylesheet" href="/static/nprogress.css" />

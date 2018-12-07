@@ -4,7 +4,7 @@ export const phone = value =>
 			return reject("Поле 'Телефон' не заполнено");
 		}
 
-		if (typeof value !== "string" || value.length !== 11) {
+		if (typeof value !== "string") {
 			return reject("Поле 'Телефон' заполнено некорректно");
 		}
 

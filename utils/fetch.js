@@ -73,6 +73,10 @@ export const fetch = (fetcher, action, ...rest) => {
 		return fetcher.delete("/sale/entry", ...rest);
 	}
 
+	if (action === fetchConsts.FETCH_CONTACT_US) {
+		return fetcher.post("/contact/create", ...rest);
+	}
+
 	throw new Error("Unknown action");
 };
 

@@ -1,7 +1,8 @@
-import { Contact } from "./model";
+import ContactModel from "./model";
 import * as methods from "./methods";
 
-Contact.createContact = methods.createContact;
-Contact.getContacts = methods.getContacts;
+ContactModel.createContact = methods.createContact;
+ContactModel.getContacts = methods.getContacts;
 
+export const Contact = ContactModel;
 export default Contact;

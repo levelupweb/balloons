@@ -5,3 +5,4 @@ export { hashWithSecret } from "./hashWithSecret";
 export { createError } from "./createError";
 export { createSlug } from "./createSlug";
 export { parseExtension } from "./parseExtension";
+export { sendEmail } from "./sendEmail";

@@ -83,7 +83,6 @@ export const createMenu = allArticles => {
 			return items[key];
 		});
 
-	console.log(sorted);
 
 	return sorted;
 };

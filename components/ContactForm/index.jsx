@@ -1,7 +1,10 @@
 import React from "react";
-import { withAsyncSetState } from "@utils";
+import PropTypes from "prop-types";
+import { withAsyncSetState, fetch, parseError } from "@utils";
 import { Paragraph, Heading } from "@components/Typography";
 import Field from "@components/Field";
+import { FetcherContext } from "@providers/fetcher";
+import { FETCH_CONTACT_US } from "@consts/_fetch";
 import Margin from "@components/Margin";
 
 import {
@@ -16,7 +19,6 @@ import {
 	Input,
 	TextArea,
 	Segment,
-	Button,
 	Popup,
 	Grid,
 	Checkbox
@@ -24,9 +26,16 @@ import {
 
 import styles from "./styles";
 
+const defaultMessage = {
+	[CONTACT_MESSAGE]: "",
+	[CONTACT_NAME]: "",
+	[CONTACT_PHONE]: "",
+	[CONTACT_AGREEMENT]: false
+};
+
 class ContactForm extends React.Component {
 	state = {
-		data: {},
+		data: defaultMessage,
 		isHydrating: false,
 		isSuccess: false,
 		error: null,
@@ -41,18 +50,66 @@ class ContactForm extends React.Component {
 			}
 		});
 
+	sendDataStart = () =>
+		this.asyncSetState({
+			isHydrating: true,
+			isSuccess: false,
+			error: null,
+			typeErrors: null
+		})
+			.then(this.sendDataProcess)
+			.then(this.sendDataSuccess)
+			.catch(this.sendDataFail);
+
+	sendDataProcess = () => {
+		const { fetcher } = this.props;
+		const { data } = this.state;
+
+		return fetch(fetcher, FETCH_CONTACT_US, data);
+	};
+
+	sendDataSuccess = () =>
+		this.asyncSetState({
+			data: defaultMessage,
+			isHydrating: false,
+			isSuccess: true
+		});
+
+	sendDataFail = reason => {
+		const error = parseError(reason);
+
+		if (typeof error === "string") {
+			return this.asyncSetState({
+				error,
+				isHydrating: false
+			});
+		}
+
+		return this.asyncSetState({
+			typeErrors: error,
+			isHydrating: false
+		});
+	};
+
 	getTypeError = field => {
 		const { typeErrors } = this.state;
 
 		return typeErrors && typeErrors[field] && typeErrors[field].msg;
 	};
 
+	dismissErrors = () =>
+		this.asyncSetState({
+			error: null,
+			typeErrors: null
+		});
+
 	render = () => {
-		const { error, data, isHydrating } = this.state;
+		const { error, data, isHydrating, isSuccess } = this.state;
+
 		return (
 			<div className={styles.form}>
 				<Margin top>
-					<Form inverted loading={isHydrating}>
+					<Form onSubmit={this.sendDataStart} inverted loading={isHydrating}>
 						<Grid stackable>
 							<Grid.Row>
 								<Grid.Column width={16}>
@@ -65,6 +122,11 @@ class ContactForm extends React.Component {
 											обратную связь
 										</Paragraph>
 									</Margin>
+									{isSuccess && (
+										<Segment inverted color="green">
+											Ваше сообщение успешно доставлено!
+										</Segment>
+									)}
 									{error && (
 										<Segment inverted color="red">
 											{error}
@@ -79,6 +141,7 @@ class ContactForm extends React.Component {
 											open={!!this.getTypeError(CONTACT_NAME)}
 											trigger={
 												<Input
+													error={!!this.getTypeError(CONTACT_NAME)}
 													value={data[CONTACT_NAME]}
 													onChange={(_, { value }) =>
 														this.handleData({
@@ -95,24 +158,26 @@ class ContactForm extends React.Component {
 									</Field>
 								</Grid.Column>
 								<Grid.Column width={8}>
-									<Popup
-										open={!!this.getTypeError(CONTACT_PHONE)}
-										trigger={
-											<Field
-												value={data[CONTACT_PHONE]}
-												onChange={(_, { value }) =>
-													this.handleData({
-														[CONTACT_PHONE]: value
-													})
-												}
-												title="Номер телефона"
-											>
-												<Input fluid placeholder="+7" />
-											</Field>
-										}
-									>
-										{this.getTypeError(CONTACT_PHONE)}
-									</Popup>
+									<Field title="Номер телефона">
+										<Popup
+											open={!!this.getTypeError(CONTACT_PHONE)}
+											trigger={
+												<Input
+													error={!!this.getTypeError(CONTACT_NAME)}
+													value={data[CONTACT_PHONE]}
+													onChange={(_, { value }) =>
+														this.handleData({
+															[CONTACT_PHONE]: value
+														})
+													}
+													fluid
+													placeholder="+7"
+												/>
+											}
+										>
+											{this.getTypeError(CONTACT_PHONE)}
+										</Popup>
+									</Field>
 								</Grid.Column>
 							</Grid.Row>
 							<Grid.Row>
@@ -122,6 +187,7 @@ class ContactForm extends React.Component {
 											open={!!this.getTypeError(CONTACT_MESSAGE)}
 											trigger={
 												<TextArea
+													error={!!this.getTypeError(CONTACT_MESSAGE)}
 													value={data[CONTACT_MESSAGE]}
 													onChange={(_, { value }) =>
 														this.handleData({
@@ -142,19 +208,31 @@ class ContactForm extends React.Component {
 							<Grid.Row>
 								<Grid.Column width={16}>
 									<div className={styles.action}>
-										<Button className={styles.button} loading={isHydrating}>
+										<Form.Button
+											className={styles.button}
+											loading={isHydrating}
+										>
 											Отправить
-										</Button>
-										<Checkbox
-											inverted
-											label="Я соглашаюсь с правилами обработки данных"
-											checked={data[CONTACT_AGREEMENT]}
-											onChange={(_, { checked }) =>
-												this.handleData({
-													[CONTACT_AGREEMENT]: checked
-												})
+										</Form.Button>
+										<Popup
+											open={!!this.getTypeError(CONTACT_AGREEMENT)}
+											position="bottom left"
+											trigger={
+												<Checkbox
+													inverted
+													error={!!this.getTypeError(CONTACT_AGREEMENT)}
+													label="Я соглашаюсь с правилами обработки данных"
+													checked={data[CONTACT_AGREEMENT]}
+													onChange={(_, { checked }) =>
+														this.handleData({
+															[CONTACT_AGREEMENT]: checked
+														})
+													}
+												/>
 											}
-										/>
+										>
+											{this.getTypeError(CONTACT_AGREEMENT)}
+										</Popup>
 									</div>
 								</Grid.Column>
 							</Grid.Row>
@@ -166,6 +244,16 @@ class ContactForm extends React.Component {
 	};
 }
 
+ContactForm.propTypes = {
+	fetcher: PropTypes.func.isRequired
+};
+
 const ContactFormWithAsyncSetState = withAsyncSetState(ContactForm);
 
-export default ContactFormWithAsyncSetState;
+const ContactFormWithFetcherContext = props => (
+	<FetcherContext.Consumer>
+		{ctx => <ContactFormWithAsyncSetState {...props} fetcher={ctx.fetcher} />}
+	</FetcherContext.Consumer>
+);
+
+export default ContactFormWithFetcherContext;

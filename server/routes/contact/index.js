@@ -3,6 +3,7 @@ import { Contact } from "@server/models";
 import { validation } from "@server/middlewares";
 import { createError, sendEmail } from "@server/utils";
 import * as middlewares from "./middlewares";
+import * as contactEmail from "@server/email/contact";
 
 const router = express.Router();
 
@@ -24,9 +25,9 @@ router.post(
 		Contact.createContact(req.matchedData)
 			.then(contact =>
 				sendEmail(
-					"example@example.com",
-					"Вам прислали контакт",
-					"<div>Hello world</div>"
+					"Вам пришёл новый контакт!",
+					contactEmail.rich(contact),
+					contactEmail.simple(contact)
 				).then(() => contact)
 			)
 			.then(contact => res.json(contact))

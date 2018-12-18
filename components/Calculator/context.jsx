@@ -119,7 +119,8 @@ class CalculatorProviderClass extends React.Component {
 			value={{
 				params: this.state.params,
 				handleParams: this.handleParams,
-				price: this.calculatePrice()
+				price: this.calculatePrice(),
+				logoCount: getLogoCount(this.state.params)
 			}}
 		>
 			{this.props.children}

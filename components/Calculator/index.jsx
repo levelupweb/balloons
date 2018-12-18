@@ -54,7 +54,7 @@ const Calculator = ({ params, handleParams, hasLogo }) => (
 				</Margin>
 				{hasLogo && (
 					<Margin top>
-						<Field title="Стороны печати" description="Обязательное поле">
+						<Field title="Дополнительно" description="Обязательное поле">
 							<MetalSelector />
 						</Field>
 					</Margin>

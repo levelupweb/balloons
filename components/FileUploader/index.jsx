@@ -51,7 +51,7 @@ class FileUploader extends React.Component {
 		return this.asyncSetState({
 			isUploading: false,
 			file: null
-		}).then(() => onUrl(data.url));
+		}).then(() => onUrl(data.url, data.mime));
 	};
 
 	uploadFileFail = reason =>

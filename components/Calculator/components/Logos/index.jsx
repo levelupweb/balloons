@@ -128,10 +128,12 @@ class Logos extends React.Component {
 							colors={params[CALCULATOR_PARAM_LOGO_COLORS]}
 							logo={params[CALCULATOR_PARAM_LOGO]}
 							index={1}
-							handleLogo={logo =>
+							mime={params.mime1}
+							handleLogo={(logo, mime1) =>
 								handleParams(params => ({
 									...params,
-									[CALCULATOR_PARAM_LOGO]: logo
+									[CALCULATOR_PARAM_LOGO]: logo,
+									mime1
 								}))
 							}
 						/>
@@ -140,11 +142,13 @@ class Logos extends React.Component {
 						<Logo
 							colors={params[CALCULATOR_PARAM_LOGO_COLORS_2]}
 							logo={params[CALCULATOR_PARAM_LOGO_2]}
+							mime={params.mime2}
 							index={2}
-							handleLogo={logo =>
+							handleLogo={(logo, mime2) =>
 								handleParams(params => ({
 									...params,
-									[CALCULATOR_PARAM_LOGO_2]: logo
+									[CALCULATOR_PARAM_LOGO_2]: logo,
+									mime2
 								}))
 							}
 						/>

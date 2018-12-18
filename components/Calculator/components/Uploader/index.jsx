@@ -6,7 +6,7 @@ import styles from "./styles";
 const Uploader = ({ onUpload, index }) => (
 	<div className={styles.wrapper}>
 		<FileUploader
-			accept="image/svg+xml"
+			accept="image/svg+xml,image/png"
 			text={`Загрузить ${index} лого`}
 			onUrl={onUpload}
 			buttonProps={{

@@ -39,6 +39,7 @@ export default dirname =>
 				const form = new formidable.IncomingForm();
 				const timestamp = new Date().getTime();
 
+				let mime = null;
 				let filename = timestamp;
 				let shouldResponse = true;
 
@@ -53,6 +54,7 @@ export default dirname =>
 						return;
 					}
 
+					mime = file.type;
 					filename = req.user
 						? `/admin/${timestamp}.${extension}`
 						: `/temp/${timestamp}.${extension}`;
@@ -72,7 +74,8 @@ export default dirname =>
 				form.on("end", () => {
 					if (shouldResponse) {
 						res.json({
-							url: filename
+							url: filename,
+							mime
 						});
 					}
 				});

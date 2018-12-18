@@ -60,7 +60,17 @@
 }
 
 .nav {
-  background: @secondary;
+  background: linear-gradient(to right, @secondary, lighten(@secondary, 10%));
+  background: -webkit-linear-gradient(
+    to right,
+    @secondary,
+    lighten(@secondary, 10%)
+  );
+  background: -moz-linear-gradient(
+    to right,
+    @secondary,
+    lighten(@secondary, 10%)
+  );
   color: @white;
   box-shadow: 0 5px 20px rgba(79, 153, 197, 0.52);
   top: 0;

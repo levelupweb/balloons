@@ -8,4 +8,6 @@ const ArticlesPage = () => (
 	</DefaultContainer>
 );
 
+ArticlesPage.requireAuth = true;
+
 export default ArticlesPage;

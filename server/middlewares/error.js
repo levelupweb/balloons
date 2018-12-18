@@ -2,7 +2,6 @@
 export const error = (err, req, res, next) => {
 	// eslint-disable-next-line no-console
 	let response = "Неизвестная ошибка сервера";
-
 	if (typeof err.message === "string") {
 		response = err.message;
 	}

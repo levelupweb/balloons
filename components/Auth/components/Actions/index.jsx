@@ -10,9 +10,9 @@ const Actions = () => (
 				<Button
 					onClick={ctx.authStart}
 					fluid
+					primary
 					loading={ctx.isHydrating}
 					size="large"
-					basic
 				>
 					Авторизоваться
 				</Button>

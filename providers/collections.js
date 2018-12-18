@@ -143,7 +143,6 @@ class CollectionsProviderClass extends React.Component {
 	render = () => (
 		<CollectionsContext.Provider
 			value={{
-				collections: this.state.collections,
 				insertDocuments: this.insertDocuments,
 				updateDocument: this.updateDocument,
 				removeDocuments: this.removeDocuments,

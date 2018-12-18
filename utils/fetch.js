@@ -9,8 +9,20 @@ export const fetch = (fetcher, action, ...rest) => {
 		throw new Error("Fetcher is not valid axios instance");
 	}
 
+	if (action === fetchConsts.FETCH_AUTH) {
+		return fetcher.get("/user/auth", ...rest);
+	}
+
+	if (action === fetchConsts.FETCH_NEWS) {
+		return fetcher.get("/news/entries", ...rest);
+	}
+
 	if (action === fetchConsts.FETCH_SIGNIN) {
 		return fetcher.post("/user/signin", ...rest);
+	}
+
+	if (action === fetchConsts.FETCH_NEWS_CREATE) {
+		return fetcher.post("/news/create", ...rest);
 	}
 
 	if (action === fetchConsts.FETCH_UI_ELEMENTS) {

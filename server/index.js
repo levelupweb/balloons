@@ -94,6 +94,15 @@ export default dirname =>
 				});
 			});
 
+			server.get("/news", (req, res) => {
+				if (!req.query.page && req.query.page !== 0) {
+					return res.redirect("/news?page=0");
+				}
+				return app.render(req, res, "/news", {
+					page: req.query.page
+				});
+			});
+
 			server.get("*", (req, res) => handle(req, res));
 
 			server.listen(envConfig.port, err => {

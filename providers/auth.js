@@ -1,62 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cookies from "js-cookie";
-import axios from "axios";
-import { withAsyncSetState, getApiUrl, parseToken } from "@utils";
+import { withAsyncSetState } from "@utils";
 import { TOKEN } from "@consts/_common";
 
 export const AuthContext = React.createContext();
 
 class AuthProviderClass extends React.Component {
 	state = {
-		user: null,
-		token: null
+		user: this.props.user,
+		token: this.props.token
 	};
 
 	componentDidMount = () => {
-		this.makeAuthIfNeeded();
-	};
+		const { shouldRemoveToken } = this.props;
 
-	makeAuthIfNeeded = () => {
-		const { user } = this.state;
-		const token = parseToken();
-
-		if (!user && token) {
-			return this.authStart(token)
-				.then(this.performAuth)
-				.then(this.authSuccess)
-				.catch(this.authFail);
+		if (shouldRemoveToken) {
+			cookies.remove(TOKEN);
 		}
-
-		return Promise.resolve();
-	};
-
-	authStart = token =>
-		this.asyncSetState({
-			token
-		});
-
-	performAuth = () => {
-		const { token } = this.state;
-
-		return axios.get(getApiUrl("/user/auth"), {
-			headers: {
-				authorization: token
-			}
-		});
-	};
-
-	authSuccess = ({ data }) =>
-		this.asyncSetState({
-			user: data
-		});
-
-	authFail = () => {
-		cookies.remove(TOKEN);
 	};
 
 	setUser = ({ token, user }) => {
-		cookies.set(TOKEN, token);
+		cookies.set(TOKEN, token, { expires: 31 });
 
 		return this.asyncSetState({
 			user,
@@ -89,11 +54,14 @@ class AuthProviderClass extends React.Component {
 
 AuthProviderClass.propTypes = {
 	token: PropTypes.string,
-	children: PropTypes.element.isRequired
+	children: PropTypes.element.isRequired,
+	user: PropTypes.object,
+	shouldRemoveToken: PropTypes.bool.isRequired
 };
 
 AuthProviderClass.defaultProps = {
-	token: null
+	token: null,
+	user: null
 };
 
 const AuthProviderClassWithAsyncSetState = withAsyncSetState(AuthProviderClass);

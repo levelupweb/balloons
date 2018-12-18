@@ -1,5 +1,4 @@
-import { SALE_MODEL, ARTICLE_MODEL } from "@consts/_models";
-import {} from "../consts/_models";
+import { SALE_MODEL, ARTICLE_MODEL, NEWS_MODEL } from "@consts/_models";
 
 export const getDefaultCollections = pageProps => {
 	const collections = {};
@@ -17,5 +16,13 @@ export const getDefaultCollections = pageProps => {
 			[SALE_MODEL]: pageProps.collectionsSales
 		};
 	}
+
+	if (pageProps.collectionsNews) {
+		return {
+			...collections,
+			[NEWS_MODEL]: pageProps.collectionsNews
+		};
+	}
+
 	return collections;
 };

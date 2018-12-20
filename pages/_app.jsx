@@ -61,7 +61,7 @@ class MyApp extends App {
 	render() {
 		const { Component, ...rest } = this.props;
 
-		if (rest.shouldRedirectToAuth) {
+		if (rest.shouldRedirectToAuth && utils.isBrowser()) {
 			router.push("/admin");
 			return null;
 		}

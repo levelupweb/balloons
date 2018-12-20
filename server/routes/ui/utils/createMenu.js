@@ -64,11 +64,11 @@ export const createMenu = allArticles => {
 				index: 100,
 				id: "sales"
 			},
-			index: {
-				title: "Главная",
-				link: "/",
-				id: "index",
-				index: -1
+			news: {
+				title: "Новости",
+				link: "/news",
+				id: "news",
+				index: 0
 			}
 		}
 	);
@@ -82,7 +82,6 @@ export const createMenu = allArticles => {
 
 			return items[key];
 		});
-
 
 	return sorted;
 };

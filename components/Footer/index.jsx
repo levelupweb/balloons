@@ -66,7 +66,7 @@ const Footer = () => (
 									"mail",
 									"mailto:print@zolotaja-strekoza.ru"
 								],
-								["Телефон", "8 (902) 888-86-90", "phone", "tel:+79028888690"]
+								["Телефон", "8 (495) 960-25-10", "phone", "tel:+74959602510"]
 							]}
 						</FooterList>
 					</div>

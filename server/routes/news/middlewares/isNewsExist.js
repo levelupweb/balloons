@@ -1,4 +1,4 @@
-import News from "@server/models";
+import { News } from "@server/models";
 import { createError } from "@server/utils";
 
 export const isNewsExist = (req, _, next) =>

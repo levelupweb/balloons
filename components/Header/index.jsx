@@ -20,7 +20,7 @@ const Header = () => (
 		</div>
 		<div className={styles.contact}>
 			<Heading as="p" size={4}>
-				8 (920) 888-86-90
+				8 (495) 960-25-10
 			</Heading>
 			<Paragraph>г. Москва, Измайловское шоссе, 73Ж</Paragraph>
 			<Margin top half>

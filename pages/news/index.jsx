@@ -20,7 +20,7 @@ class NewsPage extends React.Component {
 
 			return {
 				...response,
-				collectionsNews: [data.news] // inserting articles in collections
+				collectionsNews: data.news // inserting articles in collections
 			};
 		} catch (err) {
 			return {

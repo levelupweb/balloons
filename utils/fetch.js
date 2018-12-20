@@ -13,8 +13,16 @@ export const fetch = (fetcher, action, ...rest) => {
 		return fetcher.get("/user/auth", ...rest);
 	}
 
+	if (action === fetchConsts.FETCH_NEWS_ENTRY) {
+		return fetcher.get("/news/entry", ...rest);
+	}
+
 	if (action === fetchConsts.FETCH_NEWS) {
 		return fetcher.get("/news/entries", ...rest);
+	}
+
+	if (action === fetchConsts.FETCH_UPDATE_NEWS) {
+		return fetcher.put("/news/entry", ...rest);
 	}
 
 	if (action === fetchConsts.FETCH_SIGNIN) {

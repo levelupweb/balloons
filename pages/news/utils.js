@@ -17,7 +17,7 @@ export const getEntry = (fetcher, newsId) =>
 	});
 
 export const isEditing = editMode => {
-	if (editMode && editMode === "1") {
+	if (editMode === "1") {
 		return true;
 	}
 

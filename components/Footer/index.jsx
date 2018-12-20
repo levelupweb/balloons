@@ -49,7 +49,7 @@ const Footer = () => (
 							["Оплата и доставка", "/article/oplata-i-dostavka"],
 							["Наши услуги", "/article/ceny"],
 							["Активные акции", "/sales"],
-							["Наши работы", "/works"]
+							["Наши работы", "/portfolio"]
 						]}
 					</FooterNav>
 				</Margin>

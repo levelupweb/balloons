@@ -1,26 +1,34 @@
 import { SALE_MODEL, ARTICLE_MODEL, NEWS_MODEL } from "@consts/_models";
+import { PORTFOLIO_MODEL } from "../consts/_models";
 
 export const getDefaultCollections = pageProps => {
-	const collections = {};
+	let collections = {};
 
 	if (pageProps.collectionsArticles) {
-		return {
+		collections = {
 			...collections,
 			[ARTICLE_MODEL]: pageProps.collectionsArticles
 		};
 	}
 
 	if (pageProps.collectionsSales) {
-		return {
+		collections = {
 			...collections,
 			[SALE_MODEL]: pageProps.collectionsSales
 		};
 	}
 
 	if (pageProps.collectionsNews) {
-		return {
+		collections = {
 			...collections,
 			[NEWS_MODEL]: pageProps.collectionsNews
+		};
+	}
+
+	if (pageProps.collectionsPortfolio) {
+		collections = {
+			...collections,
+			[PORTFOLIO_MODEL]: pageProps.collectionsPortfolio
 		};
 	}
 

@@ -6,3 +6,4 @@ export { Contact } from "./Contact";
 export { Calculation } from "./Calculation";
 export { Sale } from "./Sale";
 export { News } from "./News";
+export { Portfolio } from "./Portfolio";

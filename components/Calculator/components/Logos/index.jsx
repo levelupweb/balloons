@@ -161,7 +161,7 @@ class Logos extends React.Component {
 							triggerClassName={styles.trigger}
 							trigger={
 								<Button fluid circular color="black">
-									Цвет логотипа
+									Дополнительные цвета
 								</Button>
 							}
 						>

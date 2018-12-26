@@ -9,7 +9,7 @@ import {
 	CALCULATOR_PARAM_LOGO_COLORS_2,
 	CALCULATOR_PARAM_NUMBER,
 	CALCULATOR_PARAM_DIAMETER,
-	CALCULATOR_DIAMETER_14,
+	CALCULATOR_DIAMETER_12,
 	CALCULATOR_PARAM_TYPE,
 	CALCULATOR_PARAM_METAL,
 	CALCULATOR_PARAM_LOGO,
@@ -28,7 +28,7 @@ class CalculatorProviderClass extends React.Component {
 			[CALCULATOR_PARAM_TYPE]: CALCULATOR_TYPE_PASTEL,
 			[CALCULATOR_PARAM_COLOR]: "#e6652c",
 			[CALCULATOR_PARAM_LOGO_COLORS]: ["#3998cb"],
-			[CALCULATOR_PARAM_DIAMETER]: CALCULATOR_DIAMETER_14,
+			[CALCULATOR_PARAM_DIAMETER]: CALCULATOR_DIAMETER_12,
 			[CALCULATOR_PARAM_LOGO_COLORS_2]: ["#3998cb"]
 		}
 	};
@@ -42,7 +42,7 @@ class CalculatorProviderClass extends React.Component {
 			prevState.params[CALCULATOR_PARAM_DIAMETER] !==
 				params[CALCULATOR_PARAM_DIAMETER]
 		) {
-			if (params[CALCULATOR_PARAM_DIAMETER] === CALCULATOR_DIAMETER_14) {
+			if (params[CALCULATOR_PARAM_DIAMETER] === CALCULATOR_DIAMETER_12) {
 				this.handleParams(() => ({
 					[CALCULATOR_PARAM_NUMBER]: 100
 				}));
@@ -80,8 +80,7 @@ class CalculatorProviderClass extends React.Component {
 		}
 
 		const type = defineType(params);
-		const basicPrice = defineBasicPrice(type, number, params);
-
+		const basicPrice = defineBasicPrice(type, Number(number), params);
 		/**
 		 * metal factor
 		 */
@@ -101,19 +100,7 @@ class CalculatorProviderClass extends React.Component {
 			over += 1000;
 		}
 
-		/**
-		 * color factor
-		 */
-
-		if (logoCount > 0 && colorsTotal !== 2) {
-			if (params[CALCULATOR_PARAM_DIAMETER] === CALCULATOR_DIAMETER_14) {
-				over += 350 * colorsTotal;
-			} else {
-				over += 250 * colorsTotal;
-			}
-		}
-
-		return Math.round((basicPrice + basicOver) * number) + over;
+		return Math.round((basicPrice + basicOver) * Number(number)) + over;
 	};
 
 	render = () => (

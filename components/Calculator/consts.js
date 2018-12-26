@@ -12,7 +12,7 @@ export const CALCULATOR_PARAM_LOGO_COLORS_2 = "logoColors2";
 export const CALCULATOR_TYPE_PASTEL = "pastel";
 export const CALCULATOR_TYPE_DECORATOR = "decorator";
 
-export const CALCULATOR_DIAMETER_14 = "14";
+export const CALCULATOR_DIAMETER_12 = "12";
 export const CALCULATOR_DIAMETER_36 = "36";
 
 export const CALCULATOR_METAL_GOLD = "gold";

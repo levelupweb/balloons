@@ -24,7 +24,7 @@ export const defineType = params => {
 
 export const defineBasicPrice = (type, rawNumber, params) => {
 	const number = parseFloat(rawNumber);
-	console.log(rawNumber, number);
+
 	const realType = JSON.stringify(type);
 
 	if (params[CALCULATOR_PARAM_DIAMETER] !== CALCULATOR_DIAMETER_12) {

@@ -78,6 +78,6 @@ ArticlePage.defaultProps = {
 	isEditing: false
 };
 
-ArticlePage.requireAuth = true;
+ArticlePage.requireAuth = false;
 
 export default ArticlePage;

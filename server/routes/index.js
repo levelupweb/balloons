@@ -9,6 +9,7 @@ import contact from "./contact";
 import calculation from "./calculation";
 import sale from "./sale";
 import callback from "./callback";
+import portfolio from "./portfolio";
 
 const router = express.Router();
 
@@ -22,5 +23,6 @@ router.use("/contact", contact);
 router.use("/calculation", calculation);
 router.use("/sale", sale);
 router.use("/callback", callback);
+router.use("/portfolio", portfolio);
 
 export default router;

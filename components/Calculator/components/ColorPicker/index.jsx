@@ -40,8 +40,11 @@ class ColorPicker extends React.Component {
 
 	addColor = () => {
 		const { max, colors, onChange } = this.props;
-		if (colors.length < max) {
+		if (colors.length <= max) {
 			onChange([...colors, "#000"]);
+			this.setState({
+				currentIndex: this.state.currentIndex + 1
+			});
 		}
 	};
 

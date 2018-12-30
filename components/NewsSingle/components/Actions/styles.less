@@ -1,0 +1,13 @@
+@import "~@theme/spacings";
+
+.actions {
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+  & > * {
+    margin-right: @global-space;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

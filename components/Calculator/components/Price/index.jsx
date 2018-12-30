@@ -5,7 +5,7 @@ import { CalculatorContext } from "../../context";
 
 import {
 	CALCULATOR_PARAM_DIAMETER,
-	CALCULATOR_DIAMETER_14,
+	CALCULATOR_DIAMETER_12,
 	CALCULATOR_PARAM_NUMBER
 } from "../../consts";
 
@@ -14,7 +14,7 @@ const Price = () => (
 		{ctx => {
 			if (ctx.logoCount > 0) {
 				if (
-					ctx.params[CALCULATOR_PARAM_DIAMETER] === CALCULATOR_DIAMETER_14 &&
+					ctx.params[CALCULATOR_PARAM_DIAMETER] === CALCULATOR_DIAMETER_12 &&
 					ctx.params[CALCULATOR_PARAM_NUMBER] < 100
 				) {
 					return (

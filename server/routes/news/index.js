@@ -6,9 +6,9 @@ import * as middlewares from "./middlewares";
 
 const router = express.Router();
 
-router.get("/entries", [middlewares.parseParams], (req, res, next) =>
+router.get("/entries", (req, res, next) =>
 	News.countDocuments().then(total =>
-		News.find({}, null, req.parsedParams)
+		News.find({})
 			.then(news =>
 				res.json({
 					news,
@@ -28,7 +28,11 @@ router.get("/entries", [middlewares.parseParams], (req, res, next) =>
 
 router.get("/entry", [middlewares.parseQuery], (req, res, next) =>
 	News.findOne(req.parsedQuery)
-		.then(news => res.json(news))
+		.then(news =>
+			News.find({ _id: { $ne: news._id } }, null, { limit: 6 }).then(other =>
+				res.json({ current: news, other })
+			)
+		)
 		.catch(error =>
 			next(createError("Не удалось загрузить новость. Попробуйте позже", error))
 		)
@@ -60,7 +64,11 @@ router.put(
 		validation
 	],
 	(req, res, next) =>
-		News.findOneAndUpdate(req.parsedQuery, { $set: req.matchedData })
+		News.findOneAndUpdate(
+			req.parsedQuery,
+			{ $set: req.matchedData },
+			{ new: true }
+		)
 			.then(updated => res.json(updated))
 			.catch(error =>
 				next(

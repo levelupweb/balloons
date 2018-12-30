@@ -6,3 +6,4 @@ export const CONTACT_MODEL = "Contact";
 export const CALCULATION_MODEL = "Calculation";
 export const SALE_MODEL = "Sale";
 export const NEWS_MODEL = "News";
+export const PORTFOLIO_MODEL = "Portfolio";

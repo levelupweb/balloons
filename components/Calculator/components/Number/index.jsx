@@ -6,7 +6,7 @@ import { CalculatorContext } from "../../context";
 import {
 	CALCULATOR_PARAM_NUMBER,
 	CALCULATOR_PARAM_DIAMETER,
-	CALCULATOR_DIAMETER_14
+	CALCULATOR_DIAMETER_12
 } from "../../consts";
 
 class NumberOfBalloons extends React.Component {
@@ -41,7 +41,7 @@ class NumberOfBalloons extends React.Component {
 				innerRef={this.handleRef}
 				fluid
 				max={1000000}
-				min={diameter === CALCULATOR_DIAMETER_14 ? 100 : 1}
+				min={diameter === CALCULATOR_DIAMETER_12 ? 100 : 1}
 				value={parseFloat(number)}
 				onChange={this.handleChange}
 			/>

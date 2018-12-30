@@ -67,7 +67,14 @@ class CreateNews extends React.Component {
 									</p>
 								</div>
 								<Margin className={styles.btn} left>
-									<Link href={`/news/entry?id=${createdNewsId}`}>
+									<Link
+										href={{
+											pathname: "/news/item",
+											query: {
+												id: createdNewsId
+											}
+										}}
+									>
 										<a>
 											<Button circular color="green">
 												Просмотреть новость

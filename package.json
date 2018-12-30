@@ -52,6 +52,7 @@
     "react-dom": "^16.6.3",
     "react-draft-wysiwyg": "^1.12.13",
     "react-masonry-component": "^6.2.1",
+    "react-medium-image-zoom": "^3.0.15",
     "react-modal": "^3.6.1",
     "react-svg": "^7.2.0",
     "react-tippy": "^1.2.3",

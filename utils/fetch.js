@@ -9,12 +9,40 @@ export const fetch = (fetcher, action, ...rest) => {
 		throw new Error("Fetcher is not valid axios instance");
 	}
 
+	if (action === fetchConsts.FETCH_PORTFOLIO_CREATE) {
+		return fetcher.post("/portfolio/create", ...rest);
+	}
+
+	if (action === fetchConsts.FETCH_PORTFOLIO_ENTRIES) {
+		return fetcher.get("/portfolio/entries", ...rest);
+	}
+
+	if (action === fetchConsts.FETCH_PORTFOLIO_ENTRY) {
+		return fetcher.get("/portfolio/entry", ...rest);
+	}
+
+	if (action === fetchConsts.FETCH_PORTFOLIO_REMOVE) {
+		return fetcher.delete("/portfolio/entry", ...rest);
+	}
+
+	if (action === fetchConsts.FETCH_PORTFOLIO_UPDATE) {
+		return fetcher.put("/portfolio/entry", ...rest);
+	}
+
 	if (action === fetchConsts.FETCH_AUTH) {
 		return fetcher.get("/user/auth", ...rest);
 	}
 
+	if (action === fetchConsts.FETCH_NEWS_ENTRY) {
+		return fetcher.get("/news/entry", ...rest);
+	}
+
 	if (action === fetchConsts.FETCH_NEWS) {
 		return fetcher.get("/news/entries", ...rest);
+	}
+
+	if (action === fetchConsts.FETCH_UPDATE_NEWS) {
+		return fetcher.put("/news/entry", ...rest);
 	}
 
 	if (action === fetchConsts.FETCH_SIGNIN) {

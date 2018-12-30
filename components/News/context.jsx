@@ -37,14 +37,9 @@ class NewsProviderClass extends React.Component {
 			.catch(this.fetchNewsFail);
 
 	fetchNewsProcess = () => {
-		const { fetcher, currentPage } = this.props;
+		const { fetcher } = this.props;
 
-		return fetch(fetcher, FETCH_NEWS, {
-			params: {
-				skip: currentPage,
-				limit: 10
-			}
-		});
+		return fetch(fetcher, FETCH_NEWS);
 	};
 
 	fetchNewsSuccess = ({ data }) => {
@@ -71,7 +66,6 @@ class NewsProviderClass extends React.Component {
 		<NewsContext.Provider
 			value={{
 				fetchNewsStart: this.fetchNewsStart,
-				currentPage: this.props.currentPage,
 				...this.state
 			}}
 		>
@@ -85,13 +79,11 @@ NewsProviderClass.propTypes = {
 	defaultNews: PropTypes.array,
 	fetchError: PropTypes.object,
 	fetcher: PropTypes.func.isRequired,
-	insertNews: PropTypes.func.isRequired,
-	currentPage: PropTypes.number
+	insertNews: PropTypes.func.isRequired
 };
 
 NewsProviderClass.defaultProps = {
-	fetchError: null,
-	currentPage: null
+	fetchError: null
 };
 
 const NewsProviderWithAsyncSetState = withAsyncSetState(NewsProviderClass);

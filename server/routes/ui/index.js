@@ -14,7 +14,11 @@ router.get("/elements", (req, res, next) =>
 				menu: createMenu(articles)
 			})
 		)
-		.catch(error => next(createError("Не удалось загрузить страницу", error)))
+		.catch(
+			error =>
+				console.log(error) ||
+				next(createError("Не удалось загрузить страницу", error))
+		)
 );
 
 export default router;

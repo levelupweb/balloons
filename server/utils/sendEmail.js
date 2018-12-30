@@ -14,7 +14,8 @@ export const sendEmail = (
 				subject: `[Zolotaya-Strekoza.ru]: ${subject}`,
 				attachment
 			},
-			(err, message) => (!err ? resolve(message) : reject(err))
+			(err, message) =>
+				console.log(err, message) || (!err ? resolve(message) : reject(err))
 		)
 	);
 

@@ -4,8 +4,8 @@
   "description": "Site-landing for balloons web-site",
   "main": "index.js",
   "scripts": {
-    "dev": "node index",
-    "build": "next build",
+    "dev": "NODE_ENV=development node index",
+    "build": "NODE_ENV=production next build",
     "production": "NODE_ENV=production node index",
     "analyze": "BUNDLE_ANALYZE=both next build",
     "pm2prod": "NODE_ENV=production pm2 start index.js --name logonashare.ru",

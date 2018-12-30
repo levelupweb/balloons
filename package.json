@@ -8,7 +8,7 @@
     "build": "next build",
     "production": "NODE_ENV=production node index",
     "analyze": "BUNDLE_ANALYZE=both next build",
-    "pm2prod": "pm2 start index.js --name zolotaya-strekoza.ru",
+    "pm2prod": "NODE_ENV=production pm2 start index.js --name logonashare.ru",
     "analyze:server": "BUNDLE_ANALYZE=server next build",
     "analyze:browser": "BUNDLE_ANALYZE=browser next build"
   },

@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "classnames";
+import Head from "next/head";
 import { Grid } from "semantic-ui-react";
 import DefaultContainer from "@containers/Default";
 import { Paragraph, Heading, List } from "@components/Typography";
@@ -19,6 +20,9 @@ const IndexPage = () => (
 		afterNavigation={<IndexSlider />}
 		mainClassName={styles.wrapper}
 	>
+		<Head>
+			<title>Золотая стрекоза - печать на воздушных шарах</title>
+		</Head>
 		<div className={styles.indexPage}>
 			<Margin top bottom double className={styles.field}>
 				<BlockHeader

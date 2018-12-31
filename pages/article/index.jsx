@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Head from "next/head";
 import { createAxios, parseError, parseToken } from "@utils";
 import DefaultContainer from "@containers/Default";
 import ArticleSingle from "@components/ArticleSingle";
 import { ARTICLE_CATEGORY } from "@consts/article";
 import { getArticle, getOtherArticles } from "./utils";
+import { ARTICLE_TITLE } from "../../consts/article";
 
 class ArticlePage extends React.Component {
 	static async getInitialProps({ req, query: { slug, edit } }) {
@@ -31,28 +33,34 @@ class ArticlePage extends React.Component {
 
 				return {
 					...answer,
+					title: article.data[ARTICLE_TITLE],
 					collectionsArticles: [article.data, ...otherArticles.data] // inserting articles in collections
 				};
 			}
 
 			return {
 				...answer,
+				title: article.data[ARTICLE_TITLE],
 				collectionsArticles: [article.data] // inserting articles in collections
 			};
 		} catch (err) {
 			return {
 				article: null,
 				isEditing: false,
-				error: parseError(err)
+				error: parseError(err),
+				title: "Не найдено"
 			};
 		}
 	}
 
 	render = () => {
-		const { article, error, isEditing, otherArticlesIds } = this.props;
+		const { article, error, title, isEditing, otherArticlesIds } = this.props;
 
 		return (
 			<DefaultContainer>
+				<Head>
+					<title>{title} - Золотая стрекоза</title>
+				</Head>
 				<ArticleSingle
 					otherArticlesIds={otherArticlesIds}
 					article={article}
@@ -67,6 +75,7 @@ class ArticlePage extends React.Component {
 ArticlePage.propTypes = {
 	article: PropTypes.object,
 	error: PropTypes.string,
+	title: PropTypes.string.isRequired,
 	isEditing: PropTypes.bool,
 	otherArticlesIds: PropTypes.arrayOf(PropTypes.string)
 };

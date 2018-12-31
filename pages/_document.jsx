@@ -29,6 +29,20 @@ class MyDocument extends Document {
 					<link rel="stylesheet" href="/static/normalize.css" />
 					<link rel="stylesheet" href="/static/nprogress.css" />
 					<link rel="stylesheet" href="/semantic/semantic.min.css" />
+					<meta
+						name="Description"
+						content="Печать на воздушных шарах - логотипы, текст, изображения. Собственное производство."
+					/>
+					<meta
+						name="Keywords"
+						content="Печать, шары, печать на шарах, золотая стрекоза, печать логотипа, текст на шаре, изображение на шаре"
+					/>
+					<meta name="yandex-verification" content="15eb07b5384bb4e1" />
+					<link
+						rel="shortcut icon"
+						href="/static/favicon.ico"
+						type="image/x-icon"
+					/>
 					<link
 						href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=cyrillic"
 						rel="stylesheet"

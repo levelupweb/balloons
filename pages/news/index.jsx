@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Head from "next/head";
 import { createAxios, parseError, parseToken } from "@utils";
 import DefaultContainer from "@containers/Default";
 import News from "@components/News";
@@ -35,6 +36,9 @@ class NewsPage extends React.Component {
 
 		return (
 			<DefaultContainer>
+				<Head>
+					<title>Новости - Золотая стрекоза</title>
+				</Head>
 				<News defaultNews={defaultNews} fetchError={fetchError} />
 			</DefaultContainer>
 		);

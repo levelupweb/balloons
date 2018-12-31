@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Head from "next/head";
 import { createAxios, parseError, parseToken, fetch } from "@utils";
 import DefaultContainer from "@containers/Default";
 import Sales from "@components/Sales";
@@ -30,6 +31,9 @@ class SalesPage extends React.Component {
 
 		return (
 			<DefaultContainer>
+				<Head>
+					<title>Акции - золотая стрекоза</title>
+				</Head>
 				<Sales salesIds={salesIds} error={error} />
 			</DefaultContainer>
 		);

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Head from "next/head";
 import DefaultContainer from "@containers/Default";
 import Error from "@components/Error";
 
@@ -15,6 +16,9 @@ class ErrorWrapper extends React.Component {
 
 		return (
 			<DefaultContainer centered>
+				<Head>
+					<title>Ошибка - Золотая стрекоза</title>
+				</Head>
 				<Error statusCode={statusCode} />
 			</DefaultContainer>
 		);

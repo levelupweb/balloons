@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Head from "next/head";
 import { createAxios, parseError, parseToken } from "@utils";
 import DefaultContainer from "@containers/Default";
 import Portfolio from "@components/Portfolio";
@@ -34,6 +35,9 @@ class PortfolioPage extends React.Component {
 
 		return (
 			<DefaultContainer>
+				<Head>
+					<title>Портфолио - Золотая стрекоза</title>
+				</Head>
 				<Portfolio
 					defaultPortfolio={defaultPortfolio}
 					fetchError={fetchError}
